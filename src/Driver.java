@@ -39,7 +39,7 @@ public class Driver {
 
 		try {
 			// Loading nodes and edges
-			MapLoader mapLoader = new MapLoader("map-anholt-mini.osm", loader);
+			MapLoader mapLoader = new MapLoader("map-anholt-mini-1-indexed.osm", loader);
 			// Clears the shared data from the roadEdges. Note that it must
 			// be placed here in order to make the tests work.
 			// RoadEdge.clear();
