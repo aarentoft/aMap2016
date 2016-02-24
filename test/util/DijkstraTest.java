@@ -133,8 +133,8 @@ public class DijkstraTest {
 		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)0);
 		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)0);
 		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)0);
-		WayData dataM = new WayData("VejN", RoadType.MOTORWAY, (byte)0);
-		WayData dataN = new WayData("VejM", RoadType.MOTORWAY, (byte)0);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)0);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)0);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -270,8 +270,8 @@ public class DijkstraTest {
 		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
 		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
 		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)1);
-		WayData dataM = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -405,8 +405,8 @@ public class DijkstraTest {
 		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
 		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
 		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)2);
-		WayData dataM = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -539,8 +539,8 @@ public class DijkstraTest {
 		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)0);
 		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)0);
 		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)0);
-		WayData dataM = new WayData("VejN", RoadType.MOTORWAY, (byte)0);
-		WayData dataN = new WayData("VejM", RoadType.MOTORWAY, (byte)0);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)0);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)0);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -652,8 +652,8 @@ public class DijkstraTest {
 		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
 		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
 		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)1);
-		WayData dataM = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -772,8 +772,8 @@ public class DijkstraTest {
 		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
 		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
 		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)1);
-		WayData dataM = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -893,8 +893,8 @@ public class DijkstraTest {
 		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
 		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
 		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)2);
-		WayData dataM = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
