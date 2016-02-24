@@ -39,12 +39,12 @@ public class Driver {
 			// Clears the shared data from the roadEdges. Note that it must
 			// be placed here in order to make the tests work.
 			// RoadEdge.clear();
-//			QuadTree tree = mapLoader.getQuadTree();
-//			Trie<RoadEdge> searchTrie = mapLoader.getSearchTree();
-//			Graph graph = mapLoader.getGraph();
+			QuadTree tree = mapLoader.getQuadTree();
+			Trie<RoadEdge> searchTrie = mapLoader.getSearchTree();
+			Graph graph = mapLoader.getGraph();
 
-//			new MapFrame("aMap", tree, searchTrie, graph);
-//			loader.dispose();
+			new MapFrame("aMap", tree, searchTrie, graph);
+			loader.dispose();
 		} catch (IOException e) {
 			loader.dispose();
 			JOptionPane
