@@ -39,7 +39,7 @@ public class MapLoader {
 			xmlr.nextTag();		// Skips <?xml ...> tag (START_DOCUMENT event)
 			xmlr.nextTag();		// Skips <osm version=... > tag
 
-			quadTree = new QuadTree(parseBounds(xmlr));
+			quadTree = new QuadTree(readBounds(xmlr));
 
 			nextStartElement(xmlr);		// Continue to the list of <node ...> tags
 
@@ -64,7 +64,7 @@ public class MapLoader {
 	 * @param xmlr {@code XMLStreamReader} positioned at a {@literal <bounds ...>} tag.
 	 * @return {@code Rectangle} with the bound coordinates.
      */
-	private Rectangle parseBounds(XMLStreamReader xmlr) {
+	private Rectangle readBounds(XMLStreamReader xmlr) {
 		double[] boundCoords = new double[4];
 
 		// get attribute values of the <bounds ...> tag
