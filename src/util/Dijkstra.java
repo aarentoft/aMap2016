@@ -40,7 +40,7 @@ public class Dijkstra {
 		// Last edge on shortest s->v path
 		RoadEdge[] edgeTo = new RoadEdge[graph.size() + 1];
 		// Priority queue of edges
-		IndexedMinPriorityQueue<Double> pq = new IndexedMinPriorityQueue<Double>(graph.size() + 1);
+		MappedMinPriorityQueue<Integer, Double> pq = new MappedMinPriorityQueue<>(graph.size() + 1);
 		// Whether or not we actually have a result
 		boolean found = false;
 		// Map of the nodes
@@ -131,7 +131,7 @@ public class Dijkstra {
 		// Last edge on shortest s->v path
 		RoadEdge[] edgeTo = new RoadEdge[graph.size() + 1];
 		// Priority queue of edges
-		IndexedMinPriorityQueue<Double> pq = new IndexedMinPriorityQueue<Double>(graph.size() + 1);
+		MappedMinPriorityQueue<Integer, Double> pq = new MappedMinPriorityQueue<>(graph.size() + 1);
 		// Whether or not we actually have a result
 		boolean found = false;
 		// Map of the nodes

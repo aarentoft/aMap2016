@@ -1,33 +1,36 @@
 package util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Minimal implementation of an indexed minimum priority queue (ie. smallest element will always be in front)
+ * Minimal implementation of an mapped minimum priority queue (ie. smallest element will always be in front)
  * needed by the Dijkstra and A* path finding algorithms.
  *
  * @param <Item> Type of the elements, the priority queue will contain.
  */
-public class IndexedMinPriorityQueue<Item extends Comparable<Item>> {
+public class MappedMinPriorityQueue<Key, Item extends Comparable<Item>> {
 
-    // This is the actual heap structure. Keeps the elements of the itemValues array in order
-    // by storing the indices of the itemValues array.
-    private int[]  heap;
-    // itemPositionInHeap[i] is the position of itemValues[i] in heap
-    private int[]  itemPositionInHeap;
+    // This is the actual heap structure. Keeps the elements of itemValues in order
+    // by storing and ordering the Keys of itemValues.
+    private Key[]             heap;
+    // itemPositionInHeap.get(k)] is the position of itemValues.get(k) in the heap
+    private Map<Key, Integer> itemPositionInHeap;
     // NOTE: The position of an item in itemValues is final as long as the value is part of the Priority Queue
-    private Item[] itemValues;
+    private Map<Key, Item>    itemValues;
     // The number of elements in the Priority Queue
-    private int    size;
+    private int               size;
 
     /**
-     * Instantiate an IndexedMinPriorityQueue with a specified maximum size.
+     * Instantiate an MappedMinPriorityQueue with a specified maximum size.
      *
      * @param maxSize Maximum size of the priority queue.
      */
-    public IndexedMinPriorityQueue(int maxSize) {
-        // The index 0 remains unused in all arrays
-        heap = new int[maxSize + 1];
-        itemPositionInHeap = new int[maxSize + 1];
-        itemValues = (Item[]) new Comparable[maxSize + 1];
+    public MappedMinPriorityQueue(int maxSize) {
+        // The index 0 remains unused
+        heap = (Key[]) new Object[maxSize + 1];
+        itemPositionInHeap = new HashMap<>(maxSize + 1);
+        itemValues = new HashMap<>(maxSize + 1);
         size = 0;
     }
 
@@ -37,11 +40,11 @@ public class IndexedMinPriorityQueue<Item extends Comparable<Item>> {
      * @param i   Index value, the item will get.
      * @param item Item to insert.
      */
-    public void insert(int i, Item item) {
+    public void insert(Key i, Item item) {
         size++;
-        itemPositionInHeap[i] = size;
-        heap[size] = i;            // Insert i at bottom of heap
-        itemValues[i] = item;
+        itemPositionInHeap.put(i, size);
+        heap[size] = i;           // Insert i at bottom of heap
+        itemValues.put(i, item);
         heapifyUp(size);           // Restore heap order
     }
 
@@ -50,16 +53,16 @@ public class IndexedMinPriorityQueue<Item extends Comparable<Item>> {
      *
      * @return The min Item
      */
-    public int popMin() {
-        int min = heap[1];
+    public Key popMin() {
+        Key min = heap[1];
         swap(1, size);      // Swap top element with the last element (which is also one of the smallest)
         size--;             // NOTE: size needs to be updated here, otherwise heapifyDown will fail
         heapifyDown(1);     // Restore heap order after moving one of the smallest elements to the top
 
         // Clean-up. Remove the previous top element
-        itemPositionInHeap[min] = 0;
-        itemValues[heap[size + 1]] = null;
-        heap[size + 1] = 0;
+        itemPositionInHeap.remove(min);
+        itemValues.remove(heap[size + 1]);
+        heap[size + 1] = null;
         return min;
     }
 
@@ -69,20 +72,21 @@ public class IndexedMinPriorityQueue<Item extends Comparable<Item>> {
      * @param i Index of the Item value to decrease
      * @param item Decrease the value to this Item value.
      */
-    public void decreaseItemValue(int i, Item item) {
+    public void decreaseItemValue(Key i, Item item) {
         // if itemValues[i] is less than item, the value will INcrease instead of DEcrease.
-        if (itemValues[i].compareTo(item) <= 0)
+        if (itemValues.get(i).compareTo(item) <= 0)
             return;
-        itemValues[i] = item;
-        heapifyUp(itemPositionInHeap[i]);
+
+        itemValues.put(i, item);
+        heapifyUp(itemPositionInHeap.get(i));
     }
 
     /**
      * @param i Index to test.
      * @return Whether index i is associated with some Item.
      */
-    public boolean contains(int i) {
-        return itemPositionInHeap[i] != 0;
+    public boolean contains(Key i) {
+        return itemPositionInHeap.get(i) != null;
     }
 
     /**
@@ -132,7 +136,12 @@ public class IndexedMinPriorityQueue<Item extends Comparable<Item>> {
      * @return Whether the Item at i1 is greater than the Item at i2.
      */
     private boolean greater(int i1, int i2) {
-        return itemValues[heap[i1]].compareTo(itemValues[heap[i2]]) > 0;
+        Item v1 = itemValues.get(heap[i1]);
+        Item v2 = itemValues.get(heap[i2]);
+        if (v1 != null && v2 != null)
+            return v1.compareTo( v2 ) > 0;
+        else
+            return false;
     }
 
     /**
@@ -142,10 +151,10 @@ public class IndexedMinPriorityQueue<Item extends Comparable<Item>> {
      * @param i2 Index of second Item to swap.
      */
     private void swap(int i1, int i2) {
-        int i1temp = heap[i1];
+        Key i1temp = heap[i1];
         heap[i1] = heap[i2];
         heap[i2] = i1temp;
-        itemPositionInHeap[heap[i1]] = i1;
-        itemPositionInHeap[heap[i2]] = i2;
+        itemPositionInHeap.put(heap[i1], i1);
+        itemPositionInHeap.put(heap[i2], i2);
     }
 }
