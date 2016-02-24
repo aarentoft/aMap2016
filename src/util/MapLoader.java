@@ -2,13 +2,17 @@ package util;
 
 import util.graph.Graph;
 import util.graph.RoadEdge;
+import util.graph.RoadNode;
 import view.Loader;
 
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * This class contains static methods for loading data from the files into the
@@ -32,10 +36,14 @@ public class MapLoader {
 			XMLStreamReader xmlr = xmlif.createXMLStreamReader(mapDataFile,
 					new FileInputStream(mapDataFile));
 
-			xmlr.nextTag();		// Skips <?xml ...> tag
+			xmlr.nextTag();		// Skips <?xml ...> tag (START_DOCUMENT event)
 			xmlr.nextTag();		// Skips <osm version=... > tag
 
 			quadTree = new QuadTree(parseBounds(xmlr));
+
+			nextStartElement(xmlr);		// Continue to the list of <node ...> tags
+
+			graph = new Graph(readRoadNodes(xmlr));
 
 			// Tell the loader that we're loading edges
 //          if (loader != null) {
@@ -53,8 +61,8 @@ public class MapLoader {
 	 * Parse the two coordinate sets of the bounds of the map data. This data is contained in the
 	 * {@literal <bounds ...>} tag.
 	 *
-	 * @param xmlr XMLStreamReader positioned at a {@literal <bounds ...>} tag.
-	 * @return Rectangle with the bound coordinates.
+	 * @param xmlr {@code XMLStreamReader} positioned at a {@literal <bounds ...>} tag.
+	 * @return {@code Rectangle} with the bound coordinates.
      */
 	private Rectangle parseBounds(XMLStreamReader xmlr) {
 		double[] boundCoords = new double[4];
@@ -80,6 +88,72 @@ public class MapLoader {
 		}
 
 		return new Rectangle(boundCoords[0], boundCoords[1], boundCoords[2], boundCoords[3]);
+	}
+
+	/**
+	 * Reads a list of nodes from OSM data and generates a Map (NodeID-&gt;NodeObject). {@link RoadNode} objects are
+	 * generated based on the OSM data. This method assumes that the {@code XMLStreamReader} is positioned at the beginning
+     * of a list of {@literal <node ...>} tags, otherwise it will skip XML data until it reaches a node list,
+     * and then read that list. If there is no node list at all, it will return an empty map and the {@code XMLStreamReader}
+     * will be positioned either at a {@literal <way ...>} tag or at the end of the document.
+	 * <p>In short, ensure that the {@code XMLStreamReader} is positioned at a node list.</p>
+	 *
+	 * @param xmlr {@code XMLStreamReader} positioned at the beginning of a list of {@literal <node ...>} tags.
+	 * @return A (NodeID-&gt;NodeObject) mapping of {@code RoadNode}.
+	 * @throws XMLStreamException Rethrown from {@code XMLStreamReader}.
+     */
+	private Map<Integer, RoadNode> readRoadNodes(XMLStreamReader xmlr) throws XMLStreamException {
+		Map<Integer, RoadNode> nodes = new TreeMap<Integer, RoadNode>();
+		Integer id = -1;
+		Double lat = -1.0;
+		Double lon = -1.0;
+
+		while (xmlr.hasNext()) {
+			// Once a way tag is reached, all nodes have been read, due to the way OSM data is structured.
+			if (xmlr.getLocalName().equals("way"))
+				break;
+
+			// If a node has, sub XML tags (eg. <tag ...>, they are skipped
+			if (!xmlr.getLocalName().equals("node")) {
+				nextStartElement(xmlr);
+				continue;
+			}
+
+			// get node attribute values
+			for (int i = 0; i < xmlr.getAttributeCount(); i++) {
+				switch (xmlr.getAttributeLocalName(i)) {
+					case "id":
+						id = Integer.parseInt(xmlr.getAttributeValue(i));
+						break;
+					case "lat":
+						lat = Double.parseDouble(xmlr.getAttributeValue(i));
+						break;
+					case "lon":
+						lon = Double.parseDouble(xmlr.getAttributeValue(i));
+						break;
+				}
+			}
+
+			nodes.put(id, new RoadNode(id, lat, lon));
+			nextStartElement(xmlr);
+		}
+
+		return nodes;
+	}
+
+	/**
+	 * Helper method which calls {@code nextTag()} on an {@code XMLStreamReader} object until a new
+	 * {@code START_ELEMENT} event is reached.
+	 *
+	 * @param xmlr {@code XMLStreamReader} to "fast-forward"
+	 * @throws XMLStreamException Rethrown from {@code XMLStreamReader}.
+     */
+	private void nextStartElement(XMLStreamReader xmlr) throws XMLStreamException {
+		// Do-while() necessary. while() will never execute the body since the current event is already START_ELEMENT,
+		// but the XMLStreamReader should skip to the next one.
+		do {
+			xmlr.nextTag();
+		} while (xmlr.getEventType() != XMLStreamConstants.START_ELEMENT && xmlr.hasNext());
 	}
 
 	/**
