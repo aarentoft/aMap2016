@@ -24,22 +24,18 @@ public class Driver {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String dir = "./Txt/";
+		String inputPath = "";
 
-		// TODO: Fix map data hardcode
 		// Allow specifying the data dir from commandline.
-//		if (args.length != 0) {
-//			dir = args[0];
-//		}
-//		if (dir.charAt(dir.length() - 1) != '/') {
-//			dir += '/';
-//		}
+		if (args.length != 0) {
+			inputPath = args[0];
+		}
 
 		Loader loader = new Loader();
 
 		try {
 			// Loading nodes and edges
-			MapLoader mapLoader = new MapLoader("map-anholt-mini-1-indexed.osm", loader);
+			MapLoader mapLoader = new MapLoader(inputPath, loader);
 			// Clears the shared data from the roadEdges. Note that it must
 			// be placed here in order to make the tests work.
 			// RoadEdge.clear();
@@ -55,7 +51,8 @@ public class Driver {
 					.showMessageDialog(
 							null,
 							"Map data could not be found. Please make sure that you entered the correct path to your map data.\n"
-									+ "Current dir: " + dir + " --- "+e.getMessage(),
+									+ "---\n"
+									+ e.getMessage(),
 							"An error occurred", JOptionPane.ERROR_MESSAGE);
 		}
 	}
