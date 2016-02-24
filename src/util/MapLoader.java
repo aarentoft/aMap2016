@@ -1,8 +1,6 @@
 package util;
 
-import util.graph.Graph;
-import util.graph.RoadEdge;
-import util.graph.RoadNode;
+import util.graph.*;
 import view.Loader;
 
 import javax.xml.stream.XMLInputFactory;
@@ -11,8 +9,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * This class contains static methods for loading data from the files into the
@@ -30,6 +27,8 @@ public class MapLoader {
 	}
 
 	public MapLoader(String mapDataFile, Loader loader) throws IOException {
+		// Attempts to read an OSM map data file. For more info about at the OSM data format,
+		// see http://wiki.openstreetmap.org/wiki/OSM_XML
 		try {
 			XMLInputFactory xmlif = XMLInputFactory.newInstance();
 
@@ -44,6 +43,9 @@ public class MapLoader {
 			nextStartElement(xmlr);		// Continue to the list of <node ...> tags
 
 			graph = new Graph(readRoadNodes(xmlr));
+			readRoadEdges(xmlr);
+
+			xmlr.close();
 
 			// Tell the loader that we're loading edges
 //          if (loader != null) {
@@ -139,6 +141,58 @@ public class MapLoader {
 		}
 
 		return nodes;
+	}
+
+	/**
+	 * Reads a list of Way tags from OSM data. A {@link RoadEdge} is generated for each node pair referenced by the Way
+	 * and the relevant data from the Way is attached to the edges. The edges are added both to the graph,
+	 * the quad tree, and the trie used for searching. This method assumes that the {@code XMLStreamReader} is
+	 * positioned at the beginning of a list of {@literal <way ...>} tags. Otherwise, it will not do anything, except
+	 * moving the {@code XMLStreamReader} unpredictably through the XML.
+	 *
+	 * @param xmlr {@code XMLStreamReader} positioned at the beginning of a list of {@literal <way ...>} tags.
+	 * @throws XMLStreamException Rethrown from {@code XMLStreamReader}.
+     */
+	private void readRoadEdges(XMLStreamReader xmlr) throws XMLStreamException {
+		List<Integer> nodes = new ArrayList<Integer>();
+		Map<String, String> tags = new HashMap<String, String>();
+
+		String roadname = "";
+		RoadType type = RoadType.MOTORWAY;
+		byte direction = 0;
+
+		nextStartElement(xmlr);		// Skip past way tag to the first nd tag
+
+		// Once a tag element is reached, all nd references have been read, due to the way OSM data is structured.
+		while (xmlr.hasNext() && !xmlr.getLocalName().equals("tag")) {
+			nodes.add( Integer.parseInt(xmlr.getAttributeValue(0)) );
+			nextStartElement(xmlr);
+		}
+
+		// Once a relation element is reached, all tag elements of the way have been read
+		while (xmlr.hasNext() && !xmlr.getLocalName().equals("relation")) {
+			tags.put(xmlr.getAttributeValue(0), xmlr.getAttributeValue(1));
+			nextStartElement(xmlr);
+		}
+
+		// TODO: Get road type and direction from tags
+		roadname = tags.get("name");
+		WayData data = new WayData(roadname, type, direction);
+
+		for (int i = 0; i < nodes.size() - 1; i++) {
+			RoadNode n1 = graph.getNodes().get( nodes.get(i) );
+			RoadNode n2 = graph.getNodes().get( nodes.get(i+1) );
+			RoadEdge edge = new RoadEdge(data, n1, n2);
+
+			if (!roadname.isEmpty()) {
+				searchTree.insert(edge);
+			}
+			n1.addEdge(edge);
+			n2.addEdge(edge);
+			quadTree.insert(edge);
+
+			graph.addEdge(edge);
+		}
 	}
 
 	/**
