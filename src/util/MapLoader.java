@@ -104,9 +104,9 @@ public class MapLoader {
 	 * @return A (NodeID-&gt;NodeObject) mapping of {@code RoadNode}.
 	 * @throws XMLStreamException Rethrown from {@code XMLStreamReader}.
      */
-	private Map<Integer, RoadNode> readRoadNodes(XMLStreamReader xmlr) throws XMLStreamException {
-		Map<Integer, RoadNode> nodes = new TreeMap<Integer, RoadNode>();
-		Integer id = -1;
+	private Map<String, RoadNode> readRoadNodes(XMLStreamReader xmlr) throws XMLStreamException {
+		Map<String, RoadNode> nodes = new TreeMap<String, RoadNode>();
+		String id = "";
 		Double lat = -1.0;
 		Double lon = -1.0;
 
@@ -125,7 +125,7 @@ public class MapLoader {
 			for (int i = 0; i < xmlr.getAttributeCount(); i++) {
 				switch (xmlr.getAttributeLocalName(i)) {
 					case "id":
-						id = Integer.parseInt(xmlr.getAttributeValue(i));
+						id = xmlr.getAttributeValue(i);
 						break;
 					case "lat":
 						lat = Double.parseDouble(xmlr.getAttributeValue(i));
@@ -154,7 +154,9 @@ public class MapLoader {
 	 * @throws XMLStreamException Rethrown from {@code XMLStreamReader}.
      */
 	private void readRoadEdges(XMLStreamReader xmlr) throws XMLStreamException {
-		List<Integer> nodes = new ArrayList<Integer>();
+		// Node IDs stored as strings
+		List<String> nodes = new ArrayList<String>();
+		// Key -> Value mapping of tags
 		Map<String, String> tags = new HashMap<String, String>();
 
 		String roadname = "";
@@ -165,7 +167,7 @@ public class MapLoader {
 
 		// Once a tag element is reached, all nd references have been read, due to the way OSM data is structured.
 		while (xmlr.hasNext() && !xmlr.getLocalName().equals("tag")) {
-			nodes.add( Integer.parseInt(xmlr.getAttributeValue(0)) );
+			nodes.add( xmlr.getAttributeValue(0) );
 			nextStartElement(xmlr);
 		}
 

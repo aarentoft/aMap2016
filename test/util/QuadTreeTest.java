@@ -129,9 +129,9 @@ public class QuadTreeTest {
 
 	@Test
 	public void testNegative() throws Exception {
-		RoadNode rn1 = new RoadNode(8, -1, 23);
-		RoadNode rn2 = new RoadNode(8, 66, 66);
-		RoadNode rn3 = new RoadNode(8, 0, -1);
+		RoadNode rn1 = new RoadNode("8", -1, 23);
+		RoadNode rn2 = new RoadNode("8", 66, 66);
+		RoadNode rn3 = new RoadNode("8", 0, -1);
 
 //		RoadEdge re1 = new RoadEdge(
 //				new EdgeData(

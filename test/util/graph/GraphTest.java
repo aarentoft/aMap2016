@@ -51,15 +51,15 @@ public class GraphTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		nodeA = new RoadNode(1, 2, 6);
-		nodeB = new RoadNode(2, 1, 2);
-		nodeC = new RoadNode(3, 2, 1);
-		nodeD = new RoadNode(4, 3, 5);
-		nodeE = new RoadNode(5, 4, 3);
-		nodeF = new RoadNode(6, 6, 4);
-		nodeG = new RoadNode(7, 8, 3);
-		nodeH = new RoadNode(8, 5, 6);
-		nodeI = new RoadNode(9, 8, 6);
+		nodeA = new RoadNode("1", 2, 6);
+		nodeB = new RoadNode("2", 1, 2);
+		nodeC = new RoadNode("3", 2, 1);
+		nodeD = new RoadNode("4", 3, 5);
+		nodeE = new RoadNode("5", 4, 3);
+		nodeF = new RoadNode("6", 6, 4);
+		nodeG = new RoadNode("7", 8, 3);
+		nodeH = new RoadNode("8", 5, 6);
+		nodeI = new RoadNode("9", 8, 6);
 
 		// Graph #3
 		// edgeF, edgeG and edgeL have been reversed to create obstacles
@@ -146,7 +146,7 @@ public class GraphTest {
 		edges.add(edgeM);
 		edges.add(edgeN);
 
-		Map<Integer, RoadNode> m = new TreeMap<Integer, RoadNode>();
+		Map<String, RoadNode> m = new TreeMap<String, RoadNode>();
 		for (RoadNode roadNode : nodes) {
 			m.put(roadNode.ID, roadNode);
 		}
@@ -177,7 +177,7 @@ public class GraphTest {
 		exp.add(edgeC);
 		exp.add(edgeD);
 		exp.add(edgeM);
-		List<RoadEdge> act = graph.getAdjacencyList(3);
+		List<RoadEdge> act = graph.getAdjacencyList("3");
 
 		if (exp.size() != act.size())
 			fail("The results are not the same size! Is: "+act.size()+" Should be: "+exp.size());
@@ -185,7 +185,7 @@ public class GraphTest {
 			assertTrue(exp.contains(act.get(i)));
 
 		// Out degree = 0
-		act = graph.getAdjacencyList(9);
+		act = graph.getAdjacencyList("9");
 		exp.clear();
 
 		if (exp.size() != act.size())
@@ -229,7 +229,7 @@ public class GraphTest {
 		exp.put(7, nodeG);
 		exp.put(8, nodeH);
 		exp.put(9, nodeI);
-		Map<Integer, RoadNode> act = graph.getNodes();
+		Map<String, RoadNode> act = graph.getNodes();
 
 		if (exp.size() != act.size())
 			fail("The results are not the same size!");
@@ -238,7 +238,7 @@ public class GraphTest {
 		}
 
 		// Competely empty graph
-		Map<Integer, RoadNode> emptymap = Collections.emptyMap();
+		Map<String, RoadNode> emptymap = Collections.emptyMap();
 		Graph empty = new Graph(emptymap);
 		act = empty.getNodes();
 		if (emptymap.size() != act.size())
@@ -255,7 +255,7 @@ public class GraphTest {
 	
 	@Test
 	public void sizeEmptyGraph() {
-		Map<Integer, RoadNode> emptymap = Collections.emptyMap();
+		Map<String, RoadNode> emptymap = Collections.emptyMap();
 		Graph empty = new Graph(emptymap);
 		assertEquals(empty.size(), 0);
 	}
@@ -286,7 +286,7 @@ public class GraphTest {
 
 		// Empty graph
 		List<RoadEdge> emptylist = Collections.emptyList();
-		Map<Integer, RoadNode> emptymap = Collections.emptyMap();
+		Map<String, RoadNode> emptymap = Collections.emptyMap();
 		Graph empty = new Graph(emptymap);
 		act = empty.getEdges();
 		if (emptylist.size() != act.size())

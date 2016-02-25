@@ -12,7 +12,7 @@ import util.Point;
 @SuppressWarnings("serial")
 public class RoadNode extends Point {
 	private List<RoadEdge> edges = new ArrayList<RoadEdge>();
-	public final int ID;
+	public final String ID;
 
 	/**
 	 * Create a new node based on the input.
@@ -20,7 +20,7 @@ public class RoadNode extends Point {
 	 * @param x x coordinate of the node.
 	 * @param y y coordinate of the node.
 	 */
-	public RoadNode(int id, double x, double y) {
+	public RoadNode(String id, double x, double y) {
 		super(0, 0);
 		this.ID = id;
 		this.x  = x;

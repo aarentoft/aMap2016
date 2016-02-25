@@ -1,6 +1,7 @@
 package util.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,23 +11,23 @@ import java.util.Map;
  */
 public class Graph {
 	// All nodes in graph
-	protected Map<Integer, RoadNode> nodes;
+	protected Map<String, RoadNode> nodes;
 	// All edges in graph
 	protected List<RoadEdge> edges;
-	// outEdges[int] = list that represents edges going from node with KDVID ==
-	// int
-	protected List<RoadEdge>[] outEdges;
+	// outEdges.get(nodeIDstring) = list that represents edges going from node with nodeID ==
+	// nodeIDstring
+	protected Map<String, List<RoadEdge>> outEdges;
 
 	/**
 	 * Constructs the Graph from the given collection of RoadNodes.
 	 */
-	public Graph(Map<Integer, RoadNode> nodes) {
+	public Graph(Map<String, RoadNode> nodes) {
 		this.nodes = nodes;
 		edges = new ArrayList<RoadEdge>();
-		outEdges = new ArrayList[nodes.size() + 1];
+		outEdges = new HashMap<String, List<RoadEdge>>(nodes.size() + 1);
 
-		for (int v = 0; v < nodes.size() + 1; v++) {
-			outEdges[v] = new ArrayList<RoadEdge>();
+		for (String nodeID : nodes.keySet()) {
+			outEdges.put(nodeID, new ArrayList<RoadEdge>());
 		}
 	}
 	
@@ -34,11 +35,11 @@ public class Graph {
 	 * Gets the list of outgoing neighbors to the given index.
 	 * 
 	 * @param v
-	 *            The index of the node in question.
+	 *            The ID of the node in question.
 	 * @return A list of the outgoing neighbors.
 	 */
-	public List<RoadEdge> getAdjacencyList(int v) {
-		return outEdges[v];
+	public List<RoadEdge> getAdjacencyList(String v) {
+		return outEdges.get(v);
 	}
 	
 	/**
@@ -49,7 +50,7 @@ public class Graph {
 	 * @return an ArrayList of edges
 	 */
 	public List<RoadEdge> getAdjacencyList(RoadNode node) {
-		return outEdges[node.ID];
+		return outEdges.get(node.ID);
 	}
 
 	/**
@@ -67,23 +68,23 @@ public class Graph {
 		edges.add(e);
 		// To-from
 		if (e.data.direction == 1)
-			outEdges[e.start.ID].add(e);
+			outEdges.get(e.start.ID).add(e);
 		// From-To
 		else if (e.data.direction == 2)
-			outEdges[e.end.ID].add(e);
+			outEdges.get(e.end.ID).add(e);
 		// No-go
 		else if (e.data.direction == 3) {
 			// do nothing (road not traversable)
 		} else { // Both ways
-			outEdges[e.start.ID].add(e);
-			outEdges[e.end.ID].add(e);
+			outEdges.get(e.start.ID).add(e);
+			outEdges.get(e.end.ID).add(e);
 		}
 	}
 
 	/**
 	 * @return All the nodes.
 	 */
-	public Map<Integer, RoadNode> getNodes() {
+	public Map<String, RoadNode> getNodes() {
 		return nodes;
 	}
 

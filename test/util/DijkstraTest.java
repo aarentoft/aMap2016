@@ -58,15 +58,15 @@ public class DijkstraTest {
 
 	@Before
 	public void setup() {
-		nodeA = new RoadNode(1, 2, 6);
-		nodeB = new RoadNode(2, 1, 5);
-		nodeC = new RoadNode(3, 2, 1);
-		nodeD = new RoadNode(4, 3, 5);
-		nodeE = new RoadNode(5, 4, 3);
-		nodeF = new RoadNode(6, 6, 4);
-		nodeG = new RoadNode(7, 8, 3);
-		nodeH = new RoadNode(8, 5, 6);
-		nodeI = new RoadNode(9, 8, 6);
+		nodeA = new RoadNode("1", 2, 6);
+		nodeB = new RoadNode("2", 1, 5);
+		nodeC = new RoadNode("3", 2, 1);
+		nodeD = new RoadNode("4", 3, 5);
+		nodeE = new RoadNode("5", 4, 3);
+		nodeF = new RoadNode("6", 6, 4);
+		nodeG = new RoadNode("7", 8, 3);
+		nodeH = new RoadNode("8", 5, 6);
+		nodeI = new RoadNode("9", 8, 6);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class DijkstraTest {
 		edges.add(edgeM);
 		edges.add(edgeN);
 
-		Map<Integer, RoadNode> m = new TreeMap<Integer, RoadNode>();
+		Map<String, RoadNode> m = new TreeMap<String, RoadNode>();
 		for (RoadNode roadNode : nodes) {
 			m.put(roadNode.ID, roadNode);
 		}
@@ -339,7 +339,7 @@ public class DijkstraTest {
 		edges.add(edgeM);
 		edges.add(edgeN);
 
-		Map<Integer, RoadNode> m = new TreeMap<Integer, RoadNode>();
+		Map<String, RoadNode> m = new TreeMap<String, RoadNode>();
 		for (RoadNode roadNode : nodes) {
 			m.put(roadNode.ID, roadNode);
 		}
@@ -474,7 +474,7 @@ public class DijkstraTest {
 		edges.add(edgeM);
 		edges.add(edgeN);
 
-		Map<Integer, RoadNode> m = new TreeMap<Integer, RoadNode>();
+		Map<String, RoadNode> m = new TreeMap<String, RoadNode>();
 		for (RoadNode roadNode : nodes) {
 			m.put(roadNode.ID, roadNode);
 		}
@@ -596,7 +596,7 @@ public class DijkstraTest {
 		edges.add(edgeK);
 		edges.add(edgeN);
 
-		Map<Integer, RoadNode> m = new TreeMap<Integer, RoadNode>();
+		Map<String, RoadNode> m = new TreeMap<String, RoadNode>();
 		for (RoadNode roadNode : nodes) {
 			m.put(roadNode.ID, roadNode);
 		}
@@ -709,7 +709,7 @@ public class DijkstraTest {
 		edges.add(edgeK);
 		edges.add(edgeN);
 
-		Map<Integer, RoadNode> m = new TreeMap<Integer, RoadNode>();
+		Map<String, RoadNode> m = new TreeMap<String, RoadNode>();
 		for (RoadNode roadNode : nodes) {
 			m.put(roadNode.ID, roadNode);
 		}
@@ -829,7 +829,7 @@ public class DijkstraTest {
 		edges.add(edgeK);
 		edges.add(edgeN);
 
-		Map<Integer, RoadNode> m = new TreeMap<Integer, RoadNode>();
+		Map<String, RoadNode> m = new TreeMap<String, RoadNode>();
 		for (RoadNode roadNode : nodes) {
 			m.put(roadNode.ID, roadNode);
 		}
@@ -962,7 +962,7 @@ public class DijkstraTest {
 		edges.add(edgeM);
 		edges.add(edgeN);
 
-		Map<Integer, RoadNode> m = new TreeMap<Integer, RoadNode>();
+		Map<String, RoadNode> m = new TreeMap<String, RoadNode>();
 		for (RoadNode roadNode : nodes) {
 			m.put(roadNode.ID, roadNode);
 		}
@@ -996,7 +996,7 @@ public class DijkstraTest {
 		nodes.add(nodeH);
 		nodes.add(nodeI);
 
-		Map<Integer, RoadNode> m = new TreeMap<Integer, RoadNode>();
+		Map<String, RoadNode> m = new TreeMap<String, RoadNode>();
 		for (RoadNode roadNode : nodes) {
 			m.put(roadNode.ID, roadNode);
 		}
@@ -1010,8 +1010,8 @@ public class DijkstraTest {
 	@Test
 	public void distToTarget() {
 		try {
-			nodeA = new RoadNode(1, 2, 6);
-			nodeB = new RoadNode(2, 6, 9);
+			nodeA = new RoadNode("1", 2, 6);
+			nodeB = new RoadNode("2", 6, 9);
 		} catch (Exception e) {
 			System.out.println("Oh no");
 		}
