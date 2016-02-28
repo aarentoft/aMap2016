@@ -157,7 +157,7 @@ public class MapLoader {
 		// Node IDs stored as strings
 		List<String> nodes = new ArrayList<String>();
 		// Key -> Value mapping of tags
-		Map<String, String> tags = new HashMap<String, String>();
+		Map<String, String> tags;
 
 		String roadname = "";
 		RoadType type = RoadType.MOTORWAY;
@@ -171,11 +171,7 @@ public class MapLoader {
 			nextStartElement(xmlr);
 		}
 
-		// Once a relation element is reached, all tag elements of the way have been read
-		while (xmlr.hasNext() && !xmlr.getLocalName().equals("relation")) {
-			tags.put(xmlr.getAttributeValue(0), xmlr.getAttributeValue(1));
-			nextStartElement(xmlr);
-		}
+		tags = readTags(xmlr);
 
 		// TODO: Get road type and direction from tags
 		roadname = tags.get("name");
@@ -195,6 +191,26 @@ public class MapLoader {
 
 			graph.addEdge(edge);
 		}
+	}
+
+	/**
+	 * Reads a list of tags from OSM data and generates a Key Value pairs for each tag. This method assumes that the
+	 * {@code XMLStreamReader} is positioned at the beginning of a list of {@literal <tag...>} element,
+	 * otherwise it will return an empty map.
+	 *
+	 * @param xmlr {@code XMLStreamReader} positioned at the beginning of a list of {@literal <tag ...>} element.
+	 * @return A Map of tags as Key-Value pairs.
+	 * @throws XMLStreamException Rethrown from {@code XMLStreamReader}
+     */
+	private Map<String, String> readTags(XMLStreamReader xmlr) throws XMLStreamException {
+		Map<String, String>	tags = new HashMap<>();
+
+		while (xmlr.hasNext() && xmlr.getLocalName().equals("tag")) {
+			tags.put(xmlr.getAttributeValue(0), xmlr.getAttributeValue(1));
+			nextStartElement(xmlr);
+		}
+
+		return tags;
 	}
 
 	/**
