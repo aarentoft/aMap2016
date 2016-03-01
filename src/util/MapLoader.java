@@ -163,33 +163,40 @@ public class MapLoader {
 		RoadType type = RoadType.MOTORWAY;
 		byte direction = 0;
 
-		nextStartElement(xmlr);		// Skip past way tag to the first nd tag
+		while (xmlr.hasNext() && xmlr.getLocalName().equals("way")) {
+			nextStartElement(xmlr);        // Skip past way tag to the first nd tag
 
-		// Once a tag element is reached, all nd references have been read, due to the way OSM data is structured.
-		while (xmlr.hasNext() && !xmlr.getLocalName().equals("tag")) {
-			nodes.add( xmlr.getAttributeValue(0) );
-			nextStartElement(xmlr);
-		}
-
-		tags = readTags(xmlr);
-
-		// TODO: Get road type and direction from tags
-		roadname = tags.get("name");
-		WayData data = new WayData(roadname, type, direction);
-
-		for (int i = 0; i < nodes.size() - 1; i++) {
-			RoadNode n1 = graph.getNodes().get( nodes.get(i) );
-			RoadNode n2 = graph.getNodes().get( nodes.get(i+1) );
-			RoadEdge edge = new RoadEdge(data, n1, n2);
-
-			if (!roadname.isEmpty()) {
-				searchTree.insert(edge);
+			nodes.clear();
+			// Once a tag element is reached, all nd references have been read, due to the way OSM data is structured.
+			while (xmlr.hasNext() && xmlr.getLocalName().equals("nd")) {
+				nodes.add(xmlr.getAttributeValue(0));
+				nextStartElement(xmlr);
 			}
-			n1.addEdge(edge);
-			n2.addEdge(edge);
-			quadTree.insert(edge);
 
-			graph.addEdge(edge);
+			tags = readTags(xmlr);
+
+			// way is not a road, so it shouldn't be added to the road network model
+			if (tags.get("highway") == null)
+				continue;
+
+			// TODO: Get road type and direction from tags
+			roadname = tags.get("name") != null ? tags.get("name") : "";
+			WayData data = new WayData(roadname, type, direction);
+
+			for (int i = 0; i < nodes.size() - 1; i++) {
+				RoadNode n1 = graph.getNodes().get(nodes.get(i));
+				RoadNode n2 = graph.getNodes().get(nodes.get(i + 1));
+				RoadEdge edge = new RoadEdge(data, n1, n2);
+
+				if (!roadname.isEmpty())
+					searchTree.insert(edge);
+
+				quadTree.insert(edge);
+
+				n1.addEdge(edge);
+				n2.addEdge(edge);
+				graph.addEdge(edge);
+			}
 		}
 	}
 
