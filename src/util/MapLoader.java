@@ -74,16 +74,16 @@ public class MapLoader {
 			double val = Double.parseDouble(xmlr.getAttributeValue(i));
 
 			switch (xmlr.getAttributeLocalName(i)) {
-				case "minlat":
+				case "minlon":
 					boundCoords[0] = val;
 					break;
-				case "minlon":
+				case "minlat":
 					boundCoords[1] = val;
 					break;
-				case "maxlat":
+				case "maxlon":
 					boundCoords[2] = val;
 					break;
-				case "maxlon":
+				case "maxlat":
 					boundCoords[3] = val;
 					break;
 			}
@@ -136,7 +136,7 @@ public class MapLoader {
 				}
 			}
 
-			nodes.put(id, new RoadNode(id, lat, lon));
+			nodes.put(id, new RoadNode(id, lon, lat));
 			nextStartElement(xmlr);
 		}
 
