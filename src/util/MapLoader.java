@@ -22,6 +22,8 @@ public class MapLoader {
 	protected Trie<RoadEdge> searchTree = new Trie<RoadEdge>();
 	protected Graph graph;
 
+	protected UTMConverter utmConverter = new UTMConverter();
+
 	public MapLoader(String mapDataFile) throws IOException {
 		this(mapDataFile, null);
 	}
@@ -74,22 +76,27 @@ public class MapLoader {
 			double val = Double.parseDouble(xmlr.getAttributeValue(i));
 
 			switch (xmlr.getAttributeLocalName(i)) {
-				case "minlon":
+				case "minlat":
 					boundCoords[0] = val;
 					break;
-				case "minlat":
+				case "minlon":
 					boundCoords[1] = val;
 					break;
-				case "maxlon":
+				case "maxlat":
 					boundCoords[2] = val;
 					break;
-				case "maxlat":
+				case "maxlon":
 					boundCoords[3] = val;
 					break;
 			}
 		}
 
-		return new Rectangle(boundCoords[0], boundCoords[1], boundCoords[2], boundCoords[3]);
+		UTMCoordinateSet utmCoords1 = utmConverter.LatLonToUTM(boundCoords[0], boundCoords[1]);
+		UTMCoordinateSet utmCoords2 = utmConverter.LatLonToUTM(boundCoords[2], boundCoords[3]);
+
+		return new Rectangle(
+				utmCoords1.getEasting(), utmCoords1.getNorthing(),
+				utmCoords2.getEasting(), utmCoords2.getNorthing());
 	}
 
 	/**
@@ -136,7 +143,9 @@ public class MapLoader {
 				}
 			}
 
-			nodes.put(id, new RoadNode(id, lon, lat));
+			UTMCoordinateSet utmCoords = utmConverter.LatLonToUTM(lat, lon);
+
+			nodes.put(id, new RoadNode(id, utmCoords.getEasting(), utmCoords.getNorthing()));
 			nextStartElement(xmlr);
 		}
 
