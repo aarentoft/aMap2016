@@ -37,8 +37,21 @@ public class MapLoader {
 			XMLStreamReader xmlr = xmlif.createXMLStreamReader(mapDataFile,
 					new FileInputStream(mapDataFile));
 
-			xmlr.nextTag();		// Skips <?xml ...> tag (START_DOCUMENT event)
-			xmlr.nextTag();		// Skips <osm version=... > tag
+			xmlr.nextTag();		// Skips <?xml ...> tag (START_DOCUMENT event) where getLocalName() cannot be used.
+
+			/* Skip data until <bounds ...> element is reached. Ensures that OSM data can be read, no matter what data
+			   precedes the list of nodes and the list of ways. This is important because OSM can be formatted
+			   slightly different depending on how the data was exported. */
+			while(!xmlr.getLocalName().equals("bounds")) {
+				/* Do-while() necessary. With a regular while() the body will only keep executing until
+				   the first START_ELEMENT. If that is not a <bounds ...> element, execution will be stuck in an
+				   infinite loop here, since the inner while condition will continue to be false, but the outer
+				   while condition is true. The Do-while() allows the body to execute before the inner while condition
+				   is checked, thus skipping past the START_ELEMENT.*/
+				do {
+					xmlr.next();
+				} while (xmlr.getEventType() != XMLStreamConstants.START_ELEMENT);
+			}
 
 			quadTree = new QuadTree(readBounds(xmlr));
 
