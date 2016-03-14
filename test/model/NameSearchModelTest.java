@@ -40,8 +40,8 @@ public class NameSearchModelTest {
 		Set<String> expected = new HashSet<String>();
 
 		for (RoadEdge roadEdge : tree.getContents()) {
-			if (roadEdge.roadname.toLowerCase().startsWith(q.toLowerCase())) {
-				expected.add(roadEdge.roadname);
+			if (roadEdge.data.roadname.toLowerCase().startsWith(q.toLowerCase())) {
+				expected.add(roadEdge.data.roadname);
 			}
 		}
 
@@ -50,7 +50,7 @@ public class NameSearchModelTest {
 		Set<String> actual = new HashSet<String>();
 
 		for (RoadEdge roadEdge : nameSearchModel.getRoadNameSearchResult()) {
-			actual.add(roadEdge.roadname);
+			actual.add(roadEdge.data.roadname);
 		}
 		
 		assertEquals(expected, actual);
@@ -63,8 +63,8 @@ public class NameSearchModelTest {
 		Set<String> expected = new HashSet<String>();
 
 		for (RoadEdge roadEdge : tree.getContents()) {
-			if (roadEdge.roadname.toLowerCase().startsWith(q.toLowerCase())) {
-				expected.add(roadEdge.roadname);
+			if (roadEdge.data.roadname.toLowerCase().startsWith(q.toLowerCase())) {
+				expected.add(roadEdge.data.roadname);
 			}
 		}
 
@@ -73,7 +73,7 @@ public class NameSearchModelTest {
 		Set<String> actual = new HashSet<String>();
 
 		for (RoadEdge roadEdge : nameSearchModel.getRoadNameSearchResult()) {
-			actual.add(roadEdge.roadname);
+			actual.add(roadEdge.data.roadname);
 		}
 		
 		assertEquals(expected, actual);
@@ -86,8 +86,8 @@ public class NameSearchModelTest {
 		Set<String> expected = new HashSet<String>();
 
 		for (RoadEdge roadEdge : tree.getContents()) {
-			if (roadEdge.roadname.toLowerCase().startsWith(q.toLowerCase())) {
-				expected.add(roadEdge.roadname);
+			if (roadEdge.data.roadname.toLowerCase().startsWith(q.toLowerCase())) {
+				expected.add(roadEdge.data.roadname);
 			}
 		}
 
@@ -96,7 +96,7 @@ public class NameSearchModelTest {
 		Set<String> actual = new HashSet<String>();
 
 		for (RoadEdge roadEdge : nameSearchModel.getRoadNameSearchResult()) {
-			actual.add(roadEdge.roadname);
+			actual.add(roadEdge.data.roadname);
 		}
 		
 		assertEquals(expected, actual);
@@ -109,8 +109,8 @@ public class NameSearchModelTest {
 		Set<String> expected = new HashSet<String>();
 
 		for (RoadEdge roadEdge : tree.getContents()) {
-			if (roadEdge.roadname.toLowerCase().startsWith(q.toLowerCase())) {
-				expected.add(roadEdge.roadname);
+			if (roadEdge.data.roadname.toLowerCase().startsWith(q.toLowerCase())) {
+				expected.add(roadEdge.data.roadname);
 			}
 		}
 
@@ -119,7 +119,7 @@ public class NameSearchModelTest {
 		Set<String> actual = new HashSet<String>();
 
 		for (RoadEdge roadEdge : nameSearchModel.getRoadNameSearchResult()) {
-			actual.add(roadEdge.roadname);
+			actual.add(roadEdge.data.roadname);
 		}
 		
 		assertEquals(expected, actual);
@@ -132,8 +132,8 @@ public class NameSearchModelTest {
 		Set<String> expected = new HashSet<String>();
 
 		for (RoadEdge roadEdge : tree.getContents()) {
-			if (roadEdge.roadname.toLowerCase().startsWith(q.toLowerCase())) {
-				expected.add(roadEdge.roadname);
+			if (roadEdge.data.roadname.toLowerCase().startsWith(q.toLowerCase())) {
+				expected.add(roadEdge.data.roadname);
 			}
 		}
 
@@ -142,7 +142,7 @@ public class NameSearchModelTest {
 		Set<String> actual = new HashSet<String>();
 
 		for (RoadEdge roadEdge : nameSearchModel.getRoadNameSearchResult()) {
-			actual.add(roadEdge.roadname);
+			actual.add(roadEdge.data.roadname);
 		}
 		
 		assertEquals(expected, actual);
@@ -155,8 +155,8 @@ public class NameSearchModelTest {
 		Set<String> expected = new HashSet<String>();
 
 		for (RoadEdge roadEdge : tree.getContents()) {
-			if (roadEdge.roadname.toLowerCase().startsWith(q.toLowerCase())) {
-				expected.add(roadEdge.roadname);
+			if (roadEdge.data.roadname.toLowerCase().startsWith(q.toLowerCase())) {
+				expected.add(roadEdge.data.roadname);
 			}
 		}
 
@@ -165,7 +165,7 @@ public class NameSearchModelTest {
 		Set<String> actual = new HashSet<String>();
 
 		for (RoadEdge roadEdge : nameSearchModel.getRoadNameSearchResult()) {
-			actual.add(roadEdge.roadname);
+			actual.add(roadEdge.data.roadname);
 		}
 
 		assertEquals(expected, actual);
