@@ -7,6 +7,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
@@ -18,24 +19,29 @@ import java.util.*;
  */
 public class MapLoader {
 
+	protected Loader loader;
 	protected QuadTree quadTree;
 	protected Trie<RoadEdge> searchTree = new Trie<RoadEdge>();
 	protected Graph graph;
 
 	protected UTMConverter utmConverter = new UTMConverter();
 
-	public MapLoader(String mapDataFile) throws IOException {
-		this(mapDataFile, null);
+	public MapLoader(String mapDataFilePath) throws IOException {
+		this(mapDataFilePath, null);
 	}
 
-	public MapLoader(String mapDataFile, Loader loader) throws IOException {
-		// Attempts to read an OSM map data file. For more info about at the OSM data format,
+	public MapLoader(String mapDataFilePath, Loader loader) throws IOException {
+		this.loader = loader;
+
+		// Attempt to read an OSM map data file. For more info about at the OSM data format,
 		// see http://wiki.openstreetmap.org/wiki/OSM_XML
 		try {
+			int fileLength = (int) new File(mapDataFilePath).length();
+
 			XMLInputFactory xmlif = XMLInputFactory.newInstance();
 
-			XMLStreamReader xmlr = xmlif.createXMLStreamReader(mapDataFile,
-					new FileInputStream(mapDataFile));
+			XMLStreamReader xmlr = xmlif.createXMLStreamReader(mapDataFilePath,
+					new FileInputStream(mapDataFilePath));
 
 			xmlr.nextTag();		// Skips <?xml ...> tag (START_DOCUMENT event) where getLocalName() cannot be used.
 
@@ -57,17 +63,17 @@ public class MapLoader {
 
 			nextStartElement(xmlr);		// Continue to the list of <node ...> tags
 
+			setProgress("Loading nodes...", xmlr.getLocation().getCharacterOffset(), fileLength);
 			graph = new Graph(readRoadNodes(xmlr));
+
+			setProgress("Loading edges...", xmlr.getLocation().getCharacterOffset(), fileLength);
 			readRoadEdges(xmlr);
 
-			xmlr.close();
+			// Fill the progress bar completely. As the OSM data's <relation ...> elements are not used,
+			// the progress bar would stop part way without this.
+			setProgress("Done", fileLength, fileLength);
 
-			// Tell the loader that we're loading edges
-//          if (loader != null) {
-//              // There are around 1.2 times as many edges as nodes
-//              loader.setProgress("Loading roads...", 0,
-//                      (int) (nodes.size() * 1.2));
-//          }
+			xmlr.close();
 		} catch (XMLStreamException e)
 		{
 			System.out.println(e.getMessage());
@@ -160,6 +166,9 @@ public class MapLoader {
 
 			nodes.put(id, new RoadNode(id, utmCoords.getEasting(), utmCoords.getNorthing()));
 			nextStartElement(xmlr);
+
+			// NOTE: Despite its name, getCharacterOffset actually returns byte offset
+			setProgress(xmlr.getLocation().getCharacterOffset());
 		}
 
 		return nodes;
@@ -219,6 +228,8 @@ public class MapLoader {
 				n2.addEdge(edge);
 				graph.addEdge(edge);
 			}
+
+			setProgress(xmlr.getLocation().getCharacterOffset());
 		}
 	}
 
@@ -255,6 +266,28 @@ public class MapLoader {
 		do {
 			xmlr.nextTag();
 		} while (xmlr.getEventType() != XMLStreamConstants.START_ELEMENT && xmlr.hasNext());
+	}
+
+	/**
+	 * Convenience method to only set UI loader progress if a UI loader object is present.
+	 * @param progress New progress value
+     */
+	private void setProgress(int progress) {
+		if (loader != null) {
+			loader.setProgress(progress);
+		}
+	}
+
+	/**
+	 * Convenience method to only set UI loader label, progress, and max values if a UI loader object is present.
+	 * @param label New label value
+	 * @param progress New progress value
+	 * @param max New maximum loader value. Should be larger than progress
+     */
+	private void setProgress(String label, int progress, int max) {
+		if (loader != null) {
+			loader.setProgress(label, progress, max);
+		}
 	}
 
 	/**
