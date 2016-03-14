@@ -12,6 +12,7 @@ import util.TrieTest;
 import util.RectangleTest;
 import util.graph.GraphDataLoadTest;
 import util.graph.GraphTest;
+import util.UTMConverterTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -24,7 +25,8 @@ import util.graph.GraphTest;
 	TrieTest.class,
 	RectangleTest.class,
 	GraphDataLoadTest.class,
-	GraphTest.class
+	GraphTest.class,
+	UTMConverterTest.class
 })
 public class TestSuite {
     // the class remains completely empty, 

@@ -1,3 +1,5 @@
+package util;
+
 import org.junit.Test;
 import util.UTMConverter;
 import util.UTMCoordinateSet;
