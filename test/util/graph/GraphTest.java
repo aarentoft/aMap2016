@@ -219,32 +219,32 @@ public class GraphTest {
 
 	@Test
 	public void getNodes() {
-		Map<Integer, RoadNode> exp = new HashMap<Integer, RoadNode>();
-		exp.put(1, nodeA);
-		exp.put(2, nodeB);
-		exp.put(3, nodeC);
-		exp.put(4, nodeD);
-		exp.put(5, nodeE);
-		exp.put(6, nodeF);
-		exp.put(7, nodeG);
-		exp.put(8, nodeH);
-		exp.put(9, nodeI);
+		Map<String, RoadNode> exp = new HashMap<String, RoadNode>();
+		exp.put("1", nodeA);
+		exp.put("2", nodeB);
+		exp.put("3", nodeC);
+		exp.put("4", nodeD);
+		exp.put("5", nodeE);
+		exp.put("6", nodeF);
+		exp.put("7", nodeG);
+		exp.put("8", nodeH);
+		exp.put("9", nodeI);
 		Map<String, RoadNode> act = graph.getNodes();
 
 		if (exp.size() != act.size())
 			fail("The results are not the same size!");
 		for (int i = 1; i < exp.size() && i < act.size(); i++) {
-			assertTrue(exp.get(i).equals(act.get(i)));
+			assertTrue(exp.get(""+i).equals(act.get(""+i)));
 		}
 
-		// Competely empty graph
+		// Completely empty graph
 		Map<String, RoadNode> emptymap = Collections.emptyMap();
 		Graph empty = new Graph(emptymap);
 		act = empty.getNodes();
 		if (emptymap.size() != act.size())
 			fail("The results are not the same size!");
 		for (int i = 1; i < exp.size() && i < act.size(); i++) {
-			assertTrue(emptymap.get(i).equals(act.get(i)));
+			assertTrue(emptymap.get(""+i).equals(act.get(""+i)));
 		}
 	}
 
