@@ -8,6 +8,7 @@ import util.Rectangle;
  * A graph edge created from an EdgeData object.
  */
 public class RoadEdge extends Rectangle implements Comparable<RoadEdge> {
+	// Length in meters
 	public final double length;
 	public final RoadNode start;
 	public final RoadNode end;
@@ -29,7 +30,13 @@ public class RoadEdge extends Rectangle implements Comparable<RoadEdge> {
 		this.start = v1;
 		this.end = v2;
 
-		// TODO: Calculate length based on the coords of v1 and v2
+		/* NOTE: Since very few edges (if any at all) represent a part of a road which spans more than
+		 * a small part of a UTM zone, the error due to the projection will be relatively small so
+		 * a regular Euclidean distance gets the job done for now.
+		 * A more correct solution would be to use the Haversine formula using the lat long coordinates,
+		 * but at the moment these coords are unavailable as they are converted to UTM as
+		 * soon as the data is read from the map file and the RoadNode is constructed.
+		 */
 		double len = Math.pow(v1.x - v2.x, 2.0) + Math.pow(v1.y - v2.y, 2.0);
 		this.length = Math.sqrt(len);
 //		String dir = data.ONE_WAY;
