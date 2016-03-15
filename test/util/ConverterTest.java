@@ -16,11 +16,19 @@ public class ConverterTest {
 
 	@BeforeClass
 	public static void initConverter() throws IOException {
-//		String dir = "";
-//		MapLoader mapLoader = new MapLoader("map-anholt-mini.osm");
-//		model = new MapModel(mapLoader.getQuadTree());
-//		model.setMapDimension(new Dimension(400, 400));
-//		converter = new Converter(model);
+		// UTM coordinates of the boundaries of Valby
+		double valbyX1 = 718462.56835;
+		double valbyY1 = 6171703.101570001;
+		double valbyX2 = valbyX1 + 4014.420420000097;	// valbyX1 + Width of Valby's area
+		double valbyY2 = valbyY1 + 4087.5294500002638;  // valbyY1 + Height of Valby's area
+
+		// Create mock objects
+		Rectangle bounds = new Rectangle(valbyX1, valbyY1, valbyX2, valbyY2);
+		QuadTree qTree = new QuadTree(bounds);
+
+		model = new MapModel(qTree);
+		model.setMapDimension(new Dimension(400, 400));
+		converter = new Converter(model);
 	}
 
 	@Test
