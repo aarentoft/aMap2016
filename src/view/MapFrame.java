@@ -61,6 +61,9 @@ public class MapFrame extends JFrame {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    setLocation(screenSize.width / 4, screenSize.height / 4);
 	    
+		setMinimumSize(new Dimension(400, 300));
+		setPreferredSize(new Dimension(800, 600));
+
 		pack();
 		setVisible(true);
 	}
@@ -135,14 +138,5 @@ public class MapFrame extends JFrame {
 		menuBar.add(horizontalStrut);
 
 		return menuBar;
-	}
-	@Override
-	public Dimension getMinimumSize() {
-		return new Dimension(800, 600);
-	}
-
-	@Override
-	public Dimension getPreferredSize() {
-		return getMinimumSize();
 	}
 }

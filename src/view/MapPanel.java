@@ -1,19 +1,9 @@
 package view;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.geom.Area;
-import java.lang.Thread.State;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-
+import controller.MapPanelComponentAdapter;
+import controller.MapPanelMouseListener;
+import controller.OSMCopyrightNoticeMouseAdapter;
+import exceptions.PathNotFoundException;
 import model.MapInteractionModel;
 import model.MapModel;
 import model.NameSearchModel;
@@ -21,9 +11,13 @@ import model.RouteModel;
 import util.DrawingThread;
 import util.Point;
 import util.Rectangle;
-import controller.MapPanelComponentAdapter;
-import controller.MapPanelMouseListener;
-import exceptions.PathNotFoundException;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.geom.Area;
+import java.lang.Thread.State;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This class is used to make a panel which contains a map with the data given
@@ -39,6 +33,7 @@ public class MapPanel extends JLayeredPane implements Observer {
 	protected MapInteractionModel mapInteractionModel = new MapInteractionModel();
 	protected Image buffer, bufferBG, bufferRoute;
 	protected SearchPanel searchPanel;
+	protected JPanel overlay;
 
 	/**
 	 * Creates a new {@link MapPanel}.
@@ -51,10 +46,45 @@ public class MapPanel extends JLayeredPane implements Observer {
 		this.mapModel = mapModel;
 		this.routeModel = routeModel;
 
+		String copyrightURL = "http://www.openstreetmap.org";
+
+		// Build the search panel and place it in the upper left corner.
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.anchor = GridBagConstraints.NORTHWEST;
 		searchPanel = new SearchPanel(routeModel, nameSearchModel);
-		add(searchPanel, JLayeredPane.PALETTE_LAYER);
 		searchPanel.setBounds(new java.awt.Rectangle(searchPanel
 				.getPreferredSize()));
+
+		// Build OpenStreetMap copyright notice and place it in lower right corner.
+		// This is mainly achieved by the GridBagConstraints of the search panel, though.
+		GridBagConstraints gbc2  = new GridBagConstraints();
+		gbc2.anchor = GridBagConstraints.SOUTHEAST;
+		JLabel copyrightNotice = new JLabel("<html>© <a href=>OpenStreetMap</a> contributors</html>");
+		copyrightNotice.setOpaque(true);
+		copyrightNotice.setBackground(Color.WHITE);
+		copyrightNotice.setToolTipText(copyrightURL);
+		copyrightNotice.addMouseListener(new OSMCopyrightNoticeMouseAdapter(copyrightURL));
+
+		// Build invisible center thing, which pushes the search panel and the OSM contributor notice
+		// to their respective corner. This approach, instead of just using the search panel to push the OSM notice,
+		// prevents the notice from jumping to the center when the search panel is hidden.
+		GridBagConstraints gbcCenterThing = new GridBagConstraints();
+		gbcCenterThing.anchor = GridBagConstraints.CENTER;
+		gbcCenterThing.weightx = 1.0;
+		gbcCenterThing.weighty = 1.0;
+		JPanel centerThing = new JPanel(new FlowLayout());
+		centerThing.setOpaque(false);
+		centerThing.setSize(getSize());
+
+		// Build an overlay container for the search panel and copyright notice to put
+		// on top of the map.
+		overlay = new JPanel(new GridBagLayout());
+		overlay.setOpaque(false);
+		overlay.setBounds(this.getBounds());
+		overlay.add(searchPanel, gbc);
+		overlay.add(centerThing, gbcCenterThing);
+		overlay.add(copyrightNotice, gbc2);
+		this.add(overlay, JLayeredPane.PALETTE_LAYER);
 
 		// Setup this panel
 		this.setFocusable(true);
@@ -160,6 +190,18 @@ public class MapPanel extends JLayeredPane implements Observer {
 		} else {
 			repaint();
 		}
+	}
+
+	@Override
+	public void setBounds(int x, int y, int width, int height) {
+		super.setBounds(x, y, width, height);
+		overlay.setBounds(x, y, width, height);
+	}
+
+	@Override
+	public void setBounds(java.awt.Rectangle r) {
+		super.setBounds(r);
+		overlay.setBounds(r);
 	}
 
 	/**
