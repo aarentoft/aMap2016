@@ -206,13 +206,14 @@ public class MapLoader {
 
 			tags = readTags(xmlr);
 
-			// way is not a road, so it shouldn't be added to the road network model
-			if (tags.get("highway") == null)
+			// way is not a road or route, so it shouldn't be added to the road network model
+			if (tags.get("highway") == null && tags.get("route") == null)
 				continue;
 
 			// TODO: Get direction from tags
 			roadname = tags.get("name") != null ? tags.get("name") : "";
-			type = RoadType.getEnum(tags.get("highway"));
+			// Ferries are a special case since they are not highways in OSM data, only routes.
+			type = tags.get("route") != null && tags.get("route").equals("ferry") ? RoadType.FERRY : RoadType.getEnum(tags.get("highway"));
 			WayData data = new WayData(roadname, type, direction);
 
 			for (int i = 0; i < nodes.size() - 1; i++) {
