@@ -11,19 +11,19 @@ import java.util.List;
  * RoadType enum class which holds information about the different RoadTypes.
  */
 public enum RoadType implements Comparable<RoadType> {
-	MOTORWAY(1, new Color(255, 195, 69), new Color(210, 147, 0), 1.5, 10), MOTORWAY_TUNNEL(
-			41, new Color(255, 195, 69), new Color(210, 147, 0), 1.5, 10), MOTORWAY_EXIT(
-			31, new Color(255, 224, 104), new Color(229, 169, 25), 1, 2),
+	MOTORWAY(1, new Color(216, 118, 138), new Color(204, 21, 86), 1.5, 10),
+	MOTORWAY_TUNNEL(41, new Color(216, 118, 138), new Color(204, 21, 86), 1.5, 10),
+	MOTORWAY_EXIT(31, new Color(216, 118, 138), new Color(204, 21, 86), 1, 2),
 
-	EXPRESSWAY(2, new Color(255, 195, 69), new Color(210, 147, 0), 1.5, 9), EXPRESSWAY_TUNNEL(
-			42, new Color(255, 195, 69), new Color(210, 147, 0), 1.5, 9), EXPRESSWAY_EXIT(
-			32, new Color(255, 195, 69), new Color(210, 147, 0), 1, 1),
+	EXPRESSWAY(2, new Color(236, 154, 130), new Color(183, 61, 35), 1.5, 9),
+	EXPRESSWAY_TUNNEL(42, new Color(236, 154, 130), new Color(183, 61, 35), 1.5, 9),
+	EXPRESSWAY_EXIT(32, new Color(236, 154, 130), new Color(183, 61, 35), 1, 1),
 
-	PRIMARY_ROAD(3, new Color(255, 253, 139), new Color(207, 185, 119), 1, 8), PRIMARY_ROAD_EXIT(
-			33, new Color(255, 253, 139), new Color(207, 185, 119), 1, 1),
+	PRIMARY_ROAD(3, new Color(240, 197, 139), new Color(142, 102, 13), 1.5, 8),
+	PRIMARY_ROAD_EXIT(33, new Color(240, 197, 139), new Color(142, 102, 13), 1.5, 1),
 
-	SECONDARY_ROAD(4, new Color(255, 253, 139), new Color(207, 185, 119), 1, 7), SECONDARY_ROAD_EXIT(
-			34, new Color(255, 253, 139), new Color(207, 185, 119), 1, 1),
+	SECONDARY_ROAD(4, new Color(233, 240, 166), new Color(101, 116, 10), 1.5, 7),
+	SECONDARY_ROAD_EXIT(34, new Color(233, 240, 166), new Color(101, 116, 10), 1.5, 1),
 
 	TERTIARY_ROAD(17, new Color(241, 241, 243), new Color(150, 150, 152), 1, 1),
 
