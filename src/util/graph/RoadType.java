@@ -137,22 +137,22 @@ public enum RoadType implements Comparable<RoadType> {
 		List<RoadType> list = new LinkedList<RoadType>();
 
 		// Default - Always shown
-		list.addAll(Arrays.asList(new RoadType[]{FERRY, MOTORWAY,
+		list.addAll(Arrays.asList(FERRY, MOTORWAY,
 				MOTORWAY_TUNNEL, MOTORWAY_EXIT, EXPRESSWAY, EXPRESSWAY_TUNNEL,
 				EXPRESSWAY_EXIT, PRIMARY_ROAD, PRIMARY_ROAD_EXIT,
-				SECONDARY_ROAD, SECONDARY_ROAD_EXIT}));
+				SECONDARY_ROAD, SECONDARY_ROAD_EXIT));
 
 		if (coordinateAspectRatio < coordinateRatioRoadLimit3) {
-			list.addAll(Arrays.asList(new RoadType[]{ROAD}));
+			list.addAll(Arrays.asList(ROAD));
 		}
 
 		if (coordinateAspectRatio < coordinateRatioRoadLimit2) {
-			list.addAll(Arrays.asList(new RoadType[]{MINOR_ROAD, EXIT}));
+			list.addAll(Arrays.asList(MINOR_ROAD, EXIT, RESIDENTIAL, LIVING_STREET, TRACK, SERVICE, TERTIARY_ROAD));
 		}
 
 		if (coordinateAspectRatio < coordinateRatioRoadLimit1) {
-			list.addAll(Arrays.asList(new RoadType[]{PATH, DIRT_ROAD,
-					PEDESTRIANISHED_ZONE}));
+			list.addAll(Arrays.asList(PATH, DIRT_ROAD,
+					PEDESTRIANISHED_ZONE, FOOTWAY, CYCLEWAY, STEPS));
 		}
 		Collections.sort(list, new PriorityComparator());
 
