@@ -210,8 +210,9 @@ public class MapLoader {
 			if (tags.get("highway") == null)
 				continue;
 
-			// TODO: Get road type and direction from tags
+			// TODO: Get direction from tags
 			roadname = tags.get("name") != null ? tags.get("name") : "";
+			type = RoadType.getEnum(tags.get("highway"));
 			WayData data = new WayData(roadname, type, direction);
 
 			for (int i = 0; i < nodes.size() - 1; i++) {

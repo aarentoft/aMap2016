@@ -25,11 +25,20 @@ public enum RoadType implements Comparable<RoadType> {
 	SECONDARY_ROAD(4, new Color(255, 253, 139), new Color(207, 185, 119), 1, 7), SECONDARY_ROAD_EXIT(
 			34, new Color(255, 253, 139), new Color(207, 185, 119), 1, 1),
 
-	EXIT(35, Color.WHITE, new Color(195, 187, 163), 1, 1),
+	TERTIARY_ROAD(17, new Color(241, 241, 243), new Color(150, 150, 152), 1, 1),
 
-	ROAD(5, Color.WHITE, new Color(195, 187, 163), 0.7, 6), MINOR_ROAD(6,
-			Color.WHITE, new Color(195, 187, 163), 0.7, 5), PEDESTRIANISHED_ZONE(
-			11, new Color(250, 250, 245), new Color(216, 205, 198), 0.5, 4),
+	EXIT(35, Color.WHITE, new Color(195, 187, 163), 1, 1),
+	ROAD(5, Color.WHITE, new Color(195, 187, 163), 0.7, 6),
+	MINOR_ROAD(6, Color.WHITE, new Color(195, 187, 163), 0.7, 5),
+
+	PEDESTRIANISHED_ZONE(11, new Color(203, 203, 217), new Color(145, 143, 144), 0.5, 1),
+	FOOTWAY(12, new Color(234, 116, 104), new Color(234, 116, 104), 0.0, 1),
+	STEPS(17, new Color(234, 116, 104), new Color(234, 116, 104), 0.0, 1), // Visually identical to FOOTWAY
+	CYCLEWAY(13, new Color(57, 28, 253), new Color(57, 28, 253), 0.0, 1),
+	RESIDENTIAL(14, new Color(241, 241, 243), new Color(181, 176, 176), 1, 1),
+	SERVICE(15, new Color(241, 241, 243), new Color(181, 176, 176), 0.5, 1),
+	TRACK(16, new Color(148, 110, 32), new Color(148, 110, 32), 0, 1),
+	LIVING_STREET(18, new Color(221, 221, 221), new Color(176, 176, 176), 1, 1),
 
 	PATH(8, new Color(250, 250, 245), new Color(216, 205, 198), 0.5, 1),
 
@@ -85,51 +94,34 @@ public enum RoadType implements Comparable<RoadType> {
 	}
 
 	/**
-	 * Get enum for a specific road type ID (they appear as integers in the
-	 * input file)
-	 * 
-	 * @param i
-	 *            road type integer
-	 * @return <code>RoadType</code> object.
-	 */
-	public static RoadType getEnum(int i) {
-		switch (i) {
-			case 1 :
-				return MOTORWAY;
-			case 2 :
-				return EXPRESSWAY;
-			case 3 :
-				return PRIMARY_ROAD;
-			case 4 :
-				return SECONDARY_ROAD;
-			case 5 :
-				return ROAD;
-			case 6 :
-				return MINOR_ROAD;
-			case 8 :
-				return PATH;
-			case 10 :
-				return DIRT_ROAD;
-			case 11 :
-				return PEDESTRIANISHED_ZONE;
-			case 31 :
-				return MOTORWAY_EXIT;
-			case 32 :
-				return EXPRESSWAY_EXIT;
-			case 33 :
-				return PRIMARY_ROAD_EXIT;
-			case 34 :
-				return SECONDARY_ROAD_EXIT;
-			case 35 :
-				return EXIT;
-			case 41 :
-				return MOTORWAY_TUNNEL;
-			case 42 :
-				return EXPRESSWAY_TUNNEL;
-			case 80 :
-				return FERRY;
-			default :
-				return UNKNOWN;
+	 * Get enum for a specific road type ID from OSM data.
+	 *
+	 * @param str road type string to translate
+	 * @return corresponding {@link RoadType} enum
+     */
+	public static RoadType getEnum(String str) {
+		switch (str) {
+			case "motorway"       : return MOTORWAY;
+			case "trunk"          : return EXPRESSWAY;
+			case "primary"        : return PRIMARY_ROAD;
+			case "secondary"      : return SECONDARY_ROAD;
+			case "tertiary"       : return TERTIARY_ROAD;
+			case "road"           : return ROAD;
+			case "unclassified"   : return MINOR_ROAD;
+			case "path"           : return PATH;
+			case "pedestrian"     : return PEDESTRIANISHED_ZONE;
+			case "motorway_link"  : return MOTORWAY_EXIT;
+			case "trunk_link"     : return EXPRESSWAY_EXIT;
+			case "primary_link"   : return PRIMARY_ROAD_EXIT;
+			case "secondary_link" : return SECONDARY_ROAD_EXIT;
+			case "footway" 		  : return FOOTWAY;
+			case "cycleway"		  : return CYCLEWAY;
+			case "residential"    : return RESIDENTIAL;
+			case "service"        : return SERVICE;
+			case "track"          : return TRACK;
+			case "steps"          : return STEPS;
+			case "living_street"  : return LIVING_STREET;
+			default : return UNKNOWN;
 		}
 	}
 
@@ -183,8 +175,8 @@ public enum RoadType implements Comparable<RoadType> {
 		list.addAll(Arrays.asList(new RoadType[]{FERRY, MOTORWAY,
 				MOTORWAY_TUNNEL, MOTORWAY_EXIT, EXPRESSWAY, EXPRESSWAY_TUNNEL,
 				EXPRESSWAY_EXIT, PRIMARY_ROAD, PRIMARY_ROAD_EXIT,
-				SECONDARY_ROAD, SECONDARY_ROAD_EXIT, ROAD, MINOR_ROAD, EXIT,
-				DIRT_ROAD}));
+				SECONDARY_ROAD, SECONDARY_ROAD_EXIT, TERTIARY_ROAD, ROAD, MINOR_ROAD, EXIT,
+				DIRT_ROAD, LIVING_STREET}));
 		Collections.sort(list, new PriorityComparator());
 		return list;
 	}
