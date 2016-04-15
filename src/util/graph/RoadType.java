@@ -172,11 +172,11 @@ public enum RoadType implements Comparable<RoadType> {
 	 */
 	public static List<RoadType> getAllDrivableRoads() {
 		List<RoadType> list = new LinkedList<RoadType>();
-		list.addAll(Arrays.asList(new RoadType[]{FERRY, MOTORWAY,
+		list.addAll(Arrays.asList(FERRY, MOTORWAY,
 				MOTORWAY_TUNNEL, MOTORWAY_EXIT, EXPRESSWAY, EXPRESSWAY_TUNNEL,
 				EXPRESSWAY_EXIT, PRIMARY_ROAD, PRIMARY_ROAD_EXIT,
 				SECONDARY_ROAD, SECONDARY_ROAD_EXIT, TERTIARY_ROAD, ROAD, MINOR_ROAD, EXIT,
-				DIRT_ROAD, LIVING_STREET}));
+				DIRT_ROAD, LIVING_STREET));
 		Collections.sort(list, new PriorityComparator());
 		return list;
 	}
