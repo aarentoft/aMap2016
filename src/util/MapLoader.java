@@ -229,9 +229,6 @@ public class MapLoader {
 					searchTree.insert(edge);
 
 				quadTree.insert(edge);
-
-				n1.addEdge(edge);
-				n2.addEdge(edge);
 				graph.addEdge(edge);
 			}
 
