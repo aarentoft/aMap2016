@@ -8,17 +8,17 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class TestGraphBuilder {
-    private final static List<RoadNode> nodes = new ArrayList<RoadNode>();
-    private final static Map<String, RoadNode> nodesMap = new TreeMap<String, RoadNode>();
-    private final static RoadNode nodeA;
-    private final static RoadNode nodeB;
-    private final static RoadNode nodeC;
-    private final static RoadNode nodeD;
-    private final static RoadNode nodeE;
-    private final static RoadNode nodeF;
-    private final static RoadNode nodeG;
-    private final static RoadNode nodeH;
-    private final static RoadNode nodeI;
+    public final static List<RoadNode> nodes = new ArrayList<RoadNode>();
+    public final static Map<String, RoadNode> nodesMap = new TreeMap<String, RoadNode>();
+    public final static RoadNode nodeA;
+    public final static RoadNode nodeB;
+    public final static RoadNode nodeC;
+    public final static RoadNode nodeD;
+    public final static RoadNode nodeE;
+    public final static RoadNode nodeF;
+    public final static RoadNode nodeG;
+    public final static RoadNode nodeH;
+    public final static RoadNode nodeI;
 
     public final static RoadEdge bidirectionalEdgeA;
     public final static RoadEdge bidirectionalEdgeB;
