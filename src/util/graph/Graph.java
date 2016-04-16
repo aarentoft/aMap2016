@@ -66,16 +66,9 @@ public class Graph {
 	 */
 	public void addEdge(RoadEdge e) {
 		edges.add(e);
-		// To-from
-		if (e.data.direction == 1)
+		if (e.data.oneway) {
 			outEdges.get(e.start.ID).add(e);
-		// From-To
-		else if (e.data.direction == 2)
-			outEdges.get(e.end.ID).add(e);
-		// No-go
-		else if (e.data.direction == 3) {
-			// do nothing (road not traversable)
-		} else { // Both ways
+		} else {
 			outEdges.get(e.start.ID).add(e);
 			outEdges.get(e.end.ID).add(e);
 		}

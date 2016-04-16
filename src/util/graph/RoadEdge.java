@@ -39,24 +39,6 @@ public class RoadEdge extends Rectangle implements Comparable<RoadEdge> {
 		 */
 		double len = Math.pow(v1.x - v2.x, 2.0) + Math.pow(v1.y - v2.y, 2.0);
 		this.length = Math.sqrt(len);
-//		String dir = data.ONE_WAY;
-
-//		// one-way (from-to)
-//		if (dir.equalsIgnoreCase("ft")) {
-//			this.direction = 1;
-//		}
-//		// one-way (to-from)
-//		else if (dir.equalsIgnoreCase("tf")) {
-//			this.direction = 2;
-//		}
-//		// no driving allowed.
-//		else if (dir.equalsIgnoreCase("n")) {
-//			this.direction = 3;
-//		}
-//		// no direction
-//		else {
-//			this.direction = 0;
-//		}
 	}
 
 	/**

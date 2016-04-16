@@ -64,20 +64,20 @@ public class GraphTest {
 		// Graph #3
 		// edgeF, edgeG and edgeL have been reversed to create obstacles
 		// NOTE: Direction 1 is from-to, 2 is to-from
-		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, (byte)1);
-		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, (byte)1);
-		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, (byte)1);
-		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, (byte)1);
-		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, (byte)1);
-		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, (byte)2);
-		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, (byte)2);
-		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, (byte)1);
-		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, (byte)1);
-		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
-		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
-		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)2);
-		WayData dataM = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
+		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, true);
+		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, true);
+		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, true);
+		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, true);
+		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, true);
+		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, true);
+		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, true);
+		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, true);
+		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, true);
+		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, true);
+		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, true);
+		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, true);
+		WayData dataM = new WayData("VejN", RoadType.MOTORWAY, true);
+		WayData dataN = new WayData("VejM", RoadType.MOTORWAY, true);
 
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
@@ -94,10 +94,11 @@ public class GraphTest {
 		edgeE = new RoadEdge(dataE, nodeD, nodeE);
 		nodeD.addEdge(edgeE);
 		nodeE.addEdge(edgeE);
-		edgeF = new RoadEdge(dataF, nodeD, nodeH);
+		// Note the direction of edge F and edge G
+		edgeF = new RoadEdge(dataF, nodeH, nodeD);
 		nodeD.addEdge(edgeF);
 		nodeH.addEdge(edgeF);
-		edgeG = new RoadEdge(dataG, nodeE, nodeH);
+		edgeG = new RoadEdge(dataG, nodeH, nodeE);
 		nodeE.addEdge(edgeG);
 		nodeH.addEdge(edgeG);
 		edgeH = new RoadEdge(dataH, nodeE, nodeF);
@@ -112,7 +113,8 @@ public class GraphTest {
 		edgeK = new RoadEdge(dataK, nodeG, nodeF);
 		nodeG.addEdge(edgeK);
 		nodeF.addEdge(edgeK);
-		edgeL = new RoadEdge(dataL, nodeC, nodeH);
+		// Note the direction of edge L
+		edgeL = new RoadEdge(dataL, nodeG, nodeC);
 		nodeC.addEdge(edgeL);
 		nodeG.addEdge(edgeL);
 		edgeM = new RoadEdge(dataM, nodeC, nodeE);
@@ -299,7 +301,7 @@ public class GraphTest {
 
 	@Test
 	public void addEdge() {
-		WayData testdata  = new WayData("VejTest", RoadType.ROAD, (byte)0);
+		WayData testdata  = new WayData("VejTest", RoadType.ROAD, false);
 		RoadEdge testedge = new RoadEdge(testdata, nodeB, nodeD);
 
 		graph.addEdge(testedge);

@@ -121,20 +121,20 @@ public class DijkstraTest {
 //			dataN = new EdgeData(
 //					"7,9,3.00,14,14,1,VejN,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0");
 //
-		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, (byte)0);
-		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, (byte)0);
-		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, (byte)0);
-		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, (byte)0);
-		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, (byte)0);
-		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, (byte)0);
-		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, (byte)0);
-		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, (byte)0);
-		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, (byte)0);
-		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)0);
-		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)0);
-		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)0);
-		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)0);
-		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)0);
+		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, false);
+		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, false);
+		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, false);
+		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, false);
+		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, false);
+		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, false);
+		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, false);
+		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, false);
+		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, false);
+		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, false);
+		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, false);
+		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, false);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, false);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, false);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -258,20 +258,20 @@ public class DijkstraTest {
 //			dataN = new EdgeData(
 //					"7,9,3.00,14,14,1,VejN,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,ft,0,0,0,0,0");
 
-		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, (byte)1);
-		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, (byte)1);
-		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, (byte)1);
-		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, (byte)1);
-		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, (byte)1);
-		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, (byte)1);
-		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, (byte)1);
-		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, (byte)1);
-		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, (byte)1);
-		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
-		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
-		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)1);
-		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
+		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, true);
+		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, true);
+		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, true);
+		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, true);
+		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, true);
+		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, true);
+		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, true);
+		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, true);
+		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, true);
+		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, true);
+		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, true);
+		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, true);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, true);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, true);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -393,20 +393,20 @@ public class DijkstraTest {
 //					"7,9,3.00,14,14,1,VejN,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,ft,0,0,0,0,0");
 
 		// edgeF, edgeG and edgeL have been reversed to create obstacles
-		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, (byte)1);
-		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, (byte)1);
-		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, (byte)1);
-		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, (byte)1);
-		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, (byte)1);
-		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, (byte)2);
-		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, (byte)2);
-		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, (byte)1);
-		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, (byte)1);
-		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
-		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
-		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)2);
-		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
+		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, true);
+		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, true);
+		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, true);
+		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, true);
+		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, true);
+		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, true);
+		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, true);
+		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, true);
+		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, true);
+		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, true);
+		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, true);
+		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, true);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, true);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, true);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -422,10 +422,11 @@ public class DijkstraTest {
 		edgeE = new RoadEdge(dataE, nodeD, nodeE);
 		nodeD.addEdge(edgeE);
 		nodeE.addEdge(edgeE);
-		edgeF = new RoadEdge(dataF, nodeD, nodeH);
+		// Note the direction of edge F and edge G
+		edgeF = new RoadEdge(dataF, nodeH, nodeD);
 		nodeD.addEdge(edgeF);
 		nodeH.addEdge(edgeF);
-		edgeG = new RoadEdge(dataG, nodeE, nodeH);
+		edgeG = new RoadEdge(dataG, nodeH, nodeE);
 		nodeE.addEdge(edgeG);
 		nodeH.addEdge(edgeG);
 		edgeH = new RoadEdge(dataH, nodeE, nodeF);
@@ -440,7 +441,8 @@ public class DijkstraTest {
 		edgeK = new RoadEdge(dataK, nodeG, nodeF);
 		nodeG.addEdge(edgeK);
 		nodeF.addEdge(edgeK);
-		edgeL = new RoadEdge(dataL, nodeC, nodeG);
+		// Note the direction of edge L
+		edgeL = new RoadEdge(dataL, nodeG, nodeC);
 		nodeC.addEdge(edgeL);
 		nodeG.addEdge(edgeL);
 		edgeM = new RoadEdge(dataM, nodeC, nodeE);
@@ -527,20 +529,20 @@ public class DijkstraTest {
 //			dataN = new EdgeData(
 //					"7,9,3.00,14,14,1,VejN,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0");
 
-		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, (byte)0);
-		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, (byte)0);
-		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, (byte)0);
-		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, (byte)0);
-		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, (byte)0);
-		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, (byte)0);
-		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, (byte)0);
-		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, (byte)0);
-		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, (byte)0);
-		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)0);
-		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)0);
-		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)0);
-		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)0);
-		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)0);
+		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, false);
+		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, false);
+		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, false);
+		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, false);
+		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, false);
+		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, false);
+		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, false);
+		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, false);
+		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, false);
+		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, false);
+		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, false);
+		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, false);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, false);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, false);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -640,20 +642,20 @@ public class DijkstraTest {
 //			dataN = new EdgeData(
 //					"7,9,3.00,14,14,1,VejN,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,ft,0,0,0,0,0");
 
-		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, (byte)1);
-		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, (byte)1);
-		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, (byte)1);
-		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, (byte)1);
-		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, (byte)1);
-		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, (byte)1);
-		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, (byte)1);
-		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, (byte)1);
-		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, (byte)1);
-		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
-		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
-		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)1);
-		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
+		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, true);
+		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, true);
+		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, true);
+		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, true);
+		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, true);
+		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, true);
+		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, true);
+		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, true);
+		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, true);
+		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, true);
+		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, true);
+		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, true);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, true);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, true);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -760,20 +762,20 @@ public class DijkstraTest {
 //					"7,9,3.00,14,14,1,VejN,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,ft,0,0,0,0,0");
 
 		// edgeF and edgeG is reversed to create obstacles
-		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, (byte)1);
-		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, (byte)1);
-		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, (byte)1);
-		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, (byte)1);
-		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, (byte)1);
-		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, (byte)2);
-		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, (byte)2);
-		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, (byte)1);
-		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, (byte)1);
-		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
-		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
-		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)1);
-		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
+		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, true);
+		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, true);
+		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, true);
+		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, true);
+		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, true);
+		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, true);
+		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, true);
+		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, true);
+		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, true);
+		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, true);
+		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, true);
+		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, true);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, true);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, true);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -786,10 +788,11 @@ public class DijkstraTest {
 		edgeE = new RoadEdge(dataE, nodeD, nodeE);
 		nodeD.addEdge(edgeE);
 		nodeE.addEdge(edgeE);
-		edgeF = new RoadEdge(dataF, nodeD, nodeH);
+		// Note the direction of edge F and edge G
+		edgeF = new RoadEdge(dataF, nodeH, nodeD);
 		nodeD.addEdge(edgeF);
 		nodeH.addEdge(edgeF);
-		edgeG = new RoadEdge(dataG, nodeE, nodeH);
+		edgeG = new RoadEdge(dataG, nodeH, nodeD);
 		nodeE.addEdge(edgeG);
 		nodeH.addEdge(edgeG);
 		edgeH = new RoadEdge(dataH, nodeE, nodeF);
@@ -881,20 +884,20 @@ public class DijkstraTest {
 
 		// edgeF, edgeG, edgeH and edgeL have been reversed to prevent a
 		// path
-		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, (byte)1);
-		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, (byte)1);
-		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, (byte)1);
-		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, (byte)1);
-		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, (byte)1);
-		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, (byte)2);
-		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, (byte)2);
-		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, (byte)2);
-		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, (byte)1);
-		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, (byte)1);
-		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, (byte)1);
-		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, (byte)2);
-		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, (byte)1);
-		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, (byte)1);
+		WayData dataA = new WayData("VejA", RoadType.MOTORWAY, true);
+		WayData dataB = new WayData("VejB", RoadType.MOTORWAY, true);
+		WayData dataC = new WayData("VejC", RoadType.MOTORWAY, true);
+		WayData dataD = new WayData("VejD", RoadType.MOTORWAY, true);
+		WayData dataE = new WayData("VejE", RoadType.MOTORWAY, true);
+		WayData dataF = new WayData("VejF", RoadType.MOTORWAY, true);
+		WayData dataG = new WayData("VejG", RoadType.MOTORWAY, true);
+		WayData dataH = new WayData("VejH", RoadType.MOTORWAY, true);
+		WayData dataI = new WayData("VejI", RoadType.MOTORWAY, true);
+		WayData dataJ = new WayData("VejJ", RoadType.MOTORWAY, true);
+		WayData dataK = new WayData("VejK", RoadType.MOTORWAY, true);
+		WayData dataL = new WayData("VejL", RoadType.MOTORWAY, true);
+		WayData dataM = new WayData("VejM", RoadType.MOTORWAY, true);
+		WayData dataN = new WayData("VejN", RoadType.MOTORWAY, true);
 		edgeA = new RoadEdge(dataA, nodeA, nodeB);
 		nodeA.addEdge(edgeA);
 		nodeB.addEdge(edgeA);
@@ -910,13 +913,16 @@ public class DijkstraTest {
 		edgeE = new RoadEdge(dataE, nodeD, nodeE);
 		nodeD.addEdge(edgeE);
 		nodeE.addEdge(edgeE);
-		edgeF = new RoadEdge(dataF, nodeD, nodeH);
+		// Note the direction of edge F
+		edgeF = new RoadEdge(dataF, nodeH, nodeD);
 		nodeD.addEdge(edgeF);
 		nodeH.addEdge(edgeF);
-		edgeG = new RoadEdge(dataG, nodeE, nodeH);
+		// Note the direction of edge F
+		edgeG = new RoadEdge(dataG, nodeH, nodeE);
 		nodeE.addEdge(edgeG);
 		nodeH.addEdge(edgeG);
-		edgeH = new RoadEdge(dataH, nodeE, nodeF);
+		// Note the direction of edge H
+		edgeH = new RoadEdge(dataH, nodeF, nodeE);
 		nodeE.addEdge(edgeH);
 		nodeF.addEdge(edgeH);
 		edgeI = new RoadEdge(dataI, nodeF, nodeH);
@@ -928,7 +934,8 @@ public class DijkstraTest {
 		edgeK = new RoadEdge(dataK, nodeG, nodeF);
 		nodeG.addEdge(edgeK);
 		nodeF.addEdge(edgeK);
-		edgeL = new RoadEdge(dataL, nodeC, nodeG);
+		// Note the direction of Edge L
+		edgeL = new RoadEdge(dataL, nodeG, nodeC);
 		nodeC.addEdge(edgeL);
 		nodeG.addEdge(edgeL);
 		edgeM = new RoadEdge(dataM, nodeC, nodeE);

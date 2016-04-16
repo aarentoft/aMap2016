@@ -48,7 +48,7 @@ public class GraphDataLoadTest {
 		RoadNode n2 = new RoadNode("2", set2.getEasting(), set2.getNorthing());
 
 		String roadname = "Søndervangs Allé";
-		WayData wayData = new WayData(roadname, RoadType.MOTORWAY, (byte) 1);
+		WayData wayData = new WayData(roadname, RoadType.MOTORWAY, true);
 
 		RoadEdge e = new RoadEdge(wayData, n1, n2);
 

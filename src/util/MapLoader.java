@@ -192,7 +192,7 @@ public class MapLoader {
 
 		String roadname = "";
 		RoadType type = RoadType.MOTORWAY;
-		byte direction = 0;
+		boolean oneway = false;
 
 		while (xmlr.hasNext() && xmlr.getLocalName().equals("way")) {
 			nextStartElement(xmlr);        // Skip past way tag to the first nd tag
@@ -210,11 +210,15 @@ public class MapLoader {
 			if (tags.get("highway") == null && tags.get("route") == null)
 				continue;
 
-			// TODO: Get direction from tags
 			roadname = tags.get("name") != null ? tags.get("name") : "";
+
 			// Ferries are a special case since they are not highways in OSM data, only routes.
 			type = tags.get("route") != null && tags.get("route").equals("ferry") ? RoadType.FERRY : RoadType.getEnum(tags.get("highway"));
-			WayData data = new WayData(roadname, type, direction);
+
+			// If oneway tag exists, and set to a value that indicates oneway
+			oneway = tags.get("oneway") == null || tags.get("oneway").equals("yes") || tags.get("oneway").equals("-1");
+
+			WayData data = new WayData(roadname, type, oneway);
 
 			for (int i = 0; i < nodes.size() - 1; i++) {
 				RoadNode n1 = graph.getNodes().get(nodes.get(i));
