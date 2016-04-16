@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -73,6 +74,7 @@ public class DijkstraTest {
 	 * Helper method that resets the graph, nodes- and edges collections, and
 	 * EdgeData and RoadEdge fields. Invoked between every test.
 	 */
+	@After
 	public void resetFields() {
 		graph = null;
 		nodes = new ArrayList<RoadNode>();
@@ -1063,9 +1065,6 @@ public class DijkstraTest {
 		}
 
 		assertEquals(expResult, actResultA);
-
-		// Clean-up
-		resetFields();
 	}
 
 	/**
@@ -1099,9 +1098,6 @@ public class DijkstraTest {
 		}
 
 		assertEquals(expResult, actResultA);
-
-		// Clean-up
-		resetFields();
 	}
 
 	/**
@@ -1136,9 +1132,6 @@ public class DijkstraTest {
 		}
 
 		assertEquals(expResult, actResultA);
-
-		// Clean-up
-		resetFields();
 	}
 
 	// ---------- Groups of nodes (graph 4-6)
@@ -1176,9 +1169,6 @@ public class DijkstraTest {
 		}
 
 		assertEquals(expResult, actResultA);
-
-		// Clean-up
-		resetFields();
 	}
 
 	/**
@@ -1212,9 +1202,6 @@ public class DijkstraTest {
 		}
 
 		assertEquals(expResult, actResultA);
-
-		// Clean-up
-		resetFields();
 	}
 
 	/**
@@ -1249,9 +1236,6 @@ public class DijkstraTest {
 		}
 
 		assertEquals(expResult, actResultA);
-
-		// Clean-up
-		resetFields();
 	}
 
 
@@ -1262,7 +1246,6 @@ public class DijkstraTest {
 	// ---------- Negative tests ----------
 	@Test
 	public void directedEdgesPreventPath() {
-		resetFields();
 		buildG7();
 
 		try {
@@ -1282,7 +1265,6 @@ public class DijkstraTest {
 		} catch (PathNotFoundException expected) {
 			// Exception thrown, test passed
 		}
-
 	}
 
 	// ---------- Groups of separated nodes ----------
@@ -1292,7 +1274,6 @@ public class DijkstraTest {
 	@Test
 	public void negUndirectedGroups() {
 		// Uses test graph #4
-		resetFields();
 		buildG4();
 		try {
 			Dijkstra.DijkstraSearch(graph, nodeC, nodeI);
@@ -1305,7 +1286,6 @@ public class DijkstraTest {
 			fail("AStar should've thrown an exception!");
 		} catch (PathNotFoundException e) {
 		}
-
 	}
 
 	/**
@@ -1314,7 +1294,6 @@ public class DijkstraTest {
 	@Test
 	public void negOneWayObstaclesGroups() {
 		// Uses test graph #6
-		resetFields();
 		buildG6();
 
 		LinkedList<RoadEdge> expResult = new LinkedList<RoadEdge>();
@@ -1333,7 +1312,6 @@ public class DijkstraTest {
 			fail("A* should've thrown an exception!");
 		} catch (PathNotFoundException e) {
 		}
-
 	}
 
 	// ---------------- No edges (graph 8) -----------------
@@ -1342,8 +1320,6 @@ public class DijkstraTest {
 	 */
 	@Test
 	public void negDijkstraNoEdges() {
-		resetFields();
-
 		buildG8();
 
 		try {
@@ -1357,7 +1333,6 @@ public class DijkstraTest {
 			fail("should've thrown an exception!");
 		} catch (PathNotFoundException expected) {
 		}
-
 	}
 
 }
