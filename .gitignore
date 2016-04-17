@@ -8,4 +8,4 @@ aMap2016.iml
 # Ignore third party libraries
 third_party_lib/*
 
-map-anholt*.osm
+map-anholt-mini*.osm
