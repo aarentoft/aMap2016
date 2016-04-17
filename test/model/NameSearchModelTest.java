@@ -19,11 +19,20 @@ public class NameSearchModelTest {
 
 	@Before
 	public void init() throws IOException {
-		String dir = "";
-		MapLoader mapLoader = new MapLoader("map-anholt-mini.osm");
+		String testDataFilePath = System.getProperty("testDataFilePath");
 
-		nameSearchModel = new NameSearchModel(mapLoader.getSearchTree());
-		tree = mapLoader.getQuadTree();
+		MapLoader mapLoader;
+		try {
+			mapLoader = new MapLoader(testDataFilePath);
+			nameSearchModel = new NameSearchModel(mapLoader.getSearchTree());
+			tree = mapLoader.getQuadTree();
+		} catch (IOException|NullPointerException e) {
+			System.out.println("NameSearchModelTest:\n" +
+					"\ttestDataFilePath variable not set or invalid.\n" +
+					"\tUse the Java VM option -DtestDataFilePath=\"<path to test data file\".\n" +
+					"\tTest data file should be in the OSM format.\n");
+			org.junit.Assume.assumeNoException(e);
+		}
 	}
 
 	@Test(expected = IllegalArgumentException.class)

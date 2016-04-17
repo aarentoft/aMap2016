@@ -27,12 +27,21 @@ public class MapModelTest {
 
 	@Before
 	public void init() throws IOException {
-		String dir = "";
-		MapLoader mapLoader = new MapLoader("map-anholt-mini.osm");
-		tree = mapLoader.getQuadTree();
-		model = new MapModel(tree);
-		model.setMapDimension(new Dimension(400, 400));
-	}
+		String testDataFilePath = System.getProperty("testDataFilePath");
+
+		MapLoader mapLoader;
+		try {
+			mapLoader = new MapLoader(testDataFilePath);
+			tree = mapLoader.getQuadTree();
+			model = new MapModel(tree);
+			model.setMapDimension(new Dimension(400, 400));
+		} catch (IOException|NullPointerException e) {
+			System.out.println("MapModelTest:\n" +
+					"\ttestDataFilePath variable not set or invalid.\n" +
+					"\tUse the Java VM option -DtestDataFilePath=\"<path to test data file\".\n" +
+					"\tTest data file should be in the OSM format.\n");
+			org.junit.Assume.assumeNoException(e);
+		}
 
 	@Test
 	public void allEdges() {
