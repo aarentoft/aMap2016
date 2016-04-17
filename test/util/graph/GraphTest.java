@@ -183,7 +183,7 @@ public class GraphTest {
 	 * @return the alphabetic value for a number (1=A, 2=A, 3=C, etc.)
      */
 	private String getCharForNumber(int i) {
-		return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
+		return i > 0 && i < 27 ? String.valueOf((char)(i + 'A' - 1)) : null;
 	}
 
 }
