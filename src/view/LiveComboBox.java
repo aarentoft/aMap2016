@@ -67,7 +67,7 @@ public class LiveComboBox extends JComboBox implements Observer {
 			addItem(enteredString);
 			if (results != null) {
 				for (RoadEdge edge : results) {
-					addItem(edge);
+					addItem(edge.data.roadname);
 				}
 			}
 			setPopupVisible(true);

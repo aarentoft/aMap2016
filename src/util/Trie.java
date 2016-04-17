@@ -12,7 +12,7 @@ import java.util.TreeMap;
  * 
  * @param <T>
  */
-public class Trie<T> {
+public class Trie<T extends TrieSearchable> {
 	protected T element;
 	protected int level;
 	protected Map<Character, Trie<T>> children;
@@ -31,7 +31,7 @@ public class Trie<T> {
 	 * @param e
 	 */
 	public void insert(T e) {
-		insert(e, e.toString().toLowerCase());
+		insert(e, e.getTrieRepresentation().toLowerCase());
 	}
 
 	/**

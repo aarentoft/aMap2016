@@ -3,11 +3,12 @@ package util.graph;
 import java.util.HashMap;
 
 import util.Rectangle;
+import util.TrieSearchable;
 
 /**
  * A graph edge created from an EdgeData object.
  */
-public class RoadEdge extends Rectangle implements Comparable<RoadEdge> {
+public class RoadEdge extends Rectangle implements Comparable<RoadEdge>, TrieSearchable {
 	// Length in meters
 	public final double length;
 	public final RoadNode start;
@@ -53,6 +54,11 @@ public class RoadEdge extends Rectangle implements Comparable<RoadEdge> {
 	 */
 	public RoadNode getOther(RoadNode node) {
 		return (node.equals(start)) ? end : start;
+	}
+
+	@Override
+	public String getTrieRepresentation() {
+		return data.roadname;
 	}
 
 	@Override
