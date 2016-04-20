@@ -1,5 +1,6 @@
 package util;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ public class MappedMinPriorityQueue<Key, Item extends Comparable<Item>> {
      *
      * @param maxSize Maximum size of the priority queue.
      */
+    @SuppressWarnings("unchecked")
     public MappedMinPriorityQueue(int maxSize) {
         // The index 0 remains unused
         heap = (Key[]) new Object[maxSize + 1];
