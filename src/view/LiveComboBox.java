@@ -17,7 +17,7 @@ import controller.LiveComboBoxKeyAndActionListener;
  * This class represents the searchresults.
  */
 @SuppressWarnings("serial")
-public class LiveComboBox extends JComboBox implements Observer {
+public class LiveComboBox extends JComboBox<String> implements Observer {
 	protected NameSearchModel nameSearchModel;
 
 	/**
