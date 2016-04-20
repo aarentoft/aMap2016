@@ -29,7 +29,7 @@ public class Loader extends JFrame {
 	public Loader() {
 		try {
 			// Loader image
-			img = ImageIO.read(getClass().getResourceAsStream("/resources/placeholder.png"));
+			img = ImageIO.read(getClass().getResourceAsStream("/placeholder.png"));
 			setPreferredSize(new Dimension(img.getWidth(), img.getHeight() + 50));
 		} catch (Exception e) {
 			e.printStackTrace();
