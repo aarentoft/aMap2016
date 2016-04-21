@@ -2,12 +2,13 @@
 
 Requirements
 ============
-- Java 7
-- [JUnit](https://github.com/junit-team/junit4/wiki/Download-and-Install) for unit tests
+- Java 7 or newer
+- [JUnit](https://github.com/junit-team/junit4/wiki/Download-and-Install) for unit tests. Both `junit.jar` and `hamcrest-core.jar` is needed.
 
 Getting Started
 =========
 ## Application
+**NOTE:** The [Makefile](Makefile) has only been tested on OSX. May work with Linux, but some targets will most likely fail on Windows.
 
 `cd` in to the root of the project where the [Makefile](Makefile) is located. Then execute
 ```
@@ -26,7 +27,14 @@ Execute the following to clean the project
 $ make clean
 ```
 
-For more information about the build process and the execution of the application, refer to the [Makefile](Makefile)
+## Tests
+
+```
+make JUNIT="<path-to-junit.jar>" HAMCREST="<path-to-hamcrest.jar>" test
+```
+
+
+For more information about the build process and the execution of the application, refer to the [Makefile](Makefile).
 
 About
 =====
