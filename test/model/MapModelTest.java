@@ -13,11 +13,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import util.Converter;
-import util.MapLoader;
-import util.Point;
-import util.QuadTree;
-import util.Rectangle;
+import util.*;
 import util.graph.RoadEdge;
 import util.graph.RoadType;
 
@@ -27,7 +23,7 @@ public class MapModelTest {
 
 	@Before
 	public void init() throws IOException {
-		String testDataFilePath = System.getProperty("testDataFilePath");
+		String testDataFilePath = System.getProperty("testDataPath");
 
 		MapLoader mapLoader;
 		try {
@@ -38,7 +34,7 @@ public class MapModelTest {
 		} catch (IOException | NullPointerException e) {
 			System.out.println("MapModelTest:\n" +
 					"\ttestDataFilePath variable not set or invalid.\n" +
-					"\tUse the Java VM option -DtestDataFilePath=\"<path to test data file\".\n" +
+					"\tUse the Java VM option -DtestDataPath=<path to test data file>.\n" +
 					"\tTest data file should be in the OSM format.\n");
 			org.junit.Assume.assumeNoException(e);
 		}

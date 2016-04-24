@@ -19,7 +19,7 @@ public class NameSearchModelTest {
 
 	@Before
 	public void init() throws IOException {
-		String testDataFilePath = System.getProperty("testDataFilePath");
+		String testDataFilePath = System.getProperty("testDataPath");
 
 		MapLoader mapLoader;
 		try {
@@ -29,7 +29,7 @@ public class NameSearchModelTest {
 		} catch (IOException|NullPointerException e) {
 			System.out.println("NameSearchModelTest:\n" +
 					"\ttestDataFilePath variable not set or invalid.\n" +
-					"\tUse the Java VM option -DtestDataFilePath=\"<path to test data file\".\n" +
+					"\tUse the Java VM option -DtestDataPath=<path to test data file>.\n" +
 					"\tTest data file should be in the OSM format.\n");
 			org.junit.Assume.assumeNoException(e);
 		}
