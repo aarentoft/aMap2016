@@ -1,6 +1,10 @@
 # Ignore compiled .class files
 out/*
 
+# Gradle stuff
+.gradle/*
+build/*
+
 # Ignore IntelliJ project settings
 .idea/*
 aMap2016.iml

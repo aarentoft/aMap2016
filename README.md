@@ -3,38 +3,62 @@
 Requirements
 ============
 - Java 7 or newer
-- [JUnit](https://github.com/junit-team/junit4/wiki/Download-and-Install) for unit tests. Both `junit.jar` and `hamcrest-core.jar` is needed.
+- [Gradle](https://gradle.org/gradle-download/) to build easily (on OSX, Gradle can also be installed using homebrew).
 
 Getting Started
 =========
 ## Application
-**NOTE:** The [Makefile](Makefile) has only been tested on OSX. May work with Linux, but some targets will most likely fail on Windows.
+This application uses [Gradle](https://gradle.org/) for the build process. Everything Gradle produces is put in a folder called `build` in the root of the project. The following commands can be executed in any order as Gradle handles prerequisite commands. Eg. `$ gradle run` will automatically compile the source code first.
 
-`cd` in to the root of the project where the [Makefile](Makefile) is located. Then execute
-```
-$ make
-```
-to compile the project. Compiled files are put in a folder called "bin". To run the compiled application, run
-```
-$ make ARGS="<path-to-osm-file>" run
-```
-For example, to use the included `map-anholt.osm' execute the following
-```
-$ make ARGS="map-anholt.osm" run
-```
-Execute the following to clean the project
-```
-$ make clean
-```
+- To compile the project, `cd` in to the root of the project. Then execute
+    ```
+    $ gradle compileJava
+    ```
+
+- To run the compiled class files
+    ```
+    $ gradle run -DmapPath=<path-to-osm-file>
+    ```
+    For example, to use the included `map-anholt.osm' execute the following
+    ```
+    $ gradle run -DmapPath=data/map-anholt.osm
+    ```
+
+- To build an executable jar file
+    ```
+    $ gradle jar
+    ```
+    Then run the jar file using
+    ```
+    $ java -jar build/libs/aMap2016.jar data/map-anholt.osm
+    ```
+    Running the `aMap2016.jar` file by simply clicking it, will result in the jar file complaining that it cannot find any map data.
+
+- To clean all Gradle generated files
+    ```
+    $ gradle clean
+    ```
 
 ## Tests
 
+To run all the JUnit tests
 ```
-make JUNIT="<path-to-junit.jar>" HAMCREST="<path-to-hamcrest.jar>" test
+$ gradle test
 ```
 
+**NOTE:** After running some of the previous commands, Gradle may simply report 
+```
+[...]
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
 
-For more information about the build process and the execution of the application, refer to the [Makefile](Makefile).
+BUILD SUCCESSFUL
+```
+Without actually running the tests. This happens because the tests are being executed as a prerequisite for some of the tasks above. Since the tests have not changed, they are not run again. To force Gradle to run the tests again, simply add the `--rerun-tasks` flag like so
+
+```
+$ gradle test --rerun-tasks -DtestDataPath=data/map-anholt.osm
+```
 
 About
 =====

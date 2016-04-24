@@ -1,0 +1,63 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+mainClassName = 'Driver'
+
+// sourceCompatibility = 1.8
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'test'
+        }
+    }
+}
+
+// Customize the 'run' task to accept the path for map data using
+// TODO: Should only be run when doin 'gradle run'
+run {
+    if (System.getProperty("mapPath") != null) {
+        args System.getProperty("mapPath").split()
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Driver'
+    }
+}
+
+test {
+    // Pass the path for the test data to the test JVM
+    systemProperty 'testDataPath', 'data/map-anholt.osm'
+    testLogging {
+        afterSuite {
+            // Print a test summary, even when all tests are successful
+            desc, result ->
+            if (!desc.parent) { // will match the outermost suite
+                if (result.skippedTestCount > 0)
+                    println "WARNING: Some tests were skipped. Run 'gradle test --rerun-tasks -i' for more information."
+                println "Results: ${result.resultType} (${result.testCount} tests, "+
+                "${result.successfulTestCount} successes, "+
+                "${result.failedTestCount} failures, "+
+                "${result.skippedTestCount} skipped)"
+            }
+        }
+    }
+}
