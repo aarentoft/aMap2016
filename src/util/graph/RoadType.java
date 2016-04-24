@@ -152,7 +152,7 @@ public enum RoadType implements Comparable<RoadType> {
 
 		if (coordinateAspectRatio < coordinateRatioRoadLimit1) {
 			list.addAll(Arrays.asList(PATH, DIRT_ROAD,
-					PEDESTRIANISHED_ZONE, FOOTWAY, CYCLEWAY, STEPS));
+					PEDESTRIANISHED_ZONE, FOOTWAY, CYCLEWAY, STEPS, UNKNOWN));
 		}
 		Collections.sort(list, new PriorityComparator());
 
