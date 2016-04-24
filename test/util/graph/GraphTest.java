@@ -1,21 +1,11 @@
 package util.graph;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Collector;
-
-import org.junit.Before;
 import org.junit.Test;
 import testhelpers.TestGraphBuilder;
+
+import java.util.*;
+
+import static org.junit.Assert.*;
 
 public class GraphTest {
 	Graph graph = TestGraphBuilder.getGraph3();
