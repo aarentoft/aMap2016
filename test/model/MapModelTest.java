@@ -30,7 +30,9 @@ public class MapModelTest {
 			mapLoader = new MapLoader(testDataFilePath);
 			tree = mapLoader.getQuadTree();
 			model = new MapModel(tree);
-			model.setMapDimension(new Dimension(400, 400));
+			/* NOTE: The map model dimension must be set such that all edges of the data set is "visible". I.e. they
+			would be visible if the map model was actually rendered. Otherwise, the 'allEdges()' test will fail. */
+			model.setMapDimension(new Dimension(800, 800));
 		} catch (IOException | NullPointerException e) {
 			System.out.println("MapModelTest:\n" +
 					"\ttestDataFilePath variable not set or invalid.\n" +
