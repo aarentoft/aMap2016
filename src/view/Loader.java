@@ -27,16 +27,17 @@ public class Loader extends JFrame {
 	 * Create the graphical loader.
 	 */
 	public Loader() {
+		Dimension preferredSize = null;
 		try {
 			// Loader image
 			img = ImageIO.read(getClass().getResourceAsStream("/placeholder.png"));
-			setPreferredSize(new Dimension(img.getWidth(), img.getHeight() + 50));
+			preferredSize = new Dimension(img.getWidth(), img.getHeight() + 50);
+			setPreferredSize(preferredSize);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -57,9 +58,11 @@ public class Loader extends JFrame {
 
 		// No windowframe and center the loader
 		setUndecorated(true);
+		setSize(preferredSize);
+
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    setSize(screenSize.width / 2, screenSize.height / 2);
-	    setLocation(screenSize.width / 4, screenSize.height / 4);
+		setLocation(screenSize.width / 2 - getSize().width / 2,
+				    screenSize.height / 2 - getSize().height / 2);
 
 		pack();
 		setVisible(true);
