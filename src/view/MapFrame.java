@@ -56,13 +56,16 @@ public class MapFrame extends JFrame {
 		getContentPane().add(mapPanel, BorderLayout.CENTER);
 
 		buildMenubar();
-		
+
+		Dimension preferredSize = new Dimension(800, 600);
+		setMinimumSize(new Dimension(400, 300));
+		setSize(preferredSize);
+		setPreferredSize(preferredSize);
+
 		// Center
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    setLocation(screenSize.width / 4, screenSize.height / 4);
-	    
-		setMinimumSize(new Dimension(400, 300));
-		setPreferredSize(new Dimension(800, 600));
+		setLocation(screenSize.width / 2 - getSize().width / 2,
+				screenSize.height / 2 - getSize().height / 2);
 
 		pack();
 		setVisible(true);
