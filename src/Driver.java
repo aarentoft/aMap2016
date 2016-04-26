@@ -42,7 +42,7 @@ public class Driver {
 			Trie<RoadEdge> searchTrie = mapLoader.getSearchTree();
 			Graph graph = mapLoader.getGraph();
 
-			new MapFrame("aMap", tree, searchTrie, graph);
+			new MapFrame("aMap2016", tree, searchTrie, graph);
 		} catch (IOException e) {
 			JOptionPane
 					.showMessageDialog(
