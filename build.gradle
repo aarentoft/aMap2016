@@ -1,5 +1,6 @@
-apply plugin: 'java'
-apply plugin: 'application'
+plugins {
+    id "edu.sc.seis.macAppBundle" version "2.1.6"
+}
 
 repositories {
     mavenCentral()
@@ -9,7 +10,17 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
+apply plugin: 'java'
+apply plugin: 'application'
+
 mainClassName = 'Driver'
+
+macAppBundle {
+    mainClassName = "Driver"
+    appName = "aMap2016"
+    javaProperties.put("apple.laf.useScreenMenuBar", "true")
+    javaExtras.put("-Xdock:name", appName)
+}
 
 // sourceCompatibility = 1.8
 
