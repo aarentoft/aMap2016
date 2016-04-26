@@ -14,17 +14,14 @@ import java.net.URISyntaxException;
 import java.net.URLDecoder;
 
 /**
- * This is the main class which will start the program. It does not need any
- * arguments to run.
+ * This is the main class which will start the program.
  */
 public class Driver {
 	/**
-	 * This is the main method used for launching the application. It loads the
-	 * <code>LoadSequence</code> and and creates a <code>Loader</code> object
-	 * and connect them to each other, so the <code>Loader</code> knows whether
-	 * or not the <code>LoadSequence</code> is still running.
+	 * This is the main method used for launching the application. It is possible to supply the path
+	 * to the map data using a command line argument.
 	 * 
-	 * @param args
+	 * @param args (Optional) Path do OSM map data
 	 */
 	public static void main(String[] args) {
 		String inputPath = "";
@@ -41,17 +38,12 @@ public class Driver {
 		try {
 			// Loading nodes and edges
 			MapLoader mapLoader = new MapLoader(inputPath, loader);
-			// Clears the shared data from the roadEdges. Note that it must
-			// be placed here in order to make the tests work.
-			// RoadEdge.clear();
 			QuadTree tree = mapLoader.getQuadTree();
 			Trie<RoadEdge> searchTrie = mapLoader.getSearchTree();
 			Graph graph = mapLoader.getGraph();
 
 			new MapFrame("aMap", tree, searchTrie, graph);
-			loader.dispose();
 		} catch (IOException e) {
-			loader.dispose();
 			JOptionPane
 					.showMessageDialog(
 							null,
@@ -59,6 +51,8 @@ public class Driver {
 									+ "---\n"
 									+ e.getMessage(),
 							"An error occurred", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			loader.dispose();
 		}
 	}
 
