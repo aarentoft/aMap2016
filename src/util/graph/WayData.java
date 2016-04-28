@@ -10,4 +10,9 @@ public class WayData {
         this.roadname = roadname;
         this.oneway = oneway;
     }
+
+    @Override
+    public String toString() {
+        return "[WayData type=" + type + ", roadname=" + roadname + ", oneway=" + oneway + "]";
+    }
 }

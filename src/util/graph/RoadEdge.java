@@ -63,7 +63,7 @@ public class RoadEdge extends Rectangle implements Comparable<RoadEdge>, TrieSea
 
 	@Override
 	public String toString() {
-		String s = "[RoadEdge name=" + data.roadname + ", length=" + length + "]";
+		String s = "[RoadEdge name=" + data.roadname + ", length=" + length + ", data=" + data.toString() + "]";
 		return s;
 	}
 
