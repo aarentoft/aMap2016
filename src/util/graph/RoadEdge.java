@@ -56,6 +56,13 @@ public class RoadEdge extends Rectangle implements Comparable<RoadEdge>, TrieSea
 		return (node.equals(start)) ? end : start;
 	}
 
+	/**
+	 * @return Determines how the road edge appears in the search fields when selected.
+     */
+	public String getSearchFieldRepresentation() {
+		return getTrieRepresentation();
+	}
+
 	@Override
 	public String getTrieRepresentation() {
 		return data.roadname;

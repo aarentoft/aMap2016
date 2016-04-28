@@ -66,7 +66,7 @@ public class LiveComboBoxKeyAndActionListener
 				if (!nameSearchModel.getRoadNameSearchResult().isEmpty()) {
 					RoadEdge edge = ((ArrayList<RoadEdge>) nameSearchModel
 							.getRoadNameSearchResult()).get(0);
-					liveComboBox.getEditor().setItem(edge);
+					liveComboBox.getEditor().setItem(edge.getSearchFieldRepresentation());
 				}
 			}
 		}
