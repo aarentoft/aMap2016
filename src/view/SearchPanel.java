@@ -85,8 +85,10 @@ public class SearchPanel extends JPanel implements Observer {
 		if (o instanceof RouteModel) {
 			// If the routeModel has another point saved for this field, we
 			// should update this field to be that value
-			from.setItem(routeModel.getPoints().get(0));
-			to.setItem(routeModel.getPoints().get(1));
+			if (routeModel.getPoints().get(0) != null)
+				from.setItem(routeModel.getPoints().get(0));
+			if (routeModel.getPoints().get(1) != null)
+				to.setItem(routeModel.getPoints().get(1));
 		}
 	}
 }
