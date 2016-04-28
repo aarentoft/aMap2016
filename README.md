@@ -30,9 +30,19 @@ This application uses [Gradle](https://gradle.org/) for the build process. Every
     ```
     Then run the jar file using
     ```
+    $ java -jar build/libs/aMap2016.jar
+    ```
+    or simply browse to `build/libs` and double click `aMap2016.jar`.
+    Alternatively, you can pass the map data path to the jar via the command line
+    ```
     $ java -jar build/libs/aMap2016.jar data/map-anholt.osm
     ```
-    Running the `aMap2016.jar` file by simply clicking it, will result in the jar file complaining that it cannot find any map data.
+    This omits the file browser which appears otherwise.
+- (OSX) Build a .app bundle
+    ```
+    $ gradle createApp
+    ```
+    The app bundle is available in `build/macApp`
 
 - To clean all Gradle generated files
     ```
