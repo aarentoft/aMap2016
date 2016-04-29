@@ -27,9 +27,8 @@ public class OsmosisLoader implements OSMLoader {
     public OsmosisLoader(String path) throws FileNotFoundException {
         File file = new File(path); // the input file
 
-        if (!file.getName().endsWith(".pbf")) {
-            // TODO Proper exception type
-            throw new FileNotFoundException("Wrong file type");
+        if (!file.getName().endsWith(".pbf") && !file.getName().endsWith(".osm")) {
+            throw new IllegalArgumentException("Invalid file type. Must be either .osm or .pbf.");
         }
 
         nodes = new TreeMap<>();
@@ -98,7 +97,13 @@ public class OsmosisLoader implements OSMLoader {
             public void complete() { }
         };
 
-        RunnableSource reader = new crosby.binary.osmosis.OsmosisReader(new FileInputStream(file));
+        RunnableSource reader;
+
+        if (file.getName().endsWith(".pbf")) {
+            reader = new crosby.binary.osmosis.OsmosisReader(new FileInputStream(file));
+        } else {
+            reader = new XmlReader(file, false, CompressionMethod.None);
+        }
 
         reader.setSink(sinkImplementation);
 
