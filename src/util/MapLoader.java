@@ -92,7 +92,14 @@ public class MapLoader {
 
 		// get attribute values of the <bounds ...> tag
 		for (int i = 0; i < xmlr.getAttributeCount(); i++) {
-			double val = Double.parseDouble(xmlr.getAttributeValue(i));
+			double val = 0.0;
+			try {
+				// This try/catch handles cases where the bounds tag contain other values than coordinates.
+				// Osmosis, for instance, puts an extra attribute with an alphabetic value in the bounds tag.
+				val = Double.parseDouble(xmlr.getAttributeValue(i));
+			} catch (NumberFormatException e) {
+				continue;
+			}
 
 			switch (xmlr.getAttributeLocalName(i)) {
 				case "minlat":
