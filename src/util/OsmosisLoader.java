@@ -2,7 +2,8 @@ package util;
 
 import org.openstreetmap.osmosis.core.container.v0_6.EntityContainer;
 import org.openstreetmap.osmosis.core.domain.v0_6.*;
-import org.openstreetmap.osmosis.core.task.v0_6.*;
+import org.openstreetmap.osmosis.core.task.v0_6.RunnableSource;
+import org.openstreetmap.osmosis.core.task.v0_6.Sink;
 import org.openstreetmap.osmosis.xml.common.CompressionMethod;
 import org.openstreetmap.osmosis.xml.v0_6.XmlReader;
 import util.graph.*;
@@ -66,6 +67,9 @@ public class OsmosisLoader implements OSMLoader {
                     Way way = (Way) entity;
                     Collection<Tag> tags = way.getTags();
 
+                    if (!containsTagWithValue(tags, "highway", null) && !containsTagWithValue(tags, "route", "ferry"))
+                        return;
+
                     String roadname = "";
                     RoadType type = RoadType.UNKNOWN;
                     boolean oneway = false;
@@ -95,6 +99,16 @@ public class OsmosisLoader implements OSMLoader {
             }
             public void release() { }
             public void complete() { }
+
+            private boolean containsTagWithValue(Collection<Tag> tags, String key, String value) {
+                for (Tag t : tags) {
+                    if (t.getKey().equals(key))
+                        if (value == null || t.getValue().equals(value))
+                            return true;
+                }
+
+                return false;
+            }
         };
 
         RunnableSource reader;
