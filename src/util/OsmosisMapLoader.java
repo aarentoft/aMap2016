@@ -76,6 +76,10 @@ public class OsmosisMapLoader {
                     for (Tag t: tags) {
                         oneway = false;
                         switch (t.getKey()) {
+                            case "route":
+                                if (t.getValue().equals("ferry"))
+                                    type = RoadType.FERRY;
+                                break;
                             case "highway": type = RoadType.getEnum(t.getValue()); break;
                             case "name": roadname = t.getValue(); break;
                             case "oneway": oneway = Boolean.parseBoolean(t.getValue()); break;
