@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class OsmosisLoader implements OSMLoader {
+public class OsmosisMapLoader {
     protected Loader loader;
     protected QuadTree quadTree;
     protected Trie<RoadEdge> searchTree = new Trie<RoadEdge>();
@@ -25,7 +25,7 @@ public class OsmosisLoader implements OSMLoader {
 
     private Map<String, RoadNode> nodes;
 
-    public OsmosisLoader(String path) throws FileNotFoundException {
+    public OsmosisMapLoader(String path) throws FileNotFoundException {
         File file = new File(path); // the input file
 
         if (!file.getName().endsWith(".pbf") && !file.getName().endsWith(".osm")) {
@@ -133,17 +133,14 @@ public class OsmosisLoader implements OSMLoader {
         }
     }
 
-    @Override
     public QuadTree getQuadTree() {
         return quadTree;
     }
 
-    @Override
     public Trie<RoadEdge> getSearchTree() {
         return searchTree;
     }
 
-    @Override
     public Graph getGraph() {
         return graph;
     }

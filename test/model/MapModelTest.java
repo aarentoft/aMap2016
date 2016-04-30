@@ -25,9 +25,9 @@ public class MapModelTest {
 	public void init() throws IOException {
 		String testDataFilePath = System.getProperty("testDataPath");
 
-		MapLoader mapLoader;
+		OsmosisMapLoader mapLoader;
 		try {
-			mapLoader = new MapLoader(testDataFilePath);
+			mapLoader = new OsmosisMapLoader(testDataFilePath);
 			tree = mapLoader.getQuadTree();
 			model = new MapModel(tree);
 			/* NOTE: The map model dimension must be set such that all edges of the data set is "visible". I.e. they

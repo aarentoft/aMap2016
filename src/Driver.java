@@ -1,6 +1,4 @@
-import util.MapLoader;
-import util.QuadTree;
-import util.Trie;
+import util.*;
 import util.graph.Graph;
 import util.graph.RoadEdge;
 import view.Loader;
@@ -37,7 +35,7 @@ public class Driver {
 
 		try {
 			// Loading nodes and edges
-			MapLoader mapLoader = new MapLoader(inputPath, loader);
+			OsmosisMapLoader mapLoader = new OsmosisMapLoader(inputPath);
 			QuadTree tree = mapLoader.getQuadTree();
 			Trie<RoadEdge> searchTrie = mapLoader.getSearchTree();
 			Graph graph = mapLoader.getGraph();
@@ -76,7 +74,7 @@ public class Driver {
 
 		// Create file Chooser dialog which only accepts .OSM files
 		JFileChooser fileChooser = new JFileChooser(fileChooserDefault);
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("OSM Map Data Files", "osm");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("OSM Map Data Files", "osm", "pbf");
 		fileChooser.setFileFilter(filter);
 
 		int fileChooserStatus = fileChooser.showOpenDialog(null);

@@ -9,7 +9,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import util.MapLoader;
+import util.OsmosisMapLoader;
 import util.QuadTree;
 import util.graph.RoadEdge;
 
@@ -21,9 +21,9 @@ public class NameSearchModelTest {
 	public void init() throws IOException {
 		String testDataFilePath = System.getProperty("testDataPath");
 
-		MapLoader mapLoader;
+		OsmosisMapLoader mapLoader;
 		try {
-			mapLoader = new MapLoader(testDataFilePath);
+			mapLoader = new OsmosisMapLoader(testDataFilePath);
 			nameSearchModel = new NameSearchModel(mapLoader.getSearchTree());
 			tree = mapLoader.getQuadTree();
 		} catch (IOException|NullPointerException e) {
