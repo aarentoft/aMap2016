@@ -38,7 +38,7 @@ public class OsmosisMapLoader {
 
         Sink sinkImplementation = new Sink() {
 
-            private boolean isFirstWay = false;
+            private boolean isFirstWay = true;
 
             @Override
             public void initialize(Map<String, Object> metaData) { }
@@ -61,8 +61,9 @@ public class OsmosisMapLoader {
                     UTMCoordinateSet utmCoords = utmConverter.LatLonToUTM(nd.getLatitude(), nd.getLongitude());
                     nodes.put(id, new RoadNode(id, utmCoords.getEasting(), utmCoords.getNorthing()));
                 } else if (entity instanceof Way) {
-                    if (!isFirstWay) {
+                    if (isFirstWay) {
                         graph = new Graph(nodes);
+                        isFirstWay = false;
                     }
                     Way way = (Way) entity;
                     Collection<Tag> tags = way.getTags();
