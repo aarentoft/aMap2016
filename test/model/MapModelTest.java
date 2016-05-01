@@ -16,6 +16,8 @@ import org.junit.Test;
 import util.*;
 import util.graph.RoadEdge;
 import util.graph.RoadType;
+import util.io.OsmosisMapLoader;
+import view.Loader;
 
 public class MapModelTest {
 	protected MapModel model;
@@ -27,7 +29,7 @@ public class MapModelTest {
 
 		OsmosisMapLoader mapLoader;
 		try {
-			mapLoader = new OsmosisMapLoader(testDataFilePath);
+			mapLoader = new OsmosisMapLoader(testDataFilePath, null);
 			tree = mapLoader.getQuadTree();
 			model = new MapModel(tree);
 			/* NOTE: The map model dimension must be set such that all edges of the data set is "visible". I.e. they

@@ -1,11 +1,11 @@
-package util;
+package util.io;
 
 import org.openstreetmap.osmosis.core.container.v0_6.EntityContainer;
 import org.openstreetmap.osmosis.core.domain.v0_6.*;
 import org.openstreetmap.osmosis.core.task.v0_6.RunnableSource;
 import org.openstreetmap.osmosis.core.task.v0_6.Sink;
 import org.openstreetmap.osmosis.xml.common.CompressionMethod;
-import org.openstreetmap.osmosis.xml.v0_6.XmlReader;
+import util.*;
 import util.graph.*;
 import view.Loader;
 
@@ -18,15 +18,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class OsmosisMapLoader {
-    protected Loader loader;
     protected QuadTree quadTree;
     protected Trie<RoadEdge> searchTree = new Trie<RoadEdge>();
     protected Graph graph;
 
     private Map<String, RoadNode> nodes;
 
-    public OsmosisMapLoader(String path) throws FileNotFoundException {
-        File file = new File(path); // the input file
+    public OsmosisMapLoader(String path, Loader loader) throws FileNotFoundException {
+        File file = new File(path);
 
         if (!file.getName().endsWith(".pbf") && !file.getName().endsWith(".osm")) {
             throw new IllegalArgumentException("Invalid file type. Must be either .osm or .pbf.");
@@ -41,7 +40,7 @@ public class OsmosisMapLoader {
             private UTMConverter utmConverter = new UTMConverter();
 
             @Override
-            public void initialize(Map<String, Object> metaData) { }
+            public void initialize(Map<String, Object> metaData) { loader.setStatus("Loading nodes..."); }
 
             public void process(EntityContainer entityContainer) {
                 Entity entity = entityContainer.getEntity();
@@ -63,6 +62,7 @@ public class OsmosisMapLoader {
                 } else if (entity instanceof Way) {
                     if (isFirstWay) {
                         graph = new Graph(nodes);
+                        loader.setStatus("Loading edges...");
                         isFirstWay = false;
                     }
                     Way way = (Way) entity;
@@ -103,7 +103,7 @@ public class OsmosisMapLoader {
                 }
             }
             public void release() { }
-            public void complete() { }
+            public void complete() { loader.setStatus("Done"); }
 
             private boolean containsTagWithValue(Collection<Tag> tags, String key, String value) {
                 for (Tag t : tags) {
@@ -117,11 +117,12 @@ public class OsmosisMapLoader {
         };
 
         RunnableSource reader;
+        OsmosisReaderProgressInputStream monitor = new OsmosisReaderProgressInputStream(new FileInputStream(file), loader, (int)file.length());
 
         if (file.getName().endsWith(".pbf")) {
-            reader = new crosby.binary.osmosis.OsmosisReader(new FileInputStream(file));
+            reader = new crosby.binary.osmosis.OsmosisReader(monitor);
         } else {
-            reader = new XmlReader(file, false, CompressionMethod.None);
+            reader = new OsmosisXmlProgressReader(file, false, CompressionMethod.None, monitor);
         }
 
         reader.setSink(sinkImplementation);

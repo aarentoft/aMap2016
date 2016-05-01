@@ -1,6 +1,7 @@
 import util.*;
 import util.graph.Graph;
 import util.graph.RoadEdge;
+import util.io.OsmosisMapLoader;
 import view.Loader;
 import view.MapFrame;
 
@@ -35,7 +36,7 @@ public class Driver {
 
 		try {
 			// Loading nodes and edges
-			OsmosisMapLoader mapLoader = new OsmosisMapLoader(inputPath);
+			OsmosisMapLoader mapLoader = new OsmosisMapLoader(inputPath, loader);
 			QuadTree tree = mapLoader.getQuadTree();
 			Trie<RoadEdge> searchTrie = mapLoader.getSearchTree();
 			Graph graph = mapLoader.getGraph();

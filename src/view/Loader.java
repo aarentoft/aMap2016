@@ -88,4 +88,8 @@ public class Loader extends JFrame {
 	public void setProgress(int progress) {
 		progressBar.setValue(progress);
 	}
+
+	public void setStatus(String status) {
+		progressBar.setString(status);
+	}
 }
