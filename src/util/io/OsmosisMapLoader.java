@@ -17,13 +17,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * This class contains code for loading data from .osm and .pbf files into the
+ * project. It will both convert data into nodes and connect the nodes with
+ * edges for use in a {@link Graph}.
+ */
 public class OsmosisMapLoader {
+    protected Loader loader;
     protected QuadTree quadTree;
     protected Trie<RoadEdge> searchTree = new Trie<RoadEdge>();
     protected Graph graph;
 
     private Map<String, RoadNode> nodes;
 
+    /**
+     * Loads the OSM data of a file and creates the data structures used by this application.
+     * Passing null to the {@code path} parameter will run the loader in headless mode with no GUI.
+     *
+     * @param path path to the map data file
+     * @param loader reference to a graphical loader to attach to this loading process
+     * @throws FileNotFoundException when {@code path} does not refer to a file
+     */
     public OsmosisMapLoader(String path, Loader loader) throws FileNotFoundException {
         File file = new File(path);
 
@@ -31,6 +45,7 @@ public class OsmosisMapLoader {
             throw new IllegalArgumentException("Invalid file type. Must be either .osm or .pbf.");
         }
 
+        this.loader = loader;
         nodes = new TreeMap<>();
         searchTree = new Trie<RoadEdge>();
 
@@ -40,7 +55,7 @@ public class OsmosisMapLoader {
             private UTMConverter utmConverter = new UTMConverter();
 
             @Override
-            public void initialize(Map<String, Object> metaData) { loader.setStatus("Loading nodes..."); }
+            public void initialize(Map<String, Object> metaData) { setStatus("Loading nodes..."); }
 
             public void process(EntityContainer entityContainer) {
                 Entity entity = entityContainer.getEntity();
@@ -62,7 +77,7 @@ public class OsmosisMapLoader {
                 } else if (entity instanceof Way) {
                     if (isFirstWay) {
                         graph = new Graph(nodes);
-                        loader.setStatus("Loading edges...");
+                        setStatus("Loading edges...");
                         isFirstWay = false;
                     }
                     Way way = (Way) entity;
@@ -103,7 +118,7 @@ public class OsmosisMapLoader {
                 }
             }
             public void release() { }
-            public void complete() { loader.setStatus("Done"); }
+            public void complete() { setStatus("Done"); }
 
             private boolean containsTagWithValue(Collection<Tag> tags, String key, String value) {
                 for (Tag t : tags) {
@@ -136,6 +151,16 @@ public class OsmosisMapLoader {
             } catch (InterruptedException e) {
                 System.out.println(e);
             }
+        }
+    }
+
+    /**
+     * Convenience method to only set UI loader label if a UI loader object is present.
+     * @param label New label value
+     */
+    private void setStatus(String label) {
+        if (loader != null) {
+            loader.setStatus(label);
         }
     }
 

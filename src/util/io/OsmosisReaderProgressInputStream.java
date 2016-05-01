@@ -14,12 +14,14 @@ public class OsmosisReaderProgressInputStream extends FilterInputStream {
         super(in);
         this.loader = loader;
         this.counter = 0;
-        this.loader.setProgress(null, 0, max);
+        if (loader != null)
+            this.loader.setProgress(null, 0, max);
     }
 
     @Override
     public int read(byte[] buffer, int offset, int count) throws IOException {
-        loader.setProgress(counter += count);
+        if (loader != null)
+            loader.setProgress(counter += count);
         return super.read(buffer, offset, count);
     }
 }
