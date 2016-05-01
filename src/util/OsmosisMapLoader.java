@@ -34,11 +34,11 @@ public class OsmosisMapLoader {
 
         nodes = new TreeMap<>();
         searchTree = new Trie<RoadEdge>();
-        UTMConverter utmConverter = new UTMConverter();
 
         Sink sinkImplementation = new Sink() {
 
             private boolean isFirstWay = true;
+            private UTMConverter utmConverter = new UTMConverter();
 
             @Override
             public void initialize(Map<String, Object> metaData) { }

@@ -58,7 +58,7 @@ jar {
 
 test {
     // Pass the path for the test data to the test JVM
-    systemProperty 'testDataPath', 'data/map-anholt.osm'
+    systemProperty 'testDataPath', 'data/map-anholt-raw.osm'
     testLogging {
         afterSuite {
             // Print a test summary, even when all tests are successful
