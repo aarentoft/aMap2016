@@ -94,7 +94,7 @@ public class OsmosisXmlProgressReader implements RunnableSource {
         try {
             SAXParser parser;
 
-            sink.initialize(Collections.emptyMap());
+            sink.initialize(Collections.<String, Object>emptyMap());
 
             // make "-" an alias for /dev/stdin
             if (file.getName().equals("-")) {
