@@ -31,9 +31,6 @@ public class RoadEdge extends Rectangle implements Comparable<RoadEdge>, TrieSea
 		this.start = v1;
 		this.end = v2;
 
-		v1.addEdge(this);
-		v2.addEdge(this);
-
 		/* NOTE: Since very few edges (if any at all) represent a part of a road which spans more than
 		 * a small part of a UTM zone, the error due to the projection will be relatively small so
 		 * a regular Euclidean distance gets the job done for now.

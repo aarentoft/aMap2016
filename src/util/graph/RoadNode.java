@@ -11,7 +11,6 @@ import util.Point;
  */
 @SuppressWarnings("serial")
 public class RoadNode extends Point {
-	private List<RoadEdge> edges = new ArrayList<RoadEdge>();
 	public final String ID;
 
 	/**
@@ -25,18 +24,5 @@ public class RoadNode extends Point {
 		this.ID = id;
 		this.x  = x;
 		this.y  = y;
-	}
-
-	// ----- Adders -----
-
-	/**
-	 * A <code>RoadNode</code> can be connected to several edges (roads). This
-	 * method will store these edges.
-	 * 
-	 * @param edge
-	 *            edge to store
-	 */
-	public void addEdge(RoadEdge edge) {
-		edges.add(edge);
 	}
 }
