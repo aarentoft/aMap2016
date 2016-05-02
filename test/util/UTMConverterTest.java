@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class UTMConverterTest {
 
-    private double comparisonDelta = 0.0;
+    private double comparisonDelta = 0.005;
 
     @Test
     public void latLonToUTM() throws Exception {
@@ -62,6 +62,26 @@ public class UTMConverterTest {
         testSetHelper(-27.11667, -109.36667, 661897, 6999591, 12);      // 12JXQ6189699590 ; Easter Island
         testSetHelper(-37.11111, -12.28833, 740947, 5889360, 28);       // 28HGD4094689359 ; Tristan da Cunha
         testSetHelper(-77.85, 166.66667, 539154, 1357814, 58);          // 58CEU3915457813 ; McMurdo Station
+    }
+
+    @Test
+    public void testEnforceZone() {
+        UTMConverter converter = new UTMConverter();
+
+        // No enforced zone
+        UTMCoordinateSet expectedRedSand = new UTMCoordinateSet(443009.652449302, 5969035.25997869, 32);
+        UTMCoordinateSet actual = converter.LatLonToUTM(53.866667, 8.133333);
+        // Enforce zone 33 (point Red Sand is in zone 32)
+        UTMCoordinateSet expectedEnforcedZoneRedSand = new UTMCoordinateSet(48786.7610335802, 5990568.86695228, 33);
+        UTMCoordinateSet actualEnforcedZone = converter.LatLonToUTM(53.866667, 8.133333, 33);
+
+        assertEquals(expectedEnforcedZoneRedSand.getEasting(), actualEnforcedZone.getEasting(), comparisonDelta);
+        assertEquals(expectedEnforcedZoneRedSand.getNorthing(), actualEnforcedZone.getNorthing(), comparisonDelta);
+        assertEquals(expectedEnforcedZoneRedSand.getZone(), actualEnforcedZone.getZone());
+
+        assertEquals(expectedRedSand.getEasting(), actual.getEasting(), comparisonDelta);
+        assertEquals(expectedRedSand.getNorthing(), actual.getNorthing(), comparisonDelta);
+        assertEquals(expectedRedSand.getZone(), actual.getZone());
     }
 
     private void testSetHelper(double lat, double lon, double expectedEasting, double expectedNorthing, int expectedZone) {

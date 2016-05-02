@@ -91,15 +91,54 @@ public class UTMConverter {
     /**
      * Converts a set of coordinates consisting of a latitude and a longitude to
      * a set of UTM coordinates including the UTM zone.
+     *
      * @param lat The latitude coordinate
      * @param lon The longitude coordinate
      * @return The corresponding UTM coordinate set and zone.
      */
     public UTMCoordinateSet LatLonToUTM(double lat, double lon) {
+        return wrappedLatLonToUTM(lat, lon, 0);
+    }
+
+    /**
+     * Converts a set of coordinates consisting of a latitude and a longitude to
+     * a set of UTM coordinates relative to a specific zone. That is, a zone other than the one
+     * in which the coordinate set naturally lies. This is useful when a set of data consists of
+     * of coordinate sets in two or more different zones.
+     *
+     * @param lat The latitude coordinate
+     * @param lon The longitude coordinate
+     * @param enforceZone The zone number to enforce.
+     * @return The corresponding UTM coordinate set and zone. The zone will be identical to the
+     * {@code enforceZone} parameter.
+     */
+    public UTMCoordinateSet LatLonToUTM(double lat, double lon, int enforceZone) {
+        return wrappedLatLonToUTM(lat, lon, enforceZone);
+    }
+
+    /**
+     * Wrapped method which converts a set of coordinates consisting of a latitude and a longitude to
+     * a set of UTM coordinates including the UTM zone.
+     *
+     * @param lat The latitude coordinate
+     * @param lon The longitude coordinate
+     * @param enforceZone The zone number to enforce. Using the value {@code 0} will NOT enforce any zone
+     *                    and will return the UTM coordinates in the UTM zone in which the lat/lon set
+     *                    naturally appears.
+     * @return The corresponding UTM coordinate set and zone.
+     */
+    private UTMCoordinateSet wrappedLatLonToUTM(double lat, double lon, int enforceZone) {
         // 180 = half earth circumference in degrees, 6 = standard width of a UTM zone in degrees
         int zone = lon < 0 ? (int) ((180.0+lon)/6.0) + 1 : (int) Math.abs((lon/6.0)+31.0);
 
+        // Longitude of the central meridian
         double centralMeridian = 6.0 * zone - 183.0;
+
+        if (enforceZone != 0) {
+            zone = enforceZone;
+            // Longitude of the enforced central meridian
+            centralMeridian = (enforceZone + 0.5 - 31) * 6.0;
+        }
 
         double absLat = Math.abs(lat);
         double Latr = absLat * Math.PI / 180.0;          // =absLat*PI()/180
