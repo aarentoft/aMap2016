@@ -97,7 +97,7 @@ public class UTMConverter {
      * @return The corresponding UTM coordinate set and zone.
      */
     public UTMCoordinateSet LatLonToUTM(double lat, double lon) {
-        return wrappedLatLonToUTM(lat, lon, 0);
+        return LatLonToUTM(lat, lon, 0);
     }
 
     /**
@@ -108,26 +108,13 @@ public class UTMConverter {
      *
      * @param lat The latitude coordinate
      * @param lon The longitude coordinate
-     * @param enforceZone The zone number to enforce.
+     * @param enforceZone The zone number to enforce. Note that using the value {@code 0} will NOT enforce any zone
+     *                    and will return the UTM coordinates in the UTM zone in which the lat/lon set
+     *                    naturally appears.
      * @return The corresponding UTM coordinate set and zone. The zone will be identical to the
      * {@code enforceZone} parameter.
      */
     public UTMCoordinateSet LatLonToUTM(double lat, double lon, int enforceZone) {
-        return wrappedLatLonToUTM(lat, lon, enforceZone);
-    }
-
-    /**
-     * Wrapped method which converts a set of coordinates consisting of a latitude and a longitude to
-     * a set of UTM coordinates including the UTM zone.
-     *
-     * @param lat The latitude coordinate
-     * @param lon The longitude coordinate
-     * @param enforceZone The zone number to enforce. Using the value {@code 0} will NOT enforce any zone
-     *                    and will return the UTM coordinates in the UTM zone in which the lat/lon set
-     *                    naturally appears.
-     * @return The corresponding UTM coordinate set and zone.
-     */
-    private UTMCoordinateSet wrappedLatLonToUTM(double lat, double lon, int enforceZone) {
         // 180 = half earth circumference in degrees, 6 = standard width of a UTM zone in degrees
         int zone = lon < 0 ? (int) ((180.0+lon)/6.0) + 1 : (int) Math.abs((lon/6.0)+31.0);
 
