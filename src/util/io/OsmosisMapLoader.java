@@ -52,6 +52,7 @@ public class OsmosisMapLoader {
         Sink sinkImplementation = new Sink() {
 
             private boolean isFirstWay = true;
+            private int commonUTMzone;
             private UTMConverter utmConverter = new UTMConverter();
 
             @Override
@@ -65,6 +66,11 @@ public class OsmosisMapLoader {
                     // top = maxlat, right = maxlon
                     UTMCoordinateSet utmCoords1 = utmConverter.LatLonToUTM(bd.getBottom(), bd.getLeft());
                     UTMCoordinateSet utmCoords2 = utmConverter.LatLonToUTM(bd.getTop(), bd.getRight());
+                    commonUTMzone = (utmCoords1.getZone()+utmCoords2.getZone()) / 2;
+
+                    utmCoords1 = utmConverter.LatLonToUTM(bd.getBottom(), bd.getLeft(), commonUTMzone);
+                    utmCoords2 = utmConverter.LatLonToUTM(bd.getTop(), bd.getRight(), commonUTMzone);
+
                     Rectangle bound = new Rectangle(
                             utmCoords1.getEasting(), utmCoords1.getNorthing(),
                             utmCoords2.getEasting(), utmCoords2.getNorthing());
@@ -72,7 +78,7 @@ public class OsmosisMapLoader {
                 } else if (entity instanceof Node) {
                     Node nd = (Node) entity;
                     String id = nd.getId()+"";
-                    UTMCoordinateSet utmCoords = utmConverter.LatLonToUTM(nd.getLatitude(), nd.getLongitude());
+                    UTMCoordinateSet utmCoords = utmConverter.LatLonToUTM(nd.getLatitude(), nd.getLongitude(), commonUTMzone);
                     nodes.put(id, new RoadNode(id, utmCoords.getEasting(), utmCoords.getNorthing()));
                 } else if (entity instanceof Way) {
                     if (isFirstWay) {
