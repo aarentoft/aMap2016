@@ -113,13 +113,18 @@ public class OsmosisMapLoader {
                     for (int i = 0; i < waynodes.size() - 1; i++) {
                         RoadNode n1 = graph.getNodes().get(waynodes.get(i).getNodeId()+"");
                         RoadNode n2 = graph.getNodes().get(waynodes.get(i + 1).getNodeId()+"");
-                        RoadEdge edge = new RoadEdge(data, n1, n2);
+                        try {
+                            RoadEdge edge = new RoadEdge(data, n1, n2);
 
-                        if (!roadname.isEmpty())
-                            searchTree.insert(edge);
+                            if (!roadname.isEmpty())
+                                searchTree.insert(edge);
 
-                        quadTree.insert(edge);
-                        graph.addEdge(edge);
+                            quadTree.insert(edge);
+                            graph.addEdge(edge);
+                        } catch (IllegalArgumentException e) {
+                            // Some road edges may be invalid, eg. by having identical end nodes.
+                            // These are are just ignored
+                        }
                     }
                 }
             }
