@@ -12,8 +12,6 @@ import java.util.Map;
 public class Graph {
 	// All nodes in graph
 	protected Map<String, RoadNode> nodes;
-	// All edges in graph
-	protected List<RoadEdge> edges;
 	// outEdges.get(nodeIDstring) = list that represents edges going from node with nodeID ==
 	// nodeIDstring
 	protected Map<String, List<RoadEdge>> outEdges;
@@ -23,7 +21,6 @@ public class Graph {
 	 */
 	public Graph(Map<String, RoadNode> nodes) {
 		this.nodes = nodes;
-		edges = new ArrayList<RoadEdge>();
 		outEdges = new HashMap<String, List<RoadEdge>>(nodes.size() + 1);
 
 		for (String nodeID : nodes.keySet()) {
@@ -65,11 +62,8 @@ public class Graph {
 	 *            Edge to add to the graph
 	 */
 	public void addEdge(RoadEdge e) {
-		edges.add(e);
-		if (e.data.oneway) {
-			outEdges.get(e.start.ID).add(e);
-		} else {
-			outEdges.get(e.start.ID).add(e);
+		outEdges.get(e.start.ID).add(e);
+		if (!e.data.oneway) {
 			outEdges.get(e.end.ID).add(e);
 		}
 	}
@@ -82,13 +76,6 @@ public class Graph {
 	}
 
 	/**
-	 * @return All the edges.
-	 */
-	public List<RoadEdge> getEdges() {
-		return edges;
-	}
-
-	/**
 	 * @return The amount of nodes.
 	 */
 	public int size() {
@@ -97,6 +84,6 @@ public class Graph {
 
 	@Override
 	public String toString() {
-		return "Graph [nodes=" + nodes + ", edges=" + edges + "]";
+		return "Graph [nodes=" + nodes + "]";
 	}
 }
