@@ -8,7 +8,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class GraphTest {
-	Graph graph = TestGraphBuilder.getGraph3();
+	private Graph graph = TestGraphBuilder.getGraph3();
 
 	@Test
 	public void adjacencyListInt() {
@@ -18,7 +18,7 @@ public class GraphTest {
 		exp.add(TestGraphBuilder.edgeC);
 		exp.add(TestGraphBuilder.edgeD);
 		exp.add(TestGraphBuilder.edgeM);
-		List<RoadEdge> act = graph.getAdjacencyList("C");
+		List<RoadEdge> act = graph.getAdjacencyList(3L); // 3 = C
 
 		if (exp.size() != act.size())
 			fail("The results are not the same size! Is: "+act.size()+" Should be: "+exp.size());
@@ -26,7 +26,7 @@ public class GraphTest {
 			assertTrue(exp.contains(act.get(i)));
 
 		// Out degree = 0
-		act = graph.getAdjacencyList("I");
+		act = graph.getAdjacencyList(9L); // 9 = I
 		exp.clear();
 
 		if (exp.size() != act.size())
@@ -42,7 +42,7 @@ public class GraphTest {
 		exp.add(TestGraphBuilder.edgeC);
 		exp.add(TestGraphBuilder.edgeD);
 		exp.add(TestGraphBuilder.edgeM);
-		List<RoadEdge> act = graph.getAdjacencyList(graph.getNodes().get("C"));
+		List<RoadEdge> act = graph.getAdjacencyList(graph.getNodes().get(3L)); // 3 = C
 
 		if (exp.size() != act.size())
 			fail("The results are not the same size! Is: "+act.size()+" Should be: "+exp.size());
@@ -50,7 +50,7 @@ public class GraphTest {
 			assertTrue(exp.contains(act.get(i)));
 
 		// Out degree = 0
-		act = graph.getAdjacencyList(graph.getNodes().get("I"));
+		act = graph.getAdjacencyList(graph.getNodes().get(9L)); // 9 = I
 		exp.clear();
 
 		if (exp.size() != act.size())
@@ -60,32 +60,33 @@ public class GraphTest {
 
 	@Test
 	public void getNodes() {
-		Map<String, RoadNode> exp = new HashMap<String, RoadNode>();
-		exp.put("A", TestGraphBuilder.nodeA);
-		exp.put("B", TestGraphBuilder.nodeB);
-		exp.put("C", TestGraphBuilder.nodeC);
-		exp.put("D", TestGraphBuilder.nodeD);
-		exp.put("E", TestGraphBuilder.nodeE);
-		exp.put("F", TestGraphBuilder.nodeF);
-		exp.put("G", TestGraphBuilder.nodeG);
-		exp.put("H", TestGraphBuilder.nodeH);
-		exp.put("I", TestGraphBuilder.nodeI);
-		Map<String, RoadNode> act = graph.getNodes();
+		Map<Long, RoadNode> exp = new HashMap<Long, RoadNode>();
+		// 1 = A, 2 = B, etc.
+		exp.put(1L, TestGraphBuilder.nodeA);
+		exp.put(2L, TestGraphBuilder.nodeB);
+		exp.put(3L, TestGraphBuilder.nodeC);
+		exp.put(4L, TestGraphBuilder.nodeD);
+		exp.put(5L, TestGraphBuilder.nodeE);
+		exp.put(6L, TestGraphBuilder.nodeF);
+		exp.put(7L, TestGraphBuilder.nodeG);
+		exp.put(8L, TestGraphBuilder.nodeH);
+		exp.put(9L, TestGraphBuilder.nodeI);
+		Map<Long, RoadNode> act = graph.getNodes();
 
 		if (exp.size() != act.size())
 			fail("The results are not the same size!");
-		for (int i = 1; i <= exp.size() && i <= act.size(); i++) {
-			assertTrue( exp.get(getCharForNumber(i)).equals(act.get(getCharForNumber(i))) );
+		for (long i = 1L; i <= exp.size() && i <= act.size(); i++) {
+			assertTrue( exp.get(i).equals(act.get(i)) );
 		}
 
 		// Completely empty graph
-		Map<String, RoadNode> emptymap = Collections.emptyMap();
+		Map<Long, RoadNode> emptymap = Collections.emptyMap();
 		Graph empty = new Graph(emptymap);
 		act = empty.getNodes();
 		if (emptymap.size() != act.size())
 			fail("The results are not the same size!");
-		for (int i = 1; i < exp.size() && i < act.size(); i++) {
-			assertTrue( emptymap.get(getCharForNumber(i)).equals(act.get(getCharForNumber(i))) );
+		for (Long i = 1L; i < exp.size() && i < act.size(); i++) {
+			assertTrue( emptymap.get(i).equals(act.get(i)) );
 		}
 	}
 
@@ -96,7 +97,7 @@ public class GraphTest {
 	
 	@Test
 	public void sizeEmptyGraph() {
-		Map<String, RoadNode> emptymap = Collections.emptyMap();
+		Map<Long, RoadNode> emptymap = Collections.emptyMap();
 		Graph empty = new Graph(emptymap);
 		assertEquals(empty.size(), 0);
 	}

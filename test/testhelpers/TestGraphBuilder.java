@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 public class TestGraphBuilder {
     public final static List<RoadNode> nodes = new ArrayList<RoadNode>();
-    public final static Map<String, RoadNode> nodesMap = new TreeMap<String, RoadNode>();
+    public final static Map<Long, RoadNode> nodesMap = new TreeMap<Long, RoadNode>();
     public final static RoadNode nodeA;
     public final static RoadNode nodeB;
     public final static RoadNode nodeC;
@@ -56,15 +56,16 @@ public class TestGraphBuilder {
     public final static RoadEdge reverseEdgeL;
 
     static {
-        nodeA = new RoadNode("A", 2, 6);
-        nodeB = new RoadNode("B", 1, 5);
-        nodeC = new RoadNode("C", 2, 1);
-        nodeD = new RoadNode("D", 3, 5);
-        nodeE = new RoadNode("E", 4, 3);
-        nodeF = new RoadNode("F", 6, 4);
-        nodeG = new RoadNode("G", 8, 3);
-        nodeH = new RoadNode("H", 5, 6);
-        nodeI = new RoadNode("I", 8, 6);
+        // 1 = A, 2 = B, etc.
+        nodeA = new RoadNode(1L, 2, 6);
+        nodeB = new RoadNode(2L, 1, 5);
+        nodeC = new RoadNode(3L, 2, 1);
+        nodeD = new RoadNode(4L, 3, 5);
+        nodeE = new RoadNode(5L, 4, 3);
+        nodeF = new RoadNode(6L, 6, 4);
+        nodeG = new RoadNode(7L, 8, 3);
+        nodeH = new RoadNode(8L, 5, 6);
+        nodeI = new RoadNode(9L, 8, 6);
         nodes.add(nodeA);
         nodes.add(nodeB);
         nodes.add(nodeC);

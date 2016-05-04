@@ -11,19 +11,19 @@ import java.util.Map;
  */
 public class Graph {
 	// All nodes in graph
-	protected Map<String, RoadNode> nodes;
-	// outEdges.get(nodeIDstring) = list that represents edges going from node with nodeID ==
+	protected Map<Long, RoadNode> nodes;
+	// outEdges.get(nodeID) = list that represents edges going from node with nodeID ==
 	// nodeIDstring
-	protected Map<String, List<RoadEdge>> outEdges;
+	protected Map<Long, List<RoadEdge>> outEdges;
 
 	/**
 	 * Constructs the Graph from the given collection of RoadNodes.
 	 */
-	public Graph(Map<String, RoadNode> nodes) {
+	public Graph(Map<Long, RoadNode> nodes) {
 		this.nodes = nodes;
-		outEdges = new HashMap<String, List<RoadEdge>>(nodes.size() + 1);
+		outEdges = new HashMap<Long, List<RoadEdge>>(nodes.size() + 1);
 
-		for (String nodeID : nodes.keySet()) {
+		for (Long nodeID : nodes.keySet()) {
 			outEdges.put(nodeID, new ArrayList<RoadEdge>());
 		}
 	}
@@ -35,7 +35,7 @@ public class Graph {
 	 *            The ID of the node in question.
 	 * @return A list of the outgoing neighbors.
 	 */
-	public List<RoadEdge> getAdjacencyList(String v) {
+	public List<RoadEdge> getAdjacencyList(long v) {
 		return outEdges.get(v);
 	}
 	
@@ -71,7 +71,7 @@ public class Graph {
 	/**
 	 * @return All the nodes.
 	 */
-	public Map<String, RoadNode> getNodes() {
+	public Map<Long, RoadNode> getNodes() {
 		return nodes;
 	}
 

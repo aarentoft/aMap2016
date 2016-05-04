@@ -11,7 +11,7 @@ import util.Point;
  */
 @SuppressWarnings("serial")
 public class RoadNode extends Point {
-	public final String ID;
+	public final long ID;
 
 	/**
 	 * Create a new node based on the input.
@@ -19,7 +19,7 @@ public class RoadNode extends Point {
 	 * @param x x coordinate of the node.
 	 * @param y y coordinate of the node.
 	 */
-	public RoadNode(String id, double x, double y) {
+	public RoadNode(long id, double x, double y) {
 		super(0, 0);
 		this.ID = id;
 		this.x  = x;

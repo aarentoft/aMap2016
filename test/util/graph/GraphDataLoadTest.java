@@ -11,8 +11,8 @@ import util.UTMCoordinateSet;
 public class GraphDataLoadTest {
 	@Test
 	public void roadNodeNormal() throws IOException {
-		RoadNode n = new RoadNode("1", 720050.2418, 6173986.37339);
-		assertEquals("1", n.ID);
+		RoadNode n = new RoadNode(1, 720050.2418, 6173986.37339);
+		assertEquals(1, n.ID);
 
 		// Allow a 0.0000001 difference between the saved and the actual values,
 		// since floating points are not very precise in Java
@@ -22,8 +22,8 @@ public class GraphDataLoadTest {
 
 	@Test
 	public void roadNodeNegative() throws IOException {
-		RoadNode n = new RoadNode("-14", -720050.2418, -6173986.37339);
-		assertEquals("-14", n.ID);
+		RoadNode n = new RoadNode(-14, -720050.2418, -6173986.37339);
+		assertEquals(-14, n.ID);
 
 		// Allow a 0.0000001 difference between the saved and the actual values,
 		// since floating points are not very precise in Java
@@ -33,7 +33,7 @@ public class GraphDataLoadTest {
 
 	@Test
 	public void roadNodeMaximum() throws IOException {
-		RoadNode n = new RoadNode("1", Double.MAX_VALUE, Double.MAX_VALUE);
+		RoadNode n = new RoadNode(1, Double.MAX_VALUE, Double.MAX_VALUE);
 
 		assertEquals(Double.MAX_VALUE, n.getX(), 0.0000001);
 		assertEquals(Double.MAX_VALUE, n.getY(), 0.0000001);
@@ -44,8 +44,8 @@ public class GraphDataLoadTest {
 		UTMConverter conv = new UTMConverter();
 		UTMCoordinateSet set1 = conv.LatLonToUTM(55.17686, 14.7067943);		// Just south of Hasle, Bornholm
 		UTMCoordinateSet set2 = conv.LatLonToUTM(55.1179148, 14.7046616);	// Just north of Rønne, Bornholm
-		RoadNode n1 = new RoadNode("1", set1.getEasting(), set1.getNorthing());
-		RoadNode n2 = new RoadNode("2", set2.getEasting(), set2.getNorthing());
+		RoadNode n1 = new RoadNode(1, set1.getEasting(), set1.getNorthing());
+		RoadNode n2 = new RoadNode(2, set2.getEasting(), set2.getNorthing());
 
 		String roadname = "Søndervangs Allé";
 		WayData wayData = new WayData(roadname, RoadType.MOTORWAY, true);

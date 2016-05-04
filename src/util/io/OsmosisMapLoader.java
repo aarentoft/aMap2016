@@ -28,7 +28,7 @@ public class OsmosisMapLoader {
     protected Trie<RoadEdge> searchTree = new Trie<RoadEdge>();
     protected Graph graph;
 
-    private Map<String, RoadNode> nodes;
+    private Map<Long, RoadNode> nodes;
 
     /**
      * Loads the OSM data of a file and creates the data structures used by this application.
@@ -77,7 +77,7 @@ public class OsmosisMapLoader {
                     quadTree = new QuadTree(bound);
                 } else if (entity instanceof Node) {
                     Node nd = (Node) entity;
-                    String id = nd.getId()+"";
+                    Long id = nd.getId();
                     UTMCoordinateSet utmCoords = utmConverter.LatLonToUTM(nd.getLatitude(), nd.getLongitude(), commonUTMzone);
                     nodes.put(id, new RoadNode(id, utmCoords.getEasting(), utmCoords.getNorthing()));
                 } else if (entity instanceof Way) {
@@ -111,8 +111,8 @@ public class OsmosisMapLoader {
 
                     List<WayNode> waynodes = way.getWayNodes();
                     for (int i = 0; i < waynodes.size() - 1; i++) {
-                        RoadNode n1 = graph.getNodes().get(waynodes.get(i).getNodeId()+"");
-                        RoadNode n2 = graph.getNodes().get(waynodes.get(i + 1).getNodeId()+"");
+                        RoadNode n1 = graph.getNodes().get(waynodes.get(i).getNodeId());
+                        RoadNode n2 = graph.getNodes().get(waynodes.get(i + 1).getNodeId());
                         try {
                             RoadEdge edge = new RoadEdge(data, n1, n2);
 

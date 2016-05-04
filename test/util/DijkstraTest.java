@@ -23,8 +23,8 @@ public class DijkstraTest {
 	@Test
 	public void distToTarget() {
 		try {
-			RoadNode nodeA = new RoadNode("1", 2, 6);
-			RoadNode nodeB = new RoadNode("2", 6, 9);
+			RoadNode nodeA = new RoadNode(1, 2, 6);
+			RoadNode nodeB = new RoadNode(2, 6, 9);
 
 			double actResult = nodeA.distance(nodeB);
 			assertEquals(5.0, actResult, 0.01);
@@ -55,7 +55,7 @@ public class DijkstraTest {
 		// Dijkstra test
 		Collection<RoadEdge> actResultD = null;
 		try {
-			actResultD = Dijkstra.DijkstraSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			actResultD = Dijkstra.DijkstraSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -65,7 +65,7 @@ public class DijkstraTest {
 		// A* test
 		Collection<RoadEdge> actResultA = null;
 		try {
-			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -88,7 +88,7 @@ public class DijkstraTest {
 		// Dijkstra test
 		Collection<RoadEdge> actResultD = null;
 		try {
-			actResultD = Dijkstra.DijkstraSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			actResultD = Dijkstra.DijkstraSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -98,7 +98,7 @@ public class DijkstraTest {
 		// A* test
 		Collection<RoadEdge> actResultA = null;
 		try {
-			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -122,7 +122,7 @@ public class DijkstraTest {
 		// Dijkstra test
 		Collection<RoadEdge> actResultD = null;
 		try {
-			actResultD = Dijkstra.DijkstraSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			actResultD = Dijkstra.DijkstraSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -132,7 +132,7 @@ public class DijkstraTest {
 		// A* test
 		Collection<RoadEdge> actResultA = null;
 		try {
-			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -158,7 +158,7 @@ public class DijkstraTest {
 		// Dijkstra test
 		Collection<RoadEdge> actResultD = null;
 		try {
-			actResultD = Dijkstra.AStarSearch(graph, graph.getNodes().get("E"), graph.getNodes().get("I"));
+			actResultD = Dijkstra.AStarSearch(graph, graph.getNodes().get(5L), graph.getNodes().get(9L)); // 5 = E, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -168,7 +168,7 @@ public class DijkstraTest {
 		// A* test
 		Collection<RoadEdge> actResultA = null;
 		try {
-			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get("E"), graph.getNodes().get("I"));
+			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get(5L), graph.getNodes().get(9L)); // 5 = E, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -190,7 +190,7 @@ public class DijkstraTest {
 		// Dijkstra test
 		Collection<RoadEdge> actResultD = null;
 		try {
-			actResultD = Dijkstra.AStarSearch(graph, graph.getNodes().get("E"), graph.getNodes().get("I"));
+			actResultD = Dijkstra.AStarSearch(graph, graph.getNodes().get(5L), graph.getNodes().get(9L)); // 5 = C, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -200,7 +200,7 @@ public class DijkstraTest {
 		// A* test
 		Collection<RoadEdge> actResultA = null;
 		try {
-			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get("E"), graph.getNodes().get("I"));
+			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get(5L), graph.getNodes().get(9L)); // 5 = E, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -223,7 +223,7 @@ public class DijkstraTest {
 		// Dijkstra test
 		Collection<RoadEdge> actResultD = null;
 		try {
-			actResultD = Dijkstra.AStarSearch(graph, graph.getNodes().get("E"), graph.getNodes().get("I"));
+			actResultD = Dijkstra.AStarSearch(graph, graph.getNodes().get(5L), graph.getNodes().get(9L)); // 5 = E, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -233,7 +233,7 @@ public class DijkstraTest {
 		// A* test
 		Collection<RoadEdge> actResultA = null;
 		try {
-			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get("E"), graph.getNodes().get("I"));
+			actResultA = Dijkstra.AStarSearch(graph, graph.getNodes().get(5L), graph.getNodes().get(9L)); // 5 = E, 9 = I
 		} catch (PathNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -252,7 +252,7 @@ public class DijkstraTest {
 		Graph graph = TestGraphBuilder.getGraph7();
 
 		try {
-			Dijkstra.DijkstraSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			Dijkstra.DijkstraSearch(graph, graph.getNodes().get(5L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 
 			// No exception was thrown so fail the test
 			fail("Dijkstra should've thrown an exception!");
@@ -261,7 +261,7 @@ public class DijkstraTest {
 		}
 
 		try {
-			Dijkstra.AStarSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			Dijkstra.AStarSearch(graph, graph.getNodes().get(5L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 
 			// No exception was thrown so fail the test
 			fail("A* should've thrown an exception!");
@@ -278,13 +278,13 @@ public class DijkstraTest {
 	public void negUndirectedGroups() {
 		Graph graph = TestGraphBuilder.getGraph4();
 		try {
-			Dijkstra.DijkstraSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			Dijkstra.DijkstraSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 			fail("Dijkstra should've thrown an exception!");
 		} catch (PathNotFoundException e) {
 		}
 
 		try {
-			Dijkstra.AStarSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			Dijkstra.AStarSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 			fail("AStar should've thrown an exception!");
 		} catch (PathNotFoundException e) {
 		}
@@ -303,13 +303,13 @@ public class DijkstraTest {
 		expResult.add(TestGraphBuilder.edgeJ);
 
 		try {
-			Dijkstra.DijkstraSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			Dijkstra.DijkstraSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 			fail("Dijkstra should've thrown an exception!");
 		} catch (PathNotFoundException e) {
 		}
 
 		try {
-			Dijkstra.AStarSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			Dijkstra.AStarSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 			fail("A* should've thrown an exception!");
 		} catch (PathNotFoundException e) {
 		}
@@ -324,13 +324,13 @@ public class DijkstraTest {
 		Graph graph = TestGraphBuilder.getGraph8();
 
 		try {
-			Dijkstra.DijkstraSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			Dijkstra.DijkstraSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 			fail("should've thrown an exception!");
 		} catch (PathNotFoundException expected) {
 		}
 
 		try {
-			Dijkstra.AStarSearch(graph, graph.getNodes().get("C"), graph.getNodes().get("I"));
+			Dijkstra.AStarSearch(graph, graph.getNodes().get(3L), graph.getNodes().get(9L)); // 3 = C, 9 = I
 			fail("should've thrown an exception!");
 		} catch (PathNotFoundException expected) {
 		}

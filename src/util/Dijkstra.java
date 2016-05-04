@@ -33,24 +33,24 @@ public class Dijkstra {
 	public static Collection<RoadEdge> DijkstraSearch(Graph graph,
 			RoadNode source, RoadNode target) throws PathNotFoundException {
 		// Distance of shortest s->v path
-		Map<String, Double> dist = new HashMap<String, Double>();
+		Map<Long, Double> dist = new HashMap<Long, Double>();
 		// Last edge on shortest s->v path
-		Map<String, RoadEdge> edgeTo = new HashMap<String, RoadEdge>(graph.size() + 1);
+		Map<Long, RoadEdge> edgeTo = new HashMap<Long, RoadEdge>(graph.size() + 1);
 		// Priority queue of edges
-		MappedMinPriorityQueue<String, Double> pq = new MappedMinPriorityQueue<>(graph.size() + 1);
+		MappedMinPriorityQueue<Long, Double> pq = new MappedMinPriorityQueue<>(graph.size() + 1);
 		// Whether or not we actually have a result
 		boolean found = false;
 		// Map of the nodes
-		Map<String, RoadNode> nodemap = graph.getNodes();
+		Map<Long, RoadNode> nodemap = graph.getNodes();
 
 		// init
-		for (String nodeID : graph.getNodes().keySet()) {
+		for (Long nodeID : graph.getNodes().keySet()) {
 			dist.put(nodeID, Double.POSITIVE_INFINITY);
 			edgeTo.put(nodeID, null);
 		}
 
 		RoadNode node1;
-		String currIndex;
+		Long currIndex;
 		// Initialize
 		dist.put(source.ID, 0.0);
 		// Dist to source = 0, Insert this into PQ
@@ -74,7 +74,7 @@ public class Dijkstra {
 			}
 			// For each outgoing edge from adjacent node
 			for (RoadEdge edge : graph.getAdjacencyList(currIndex)) {
-				String adjacentNode = edge.getOther(node1).ID;
+				Long adjacentNode = edge.getOther(node1).ID;
 
 				if (dist.get(currIndex) + edge.length < dist.get(adjacentNode)) {
 					// Overwrite dist value
@@ -124,24 +124,24 @@ public class Dijkstra {
 	public static Collection<RoadEdge> AStarSearch(Graph graph,
 			RoadNode source, RoadNode target) throws PathNotFoundException {
 		// Distance of shortest s->v path
-		Map<String, Double> dist = new HashMap<String, Double>();
+		Map<Long, Double> dist = new HashMap<Long, Double>();
 		// Last edge on shortest s->v path
-		Map<String, RoadEdge> edgeTo = new HashMap<String, RoadEdge>(graph.size() + 1);
+		Map<Long, RoadEdge> edgeTo = new HashMap<Long, RoadEdge>(graph.size() + 1);
 		// Priority queue of edges
-		MappedMinPriorityQueue<String, Double> pq = new MappedMinPriorityQueue<>(graph.size() + 1);
+		MappedMinPriorityQueue<Long, Double> pq = new MappedMinPriorityQueue<>(graph.size() + 1);
 		// Whether or not we actually have a result
 		boolean found = false;
 		// Map of the nodes
-		Map<String, RoadNode> nodemap = graph.getNodes();
+		Map<Long, RoadNode> nodemap = graph.getNodes();
 
 		// init
-		for (String nodeID : graph.getNodes().keySet()) {
+		for (Long nodeID : graph.getNodes().keySet()) {
 			dist.put(nodeID, Double.POSITIVE_INFINITY);
 			edgeTo.put(nodeID, null);
 		}
 
 		RoadNode node1;
-		String currIndex;
+		Long currIndex;
 		// Initialize
 		dist.put(source.ID, 0.0);
 		// Dist to source = 0, Insert this into PQ
@@ -166,7 +166,7 @@ public class Dijkstra {
 			}
 			// For each outgoing edge from adjacent node
 			for (RoadEdge edge : graph.getAdjacencyList(currIndex)) {
-				String adjacentNode = edge.getOther(node1).ID;
+				Long adjacentNode = edge.getOther(node1).ID;
 				// If dist[current node] + edge length < dist[adjacent node]
 				double distanceToTarget = edge.getOther(node1).distance(target);
 				if (dist.get(currIndex) + edge.length < dist.get(adjacentNode)) {
@@ -209,7 +209,7 @@ public class Dijkstra {
 	 *            The target node
 	 * @return A collection returning the specific route
 	 */
-	protected static Collection<RoadEdge> getRoute(Map<String, RoadEdge> edges,
+	protected static Collection<RoadEdge> getRoute(Map<Long, RoadEdge> edges,
 			RoadNode target) {
 
 		LinkedList<RoadEdge> route = new LinkedList<RoadEdge>();
