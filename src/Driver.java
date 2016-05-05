@@ -1,6 +1,7 @@
-import util.*;
-import util.graph.Graph;
-import util.graph.RoadEdge;
+import datastructures.QuadTree;
+import datastructures.Trie;
+import datastructures.graph.Graph;
+import datastructures.graph.RoadEdge;
 import util.io.OsmosisMapLoader;
 import view.Loader;
 import view.MapFrame;

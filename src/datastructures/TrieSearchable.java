@@ -1,4 +1,4 @@
-package util;
+package datastructures;
 
 /**
  * Classes which is going to be a part of the {@link Trie} structure must implement this interface.

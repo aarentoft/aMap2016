@@ -1,15 +1,11 @@
 package model;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Observable;
-
-import util.Dijkstra;
-import util.graph.Graph;
-import util.graph.RoadEdge;
+import datastructures.graph.Graph;
+import datastructures.graph.RoadEdge;
 import exceptions.PathNotFoundException;
+import util.Dijkstra;
+
+import java.util.*;
 
 /**
  * This model contains information about the route in the map view.

@@ -1,17 +1,15 @@
+import datastructures.QuadTreeTest;
+import datastructures.TrieTest;
+import datastructures.graph.GraphDataLoadTest;
+import datastructures.graph.GraphTest;
 import model.MapInteractionModelTest;
 import model.MapModelTest;
 import model.NameSearchModelTest;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-
 import util.ConverterTest;
 import util.DijkstraTest;
-import util.QuadTreeTest;
-import util.TrieTest;
 import util.RectangleTest;
-import util.graph.GraphDataLoadTest;
-import util.graph.GraphTest;
 import util.UTMConverterTest;
 
 @RunWith(Suite.class)

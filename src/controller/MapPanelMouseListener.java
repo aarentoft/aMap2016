@@ -13,8 +13,8 @@ import model.RouteModel;
 import util.Converter;
 import util.Point;
 import util.Rectangle;
-import util.graph.RoadEdge;
-import util.graph.RoadType;
+import datastructures.graph.RoadEdge;
+import datastructures.graph.RoadType;
 import view.MapPanel;
 
 /**

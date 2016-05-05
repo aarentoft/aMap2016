@@ -10,7 +10,7 @@ import javax.swing.JComboBox;
 
 import model.NameSearchModel;
 import model.RouteModel;
-import util.graph.RoadEdge;
+import datastructures.graph.RoadEdge;
 import controller.LiveComboBoxKeyAndActionListener;
 
 /**

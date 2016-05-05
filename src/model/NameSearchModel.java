@@ -1,11 +1,11 @@
 package model;
 
+import datastructures.Trie;
+import datastructures.graph.RoadEdge;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Observable;
-
-import util.Trie;
-import util.graph.RoadEdge;
 
 /**
  * Defines a name search model. Used to connect the actionlistner and gui with

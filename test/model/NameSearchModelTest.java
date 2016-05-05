@@ -1,18 +1,16 @@
 package model;
 
-import static org.junit.Assert.assertEquals;
+import datastructures.QuadTree;
+import datastructures.graph.RoadEdge;
+import org.junit.Before;
+import org.junit.Test;
+import util.io.OsmosisMapLoader;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import util.io.OsmosisMapLoader;
-import util.QuadTree;
-import util.graph.RoadEdge;
-import view.Loader;
+import static org.junit.Assert.assertEquals;
 
 public class NameSearchModelTest {
 	NameSearchModel nameSearchModel;

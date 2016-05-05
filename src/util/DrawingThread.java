@@ -1,17 +1,14 @@
 package util;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.util.Set;
-
+import datastructures.graph.RoadEdge;
 import model.MapInteractionModel;
 import model.MapModel;
 import model.RouteModel;
-import util.graph.RoadEdge;
 import view.MapPanel;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Set;
 
 /**
  * This class will make a thread which runs in the background and waits for

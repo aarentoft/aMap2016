@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import model.NameSearchModel;
 import model.RouteModel;
-import util.graph.RoadEdge;
+import datastructures.graph.RoadEdge;
 import view.LiveComboBox;
 
 /**

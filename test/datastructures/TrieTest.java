@@ -1,19 +1,18 @@
-package util;
+package datastructures;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import datastructures.graph.RoadEdge;
+import datastructures.graph.RoadNode;
+import datastructures.graph.RoadType;
+import datastructures.graph.WayData;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import util.graph.RoadEdge;
-import util.graph.RoadNode;
-import util.graph.RoadType;
-import util.graph.WayData;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TrieTest {
 	private Trie<RoadEdge> tree;

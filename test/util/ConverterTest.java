@@ -1,14 +1,14 @@
 package util;
 
-import static org.junit.Assert.assertEquals;
-
-import java.awt.Dimension;
-import java.io.IOException;
-
+import datastructures.QuadTree;
 import model.MapModel;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.awt.*;
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
 
 public class ConverterTest {
 	static Converter converter;

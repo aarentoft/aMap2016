@@ -1,12 +1,16 @@
 package util.io;
 
+import datastructures.QuadTree;
+import datastructures.Trie;
+import datastructures.graph.*;
 import org.openstreetmap.osmosis.core.container.v0_6.EntityContainer;
 import org.openstreetmap.osmosis.core.domain.v0_6.*;
 import org.openstreetmap.osmosis.core.task.v0_6.RunnableSource;
 import org.openstreetmap.osmosis.core.task.v0_6.Sink;
 import org.openstreetmap.osmosis.xml.common.CompressionMethod;
-import util.*;
-import util.graph.*;
+import util.Rectangle;
+import util.UTMConverter;
+import util.UTMCoordinateSet;
 import view.Loader;
 
 import java.io.File;
@@ -23,7 +27,7 @@ import java.util.TreeMap;
  * edges for use in a {@link Graph}.
  */
 public class OsmosisMapLoader {
-    protected Loader loader;
+    protected Loader   loader;
     protected QuadTree quadTree;
     protected Trie<RoadEdge> searchTree = new Trie<RoadEdge>();
     protected Graph graph;

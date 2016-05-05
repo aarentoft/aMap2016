@@ -1,12 +1,12 @@
-package util.graph;
-
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
+package datastructures.graph;
 
 import org.junit.Test;
 import util.UTMConverter;
 import util.UTMCoordinateSet;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
 
 public class GraphDataLoadTest {
 	@Test

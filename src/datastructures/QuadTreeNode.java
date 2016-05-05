@@ -1,4 +1,6 @@
-package util;
+package datastructures;
+
+import util.Rectangle;
 
 import java.util.HashSet;
 import java.util.Set;

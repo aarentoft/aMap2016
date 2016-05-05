@@ -1,11 +1,12 @@
 package util;
 
-import java.util.*;
-
-import util.graph.Graph;
-import util.graph.RoadEdge;
-import util.graph.RoadNode;
+import datastructures.MappedMinPriorityQueue;
+import datastructures.graph.Graph;
+import datastructures.graph.RoadEdge;
+import datastructures.graph.RoadNode;
 import exceptions.PathNotFoundException;
+
+import java.util.*;
 
 /**
  * This class is a "toolbox" containing two methods. An implementation of

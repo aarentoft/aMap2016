@@ -1,10 +1,6 @@
-package util;
+package datastructures;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Search tree for finding roads by name. This Trie is a datastructure that

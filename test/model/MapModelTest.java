@@ -1,23 +1,24 @@
 package model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import datastructures.QuadTree;
+import datastructures.graph.RoadEdge;
+import datastructures.graph.RoadType;
+import org.junit.Before;
+import org.junit.Test;
+import util.Converter;
+import util.Point;
+import util.Rectangle;
+import util.io.OsmosisMapLoader;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import util.*;
-import util.graph.RoadEdge;
-import util.graph.RoadType;
-import util.io.OsmosisMapLoader;
-import view.Loader;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MapModelTest {
 	protected MapModel model;

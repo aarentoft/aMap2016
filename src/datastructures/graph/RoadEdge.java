@@ -1,9 +1,7 @@
-package util.graph;
-
-import java.util.HashMap;
+package datastructures.graph;
 
 import util.Rectangle;
-import util.TrieSearchable;
+import datastructures.TrieSearchable;
 
 /**
  * A graph edge created from an EdgeData object.

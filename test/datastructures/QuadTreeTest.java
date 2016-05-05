@@ -1,18 +1,14 @@
-package util;
+package datastructures;
 
+import datastructures.graph.*;
 import org.junit.Before;
 import org.junit.Test;
-import util.graph.RoadEdge;
-import util.graph.RoadNode;
-import util.graph.RoadType;
-import util.graph.WayData;
+import util.Rectangle;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class QuadTreeTest {
 	private QuadTree tree;

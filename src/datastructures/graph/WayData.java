@@ -1,4 +1,4 @@
-package util.graph;
+package datastructures.graph;
 
 public class WayData {
     public final RoadType type;

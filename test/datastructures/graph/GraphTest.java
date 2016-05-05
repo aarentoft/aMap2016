@@ -1,4 +1,4 @@
-package util.graph;
+package datastructures.graph;
 
 import org.junit.Test;
 import testhelpers.TestGraphBuilder;

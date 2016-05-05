@@ -17,10 +17,10 @@ import javax.swing.JSeparator;
 import model.MapModel;
 import model.NameSearchModel;
 import model.RouteModel;
-import util.QuadTree;
-import util.Trie;
-import util.graph.Graph;
-import util.graph.RoadEdge;
+import datastructures.QuadTree;
+import datastructures.Trie;
+import datastructures.graph.Graph;
+import datastructures.graph.RoadEdge;
 
 /**
  * This class contains the main frame for the progam.

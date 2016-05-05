@@ -1,11 +1,11 @@
 package util;
 
+import datastructures.graph.Graph;
+import datastructures.graph.RoadEdge;
+import datastructures.graph.RoadNode;
 import exceptions.PathNotFoundException;
 import org.junit.Test;
 import testhelpers.TestGraphBuilder;
-import util.graph.Graph;
-import util.graph.RoadEdge;
-import util.graph.RoadNode;
 
 import java.util.Collection;
 import java.util.LinkedList;

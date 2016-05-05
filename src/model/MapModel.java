@@ -1,15 +1,15 @@
 package model;
 
-import java.awt.Dimension;
+import datastructures.QuadTree;
+import datastructures.graph.RoadEdge;
+import datastructures.graph.RoadType;
+import util.Point;
+import util.Rectangle;
+
+import java.awt.*;
 import java.util.List;
 import java.util.Observable;
 import java.util.Set;
-
-import util.Point;
-import util.QuadTree;
-import util.Rectangle;
-import util.graph.RoadEdge;
-import util.graph.RoadType;
 
 /**
  * This class contains the model, which contains all the information about a

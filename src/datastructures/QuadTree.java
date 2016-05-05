@@ -1,13 +1,10 @@
-package util;
+package datastructures;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import datastructures.graph.RoadEdge;
+import datastructures.graph.RoadType;
+import util.Rectangle;
 
-import util.graph.RoadEdge;
-import util.graph.RoadType;
+import java.util.*;
 
 /**
  * Optimized data-structure for inserting and getting RoadEdges, based on the
@@ -18,7 +15,7 @@ public class QuadTree {
 
 	// contains a root for each RoadType
 	protected HashMap<RoadType, QuadTreeNode<RoadEdge>> root;
-	protected Rectangle bounds;
+	protected Rectangle                                 bounds;
 
 	/**
 	 * Constructs a QuadTree with the bounds of the Rectangle given as parameter

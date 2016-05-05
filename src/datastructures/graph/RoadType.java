@@ -1,10 +1,7 @@
-package util.graph;
+package datastructures.graph;
 
-import java.awt.Color;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
 
 /**
