@@ -139,19 +139,19 @@ public enum RoadType implements Comparable<RoadType> {
 		// Default - Always shown
 		list.addAll(Arrays.asList(FERRY, MOTORWAY,
 				MOTORWAY_TUNNEL, MOTORWAY_EXIT, EXPRESSWAY, EXPRESSWAY_TUNNEL,
-				EXPRESSWAY_EXIT, PRIMARY_ROAD, PRIMARY_ROAD_EXIT,
-				SECONDARY_ROAD, SECONDARY_ROAD_EXIT));
+				EXPRESSWAY_EXIT));
 
 		if (coordinateAspectRatio < coordinateRatioRoadLimit3) {
-			list.addAll(Arrays.asList(ROAD));
+			list.addAll(Arrays.asList(PRIMARY_ROAD, PRIMARY_ROAD_EXIT,
+					SECONDARY_ROAD, SECONDARY_ROAD_EXIT));
 		}
 
 		if (coordinateAspectRatio < coordinateRatioRoadLimit2) {
-			list.addAll(Arrays.asList(MINOR_ROAD, EXIT, RESIDENTIAL, LIVING_STREET, TRACK, SERVICE, TERTIARY_ROAD));
+			list.addAll(Arrays.asList(ROAD, EXIT, LIVING_STREET, TRACK, SERVICE, TERTIARY_ROAD));
 		}
 
 		if (coordinateAspectRatio < coordinateRatioRoadLimit1) {
-			list.addAll(Arrays.asList(PATH, DIRT_ROAD,
+			list.addAll(Arrays.asList(PATH, DIRT_ROAD, MINOR_ROAD, RESIDENTIAL,
 					PEDESTRIANISHED_ZONE, FOOTWAY, CYCLEWAY, STEPS, UNKNOWN));
 		}
 		Collections.sort(list, new PriorityComparator());
