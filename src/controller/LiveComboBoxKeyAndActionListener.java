@@ -52,21 +52,20 @@ public class LiveComboBoxKeyAndActionListener
 		if (item instanceof String) {
 			routeModel.setPoint(type, null);
 			String enteredString = (String) item;
-			if (String.valueOf(e.getKeyChar()).matches("\\w")
-					|| e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+
+			if (String.valueOf(e.getKeyChar()).matches("\\w") || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 				if (enteredString.length() > 2) {
-					nameSearchModel.doRoadNameSearch(enteredString
-							.toLowerCase());
+					nameSearchModel.doRoadNameSearch(enteredString.toLowerCase());
 				} else {
 					nameSearchModel.resetRoadNameSearch();
 				}
 			}
+
 			// Select the first item that is a RoadEdge
-			if (e.getKeyCode() == KeyEvent.VK_ENTER && item instanceof String) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				if (!nameSearchModel.getRoadNameSearchResult().isEmpty()) {
-					RoadEdge edge = ((ArrayList<RoadEdge>) nameSearchModel
-							.getRoadNameSearchResult()).get(0);
-					liveComboBox.getEditor().setItem(edge.getSearchFieldRepresentation());
+					RoadEdge edge = ((ArrayList<RoadEdge>) nameSearchModel.getRoadNameSearchResult()).get(0);
+					liveComboBox.getEditor().setItem(edge);
 				}
 			}
 		}
@@ -78,10 +77,8 @@ public class LiveComboBoxKeyAndActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (liveComboBox.getSelectedItem() != null
-				&& liveComboBox.getSelectedItem() instanceof RoadEdge) {
-			routeModel
-					.setPoint(type, (RoadEdge) liveComboBox.getSelectedItem());
+		if (liveComboBox.getSelectedItem() != null && liveComboBox.getSelectedItem() instanceof RoadEdge) {
+			routeModel.setPoint(type, (RoadEdge) liveComboBox.getSelectedItem());
 		}
 	}
 }

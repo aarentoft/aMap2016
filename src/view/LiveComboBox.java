@@ -1,24 +1,28 @@
 package view;
 
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.util.Collection;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.JComboBox;
-
+import controller.LiveComboBoxEditor;
+import controller.LiveComboBoxKeyAndActionListener;
+import controller.LiveComboBoxRenderer;
+import datastructures.graph.RoadEdge;
+import datastructures.graph.RoadNode;
+import datastructures.graph.RoadType;
+import datastructures.graph.WayData;
 import model.NameSearchModel;
 import model.RouteModel;
-import datastructures.graph.RoadEdge;
-import controller.LiveComboBoxKeyAndActionListener;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This class represents the searchresults.
  */
 @SuppressWarnings("serial")
-public class LiveComboBox extends JComboBox<String> implements Observer {
+public class LiveComboBox extends JComboBox<RoadEdge> implements Observer {
 	protected NameSearchModel nameSearchModel;
+	protected LiveComboBoxKeyAndActionListener listener;
 
 	/**
 	 * Constructs the combo box. 
@@ -35,39 +39,48 @@ public class LiveComboBox extends JComboBox<String> implements Observer {
 
 		setEditable(true);
 
-		LiveComboBoxKeyAndActionListener listener = new LiveComboBoxKeyAndActionListener(
+		listener = new LiveComboBoxKeyAndActionListener(
 				type, this, routeModel, nameSearchModel);
 
-		getEditor().getEditorComponent().addKeyListener(listener);
-		addActionListener(listener);
+		setRenderer(new LiveComboBoxRenderer());
+		setEditor(new LiveComboBoxEditor());
+		editor.getEditorComponent().addKeyListener(listener);
+		this.addActionListener(listener);
 		setMaximumRowCount(5);
 		setCursor(Cursor.getDefaultCursor());
 	}
 
-	/**
-	 * Sets the input to the marked item.
-	 * @param o
-	 */
-	public void setItem(Object o) {
-		if (!getEditor().getItem().equals(o)) {
-			getEditor().setItem(o);
-		}
-	}
-
 	@Override
 	public void update(Observable o, Object arg) {
+		String enteredString = getEditor().getItem().toString();
+
 		if (getEditor().getEditorComponent().isFocusOwner()
 				&& getEditor().getItem() instanceof String) {
-			String enteredString = (String) getEditor().getItem();
 
 			setPopupVisible(false);
 			removeAllItems();
-			Collection<RoadEdge> results = nameSearchModel
-					.getRoadNameSearchResult();
-			addItem(enteredString);
-			if (results != null) {
+			List<RoadEdge> results = nameSearchModel.getRoadNameSearchResult();
+
+			if (results.size() > 0) {
+				String firstResultName = results.get(0).getTrieRepresentation().toLowerCase();
+				if (!firstResultName.equals(enteredString.toLowerCase())) {
+					/* This dummy edge is used to prevent the "JComboBox-automatically-selects-the-first-
+			 		 * item-in-the-drop-down"-feature from interfering with user text entry. However,
+			 		 * if the text in the combobox is identical to that of an actual edge, this dummy
+			 		 * is omitted, such that the real-life edge is selected instead. This also prevents
+			 		 * route searches from failing, when the user only enters the name of a road without
+			 		 * selecting it from the list. Without this, the route search would have attempted to use
+			 		 * the dummy road edge which would of course fail, as it is not a part of the road graph. */
+					RoadEdge currentEntryDummy = new RoadEdge(
+							new WayData(enteredString, RoadType.UNKNOWN, false),
+							new RoadNode(1, 0.0, 0.0),
+							new RoadNode(2, 0.1, 0.1)
+					);
+					addItem(currentEntryDummy);
+				}
+
 				for (RoadEdge edge : results) {
-					addItem(edge.data.roadname);
+					addItem(edge);
 				}
 			}
 			setPopupVisible(true);

@@ -3,8 +3,8 @@ package model;
 import datastructures.Trie;
 import datastructures.graph.RoadEdge;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -14,7 +14,7 @@ import java.util.Observable;
  */
 public class NameSearchModel extends Observable {
 	protected Trie<RoadEdge> searchTree;
-	protected Collection<RoadEdge> roadNameSearchResult = Collections.emptyList();
+	protected List<RoadEdge> roadNameSearchResult = Collections.emptyList();
 
 	/**
 	 * Constructucting the model with the source as parameter
@@ -49,7 +49,7 @@ public class NameSearchModel extends Observable {
 	 * 
 	 * @return The results of the query.
 	 */
-	public Collection<RoadEdge> getRoadNameSearchResult() {
+	public List<RoadEdge> getRoadNameSearchResult() {
 		return roadNameSearchResult;
 	}
 
@@ -57,7 +57,7 @@ public class NameSearchModel extends Observable {
 	 * Resets the searchmodel and clears the search queries
 	 */
 	public void resetRoadNameSearch() {
-		roadNameSearchResult = null;
+		roadNameSearchResult = Collections.emptyList();
 		setChanged();
 		notifyObservers();
 	}
