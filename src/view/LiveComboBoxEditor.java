@@ -1,17 +1,15 @@
 package view;
 
-import datastructures.Trie;
 import datastructures.TrieSearchable;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
+import java.awt.*;
 
 public class LiveComboBoxEditor extends BasicComboBoxEditor {
+
     public LiveComboBoxEditor() {
-        createEditorComponent();
+        editor = new JTextField();
     }
 
     public Component getEditorComponent() {
