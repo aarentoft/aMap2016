@@ -1,8 +1,6 @@
 package view;
 
-import controller.LiveComboBoxEditor;
 import controller.LiveComboBoxKeyAndActionListener;
-import controller.LiveComboBoxRenderer;
 import datastructures.graph.RoadEdge;
 import datastructures.graph.RoadNode;
 import datastructures.graph.RoadType;

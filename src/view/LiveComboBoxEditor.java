@@ -1,4 +1,4 @@
-package controller;
+package view;
 
 import datastructures.Trie;
 import datastructures.TrieSearchable;
