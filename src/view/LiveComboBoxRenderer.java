@@ -5,7 +5,7 @@ import datastructures.TrieSearchable;
 import javax.swing.*;
 import java.awt.*;
 
-public class LiveComboBoxRenderer extends JLabel implements ListCellRenderer {
+public class LiveComboBoxRenderer extends JLabel implements ListCellRenderer<Object> {
 
     public LiveComboBoxRenderer() {
         setOpaque(true);
