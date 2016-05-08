@@ -1,9 +1,6 @@
 package datastructures.graph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A graph datastructure which can be used to hold information about nodes in a
@@ -16,16 +13,16 @@ public class Graph {
 	// nodeIDstring
 	protected Map<Long, List<RoadEdge>> outEdges;
 
+	// empty list used as return value when a node has no out-edges
+	private List<RoadEdge> defaultValue;
+
 	/**
 	 * Constructs the Graph from the given collection of RoadNodes.
 	 */
 	public Graph(Map<Long, RoadNode> nodes) {
 		this.nodes = nodes;
 		outEdges = new HashMap<Long, List<RoadEdge>>(nodes.size() + 1);
-
-		for (Long nodeID : nodes.keySet()) {
-			outEdges.put(nodeID, new ArrayList<RoadEdge>());
-		}
+		defaultValue = Collections.emptyList();
 	}
 	
 	/**
@@ -36,7 +33,7 @@ public class Graph {
 	 * @return A list of the outgoing neighbors.
 	 */
 	public List<RoadEdge> getAdjacencyList(long v) {
-		return outEdges.get(v);
+		return outEdges.getOrDefault(v, defaultValue);
 	}
 	
 	/**
@@ -47,7 +44,7 @@ public class Graph {
 	 * @return an ArrayList of edges
 	 */
 	public List<RoadEdge> getAdjacencyList(RoadNode node) {
-		return outEdges.get(node.ID);
+		return outEdges.getOrDefault(node.ID, defaultValue);
 	}
 
 	/**
@@ -62,8 +59,10 @@ public class Graph {
 	 *            Edge to add to the graph
 	 */
 	public void addEdge(RoadEdge e) {
+		outEdges.putIfAbsent(e.start.ID, new ArrayList<RoadEdge>());
 		outEdges.get(e.start.ID).add(e);
 		if (!e.data.oneway) {
+			outEdges.putIfAbsent(e.end.ID, new ArrayList<RoadEdge>());
 			outEdges.get(e.end.ID).add(e);
 		}
 	}
