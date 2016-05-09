@@ -1,6 +1,7 @@
 package view;
 
 import controller.LiveComboBoxKeyAndActionListener;
+import datastructures.TrieSearchable;
 import datastructures.graph.RoadEdge;
 import datastructures.graph.RoadNode;
 import datastructures.graph.RoadType;
@@ -9,7 +10,9 @@ import model.NameSearchModel;
 import model.RouteModel;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxEditor;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -42,6 +45,7 @@ public class LiveComboBox extends JComboBox<RoadEdge> implements Observer {
 
 		setRenderer(new LiveComboBoxRenderer());
 		setEditor(new LiveComboBoxEditor());
+
 		editor.getEditorComponent().addKeyListener(listener);
 		this.addActionListener(listener);
 		setMaximumRowCount(5);
@@ -99,4 +103,56 @@ public class LiveComboBox extends JComboBox<RoadEdge> implements Observer {
 	public Dimension getMaximumSize() {
 		return getMinimumSize();
 	}
+
+	/**
+	 * Determines how the editor field of {@link LiveComboBox} behaves.
+	 * This implementation overrides the default use of the toString() representation of an object
+	 * when setting the item of the combo box. Instead, it uses the Trie representation (if available)
+	 * which makes sense as searches are matched against the Trie representation, and not the toString()
+	 * representation.
+	 */
+	private class LiveComboBoxEditor extends BasicComboBoxEditor {
+
+		public LiveComboBoxEditor() {
+			editor = new JTextField();
+		}
+
+		public void setItem(Object item) {
+			if (item == null)
+				return;
+
+			String text = item instanceof TrieSearchable ? ((TrieSearchable) item).getTrieRepresentation() : item.toString();
+			editor.setText(text);
+		}
+	}
+
+	/**
+	 * Determines the appearance of objects in the dropdown of {@link LiveComboBox}.
+	 * Uses the Trie representation of an object (if available), instead of the toString() representation.
+	 */
+	private class LiveComboBoxRenderer extends JLabel implements ListCellRenderer<Object> {
+
+		public LiveComboBoxRenderer() {
+			setOpaque(true);
+		}
+
+		@Override
+		public Component getListCellRendererComponent(JList list, Object value,
+													  int index, boolean isSelected, boolean cellHasFocus) {
+			String text = value instanceof TrieSearchable ? ((TrieSearchable) value).getTrieRepresentation() : value.toString();
+			setText(text);
+
+			if (isSelected) {
+				setForeground(Color.WHITE);
+				setBackground(Color.RED);
+			} else {
+				setForeground(Color.BLACK);
+				setBackground(Color.WHITE);
+			};
+
+			return this;
+		}
+
+	}
+
 }
