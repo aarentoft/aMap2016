@@ -44,6 +44,10 @@ public class LiveComboBox extends JComboBox<RoadEdge> implements Observer {
 				type, this, routeModel, nameSearchModel);
 
 		setRenderer(new LiveComboBoxRenderer());
+		/* Using the following custom editor breaks arrow key interaction with the dropdown list on OSX.
+		 * It still works on Linux, however. Windows has not been tested. It is possibly related to this bug
+		 * https://bugs.openjdk.java.net/browse/JDK-8139195 so it is probably easiest to wait for a Java update
+		 * to fix it. */
 		setEditor(new LiveComboBoxEditor());
 
 		editor.getEditorComponent().addKeyListener(listener);
