@@ -121,6 +121,7 @@ public class LiveComboBox extends JComboBox<RoadEdge> implements Observer {
 			editor = new JTextField();
 		}
 
+		@Override
 		public void setItem(Object item) {
 			if (item == null)
 				return;

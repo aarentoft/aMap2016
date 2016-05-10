@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import datastructures.graph.RoadType;
 import model.NameSearchModel;
 import model.RouteModel;
 import datastructures.graph.RoadEdge;
@@ -49,24 +50,13 @@ public class LiveComboBoxKeyAndActionListener
 	@Override
 	public void keyReleased(KeyEvent e) {
 		Object item = liveComboBox.getEditor().getItem();
-		if (item instanceof String) {
-			routeModel.setPoint(type, null);
-			String enteredString = (String) item;
+		String enteredString = (String) item;
 
-			if (String.valueOf(e.getKeyChar()).matches("\\w") || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-				if (enteredString.length() > 2) {
-					nameSearchModel.doRoadNameSearch(enteredString.toLowerCase());
-				} else {
-					nameSearchModel.resetRoadNameSearch();
-				}
-			}
-
-			// Select the first item that is a RoadEdge
-			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				if (!nameSearchModel.getRoadNameSearchResult().isEmpty()) {
-					RoadEdge edge = ((ArrayList<RoadEdge>) nameSearchModel.getRoadNameSearchResult()).get(0);
-					liveComboBox.getEditor().setItem(edge);
-				}
+		if (String.valueOf(e.getKeyChar()).matches("\\w") || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+			if (enteredString.length() > 2) {
+				nameSearchModel.doRoadNameSearch(enteredString.toLowerCase());
+			} else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+				nameSearchModel.resetRoadNameSearch();
 			}
 		}
 	}
