@@ -117,11 +117,14 @@ public class OsmosisMapLoader {
      * executing the other thread. If not, the entire application is closed.
      */
     private class FreeMemoryCheckerThread implements Runnable {
+        private final int MEGABYTES = 1024 * 1024;
+        private final Runtime runtime = Runtime.getRuntime();
+
         private final Thread thread;
         // Millisecond(s)
         private int checkInterval = 1000;
-        // Minimum amount of free memory needed
-        private int memoryThreshold = 30 * (1024 * 1024);
+        // Minimum amount of free memory needed (percentage of max memory)
+        private long memoryThreshold = ((runtime.maxMemory() / 100) * 20);
 
         public FreeMemoryCheckerThread(Thread thread) {
             this.thread = thread;
@@ -132,13 +135,13 @@ public class OsmosisMapLoader {
             int ct = 0;
 
             while (thread.isAlive()) {
-                System.out.println("running "+ (ct++));
 
                 try {
                     Thread.sleep(checkInterval);
                 } catch (InterruptedException e) { e.printStackTrace(); }
 
-                if (Runtime.getRuntime().freeMemory() > memoryThreshold)
+                double usedMemory = runtime.totalMemory() - runtime.freeMemory();
+                if (runtime.maxMemory() - usedMemory > memoryThreshold)
                     continue;
 
                 int userResponse;
