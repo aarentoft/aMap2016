@@ -33,7 +33,7 @@ public class Graph {
 	 * @return A list of the outgoing neighbors.
 	 */
 	public List<RoadEdge> getAdjacencyList(long v) {
-		return outEdges.getOrDefault(v, defaultValue);
+		return outEdges.containsKey(v) ? outEdges.get(v) : defaultValue;
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class Graph {
 	 * @return an ArrayList of edges
 	 */
 	public List<RoadEdge> getAdjacencyList(RoadNode node) {
-		return outEdges.getOrDefault(node.ID, defaultValue);
+		return outEdges.containsKey(node.ID) ? outEdges.get(node.ID) : defaultValue;
 	}
 
 	/**
@@ -59,10 +59,10 @@ public class Graph {
 	 *            Edge to add to the graph
 	 */
 	public void addEdge(RoadEdge e) {
-		outEdges.putIfAbsent(e.start.ID, new ArrayList<RoadEdge>());
+		putIfAbsent(e.start.ID, new ArrayList<RoadEdge>());
 		outEdges.get(e.start.ID).add(e);
 		if (!e.data.oneway) {
-			outEdges.putIfAbsent(e.end.ID, new ArrayList<RoadEdge>());
+			putIfAbsent(e.end.ID, new ArrayList<RoadEdge>());
 			outEdges.get(e.end.ID).add(e);
 		}
 	}
@@ -84,5 +84,10 @@ public class Graph {
 	@Override
 	public String toString() {
 		return "Graph [nodes=" + nodes + "]";
+	}
+
+	private void putIfAbsent(long k, List<RoadEdge> v) {
+		if (!outEdges.containsKey(k))
+			outEdges.put(k, v);
 	}
 }
