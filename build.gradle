@@ -15,13 +15,22 @@ dependencies {
 apply plugin: 'java'
 apply plugin: 'application'
 
+// The heap size for the JVM running the application is increased to allow
+// the included map of Denmark to be loaded.
+def memSize = "1536m"
+
 mainClassName = 'Driver'
+applicationDefaultJvmArgs = [ "-Xmx"+memSize ]
 
 macAppBundle {
     mainClassName = "Driver"
     appName = "aMap2016"
     javaProperties.put("apple.laf.useScreenMenuBar", "true")
     javaExtras.put("-Xdock:name", appName)
+    // The -Xmx option does not use an equals sign between the option and the argument,
+    // so the entire option is passed as the first argument.
+    // Passing null for the second argument ensures that there will be no equals sign following the option.
+    javaExtras.put("-Xmx"+memSize, null)
 }
 
 // sourceCompatibility = 1.8
