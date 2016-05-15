@@ -30,20 +30,6 @@ For more information about the build process, refer to the [build.gradle](build.
     $ gradle run -DmapPath=data/map-anholt-raw.osm
     ```
 
-- To build an executable jar file
-    ```
-    $ gradle jar
-    ```
-    Then run the jar file using
-    ```
-    $ java -jar build/libs/aMap2016.jar
-    ```
-    or simply browse to `build/libs` and double click `aMap2016.jar`.
-    Alternatively, you can pass the map data path to the jar via the command line
-    ```
-    $ java -jar build/libs/aMap2016.jar data/map-anholt-raw.osm
-    ```
-    This omits the file browser which appears otherwise.
 - (OSX) Build a .app bundle
     ```
     $ gradle createApp
@@ -55,14 +41,14 @@ For more information about the build process, refer to the [build.gradle](build.
     $ gradle clean
     ```
 
-## Tests
+### Tests
 
 To run all the JUnit tests
 ```
 $ gradle test
 ```
 
-**NOTE:** After running some of the previous commands, Gradle may simply report 
+**NOTE:** After running this command, Gradle may simply report
 ```
 [...]
 :testClasses UP-TO-DATE
@@ -78,11 +64,42 @@ $ gradle test --rerun-tasks
 
 Using custom maps
 =================
-It is possible to use custom maps exported directly from [OpenStreetMap](http://openstreetmap.org). The application supports map files in the [OSM XML format](http://wiki.openstreetmap.org/wiki/OSM_XML) (.osm file ending) which is the format which openstreetmap exports to per default. It also supports files in the binary and compressed [PBF format](http://wiki.openstreetmap.org/wiki/PBF_Format) (.pbf ending). The tool [Osmosis](http://wiki.openstreetmap.org/wiki/Osmosis) can convert between the two formats and save a lot of disk space. OSM can files get really large really fast. For more information on how to use Osmosis, refer to [this link](http://wiki.openstreetmap.org/wiki/Osmosis/Detailed_Usage_0.44).
+It is possible to use custom maps exported directly from [OpenStreetMap](http://openstreetmap.org). The application supports map files in the [OSM XML format](http://wiki.openstreetmap.org/wiki/OSM_XML) (.osm file ending) which is the format OpenStreetMap exports to per default. It also supports files in the binary and compressed [PBF format](http://wiki.openstreetmap.org/wiki/PBF_Format) (.pbf ending). The tool [Osmosis](http://wiki.openstreetmap.org/wiki/Osmosis) can convert between the two formats and save a lot of disk space as OSM files can get really large really fast. For more information on how to use Osmosis, refer to [this link](http://wiki.openstreetmap.org/wiki/Osmosis/Detailed_Usage_0.44).
 
-**DO NOTE** that only map files of a certain size can be used. This is a result of the fact that _ALL_ the data from a map file is read into memory and not streamed dynamically from disk. Using too large map files will cause Java to throw a `java.lang.OutOfMemoryError: GC overhead limit exceeded`. However, it does not do that before the memory allocated to the JVM has been filled, so if the application seems to hang when loading a custom map, the map might be too big. If the map is only a little too big, one can attempt using different values for [`-Xmx`](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html) JVM argument to modify the size of the memory allocation pool.
+**DO NOTE** that only map files below a certain size can be used. This is a result of the fact that _ALL_ the data from a map file is read into memory and not streamed dynamically from disk. Using too large map files will cause Java to throw a `java.lang.OutOfMemoryError: GC overhead limit exceeded`. However, it does not do that before the memory allocated to the JVM has been filled, so if the application seems to hang when loading a custom map, the map might be too big.
 
+### Using Osmosis to remove irrelevant data
+To help limit the size of maps, one can use Osmosis to limit the data included in an OSM data set. OSM data includes a lot of data not related to road networks which can safely be discarded, as this application was originally only written to render road networks and ferry routes.
 
+For example,
+```shell
+osmosis\
+    --read-pbf map.osm.pbf\
+    --tf accept-ways "highway=*" "route=ferry"\
+    --used-node\
+    --write-pbf map-lite.osm.pbf
+```
+will only include roads (`"highway=*"`) and ferry routes (`"route=ferry"`) and not, for instance, coastlines which has the same OSM data type as roads (called "ways").
+
+The `--used-node` option is extremely useful as this ensures that only nodes used by the other data in the file is included. This means that OSM nodes that does not function as road end points are not included and neither are OSM nodes that function as end points for roads not included in the data. If this is not done, many nodes will be loaded by aMap, but never be used for anything and just hog memory.
+
+Another option is to leave out smaller road types from the data file. For example,
+```shell
+osmosis\
+    --read-pbf map.osm.pbf\
+    --tf accept-ways "highway=*" "route=ferry"\
+    --tf reject-way "highway=footway,cycleway,steps,unknown,track,service"\
+    --used-node\
+    --write-pbf map-lite.osm.pbf
+```
+will exclude the road types listed after `--tf reject-way`, but include all other roads and ferry routes.
+
+For detailed information about how to use Osmosis to cherry pick data, refer to the [user guide](http://wiki.openstreetmap.org/wiki/Osmosis/Detailed_Usage_0.44) on the OpenStreetMap Wiki.
+
+### Adjusting JVM heap size
+If the map is only a little too big, one can attempt using different values for [`-Xmx`](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html) JVM argument to modify the size of the memory allocation pool. This can be set in the [build.gradle](build.gradle) file.
+
+All of the above mentioned tweaks has been made to make the [map of Denmark](data/map-denmark-lite.osm.pbf) load without encumbering the JVM.
 
 About
 =====
