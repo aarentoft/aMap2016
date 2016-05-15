@@ -1,6 +1,3 @@
-# Ignore compiled .class files
-out/*
-
 # Gradle stuff
 .gradle/*
 build/*
@@ -11,5 +8,3 @@ aMap2016.iml
 
 # Ignore third party libraries
 third_party_lib/*
-
-map-anholt-mini*.osm
