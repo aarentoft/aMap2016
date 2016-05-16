@@ -30,7 +30,7 @@ public class Loader extends JFrame {
 		Dimension preferredSize = null;
 		try {
 			// Loader image
-			img = ImageIO.read(getClass().getResourceAsStream("/placeholder.png"));
+			img = ImageIO.read(getClass().getResourceAsStream("/splash.png"));
 			preferredSize = new Dimension(img.getWidth(), img.getHeight() + 50);
 			setPreferredSize(preferredSize);
 		} catch (Exception e) {
