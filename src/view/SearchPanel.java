@@ -53,8 +53,8 @@ public class SearchPanel extends JPanel implements Observer {
 		submit.setCursor(Cursor.getDefaultCursor());
 		bClear.setCursor(Cursor.getDefaultCursor());
 		
-		submit.addActionListener(new SearchPanelButtonActionListener(routeModel));
-		bClear.addActionListener(new SearchPanelButtonActionListener(routeModel));
+		submit.addActionListener(new SearchPanelButtonActionListener(this));
+		bClear.addActionListener(new SearchPanelButtonActionListener(this));
 
 		//LiveComboBoxes
 		add(from, gbc);
@@ -90,5 +90,15 @@ public class SearchPanel extends JPanel implements Observer {
 			if (routeModel.getPoints().get(1) != null)
 				to.getEditor().setItem(routeModel.getPoints().get(1).getSearchFieldRepresentation());
 		}
+	}
+
+	public void clearSearch() {
+		from.getEditor().setItem("");
+		to.getEditor().setItem("");
+		routeModel.clear();
+	}
+
+	public void doRouteSearch() {
+		routeModel.setDoRouteSearch(true);
 	}
 }

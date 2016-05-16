@@ -1,22 +1,22 @@
 package controller;
 
+import view.SearchPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import model.RouteModel;
-
 /**
  * This listener contains the information and actions related to the
- * "Find Route" button (Find Route).
+ * "Find Route" button and "Clear" button.
  */
 public class SearchPanelButtonActionListener implements ActionListener {
-	protected RouteModel routeModel;
+	protected SearchPanel searchPanel;
 	
 	/**
-	 * @param routeModel The routemodel used by the map.
+	 * @param searchPanel The search panel that will be controlled by buttons using this listener
 	 */
-	public SearchPanelButtonActionListener(RouteModel routeModel) {
-		this.routeModel = routeModel;
+	public SearchPanelButtonActionListener(SearchPanel searchPanel) {
+		this.searchPanel = searchPanel;
 	}
 
 	/**
@@ -25,8 +25,8 @@ public class SearchPanelButtonActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("search"))
-			routeModel.setDoRouteSearch(true);
+			searchPanel.doRouteSearch();
 		if(e.getActionCommand().equals("clear"))
-			routeModel.clear();
+			searchPanel.clearSearch();
 	}
 }
