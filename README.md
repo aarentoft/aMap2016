@@ -1,51 +1,52 @@
 [![Build Status](https://travis-ci.org/aarentoft/aMap2016.svg?branch=master)](https://travis-ci.org/aarentoft/aMap2016)
 
-Requirements
-============
-- Java 7 or newer
-- [Gradle](https://gradle.org/gradle-download/) to build easily (on OSX, Gradle can also be installed using homebrew).
-
 Getting Started
 ===============
-### Application
-This application uses [Gradle](https://gradle.org/) for the build process. Everything Gradle produces is put in a folder called `build` in the root of the project. The following commands can be executed in any order as Gradle handles prerequisite commands. Eg. `gradle run` will automatically compile the source code first.
+
+### Requirements
+- Java 7 or newer
+
+### Building the Application
+This application uses the [Gradle](https://gradle.org/) wrapper for the build process which means that nothing needs to be set up, other than a JDK, before building. Everything Gradle produces is put in a folder called `build` in the root of the project. The following commands can be executed in any order as Gradle handles prerequisite commands. Eg. `./gradle run` will automatically compile the source code first.
 
 For more information about the build process, refer to the [build.gradle](build.gradle) file.
 
+**NOTE:** On Windows, omit the `./` part of the commands below.
+
 - To compile the project, `cd` in to the root of the project and do
     ```
-    $ gradle compileJava
+    $ ./gradlew compileJava
     ```
 
 - To run the compiled class files
     ```
-    $ gradle run
+    $ ./gradlew run
     ```
     To bypass the map file browser and pass a map file directly
     ```
-    $ gradle run -DmapPath=<path-to-osm-file>
+    $ ./gradlew run -DmapPath=<path-to-osm-file>
     ```
     For example, to use the included `map-anholt-raw.osm` execute the following
     ```
-    $ gradle run -DmapPath=data/map-anholt-raw.osm
+    $ ./gradlew run -DmapPath=data/map-anholt-raw.osm
     ```
 
 - (OSX) Build a .app bundle
     ```
-    $ gradle createApp
+    $ ./gradlew createApp
     ```
     The app bundle is available in `build/macApp`
 
 - To clean all Gradle generated files
     ```
-    $ gradle clean
+    $ ./gradlew clean
     ```
 
-### Tests
+### Running the Unit Tests
 
 To run all the JUnit tests
 ```
-$ gradle test
+$ ./gradlew test
 ```
 
 **NOTE:** After running this command, Gradle may simply report
@@ -59,7 +60,7 @@ BUILD SUCCESSFUL
 Without actually running the tests. This happens because the tests are being executed as a prerequisite for some of the tasks above. Since the tests have not changed, they are not run again. To force Gradle to run the tests again, simply add the `--rerun-tasks` flag like so
 
 ```
-$ gradle test --rerun-tasks
+$ ./gradlew test --rerun-tasks
 ```
 
 Using custom maps
