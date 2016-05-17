@@ -33,8 +33,6 @@ macAppBundle {
     javaExtras.put("-Xmx"+memSize, null)
 }
 
-// sourceCompatibility = 1.8
-
 sourceSets {
     main {
         java {
@@ -52,18 +50,26 @@ sourceSets {
 }
 
 // Customize the 'run' task to accept the path for map data using
-// TODO: Should only be run when doin 'gradle run'
 run {
     if (System.getProperty("mapPath") != null) {
         args System.getProperty("mapPath").split()
     }
 }
 
+// This task copies the dependenciy libraries into the jar destination
+// so it is possible running the application by simply double-clicking the jar
+task copyLibJars(type: Copy) {
+    from configurations.runtime
+    into jar.destinationDir.getPath() + '/lib'
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'Driver'
+        attributes 'Class-Path': configurations.runtime.files.collect { "lib/" + it.name }.join(' ')
     }
 }
+jar.dependsOn(copyLibJars)
 
 test {
     // Pass the path for the test data to the test JVM
