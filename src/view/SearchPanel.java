@@ -1,21 +1,16 @@
 package view;
 
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
+import model.NameSearchModel;
+import model.RouteModel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import model.NameSearchModel;
-import model.RouteModel;
-import controller.SearchPanelButtonActionListener;
 
 /**
  * This class defines the Searchpanel in the top of the window.
@@ -24,8 +19,8 @@ import controller.SearchPanelButtonActionListener;
 public class SearchPanel extends JPanel implements Observer {
 	protected LiveComboBox from;
 	protected LiveComboBox to;
-	protected JButton submit = new JButton("Find Route");
-	protected JButton bClear = new JButton("Clear");
+	protected JButton buttonSubmit = new JButton("Find Route");
+	protected JButton buttonClear  = new JButton("Clear");
 	protected RouteModel routeModel;
 	protected List<JTextField> stops = new ArrayList<JTextField>();
 
@@ -48,21 +43,33 @@ public class SearchPanel extends JPanel implements Observer {
 		from = new LiveComboBox(0, routeModel, nameSearchModel);
 		to = new LiveComboBox(1, routeModel, nameSearchModel);
 
-		submit.setActionCommand("search");
-		bClear.setActionCommand("clear");
-		submit.setCursor(Cursor.getDefaultCursor());
-		bClear.setCursor(Cursor.getDefaultCursor());
+		buttonSubmit.setActionCommand("search");
+		buttonClear.setActionCommand("clear");
+		buttonSubmit.setCursor(Cursor.getDefaultCursor());
+		buttonClear.setCursor(Cursor.getDefaultCursor());
 		
-		submit.addActionListener(new SearchPanelButtonActionListener(this));
-		bClear.addActionListener(new SearchPanelButtonActionListener(this));
+		buttonSubmit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				routeModel.setDoRouteSearch(true);
+			}
+		});
+		buttonClear.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				from.getEditor().setItem("");
+				to.getEditor().setItem("");
+				routeModel.clear();
+			}
+		});
 
 		//LiveComboBoxes
 		add(from, gbc);
 		add(to, gbc);
 		
 		//Buttons
-		add(submit, gbc);
-		add(bClear, gbc);
+		add(buttonSubmit, gbc);
+		add(buttonClear, gbc);
 	}
 
 	@Override
@@ -90,15 +97,5 @@ public class SearchPanel extends JPanel implements Observer {
 			if (routeModel.getPoints().get(1) != null)
 				to.getEditor().setItem(routeModel.getPoints().get(1).getSearchFieldRepresentation());
 		}
-	}
-
-	public void clearSearch() {
-		from.getEditor().setItem("");
-		to.getEditor().setItem("");
-		routeModel.clear();
-	}
-
-	public void doRouteSearch() {
-		routeModel.setDoRouteSearch(true);
 	}
 }
