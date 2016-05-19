@@ -24,7 +24,7 @@ applicationDefaultJvmArgs = [ "-Xmx"+memSize ]
 
 macAppBundle {
     mainClassName = "Driver"
-    appName = "aMap2016"
+    appName = project.name
     javaProperties.put("apple.laf.useScreenMenuBar", "true")
     javaExtras.put("-Xdock:name", appName)
     // The -Xmx option does not use an equals sign between the option and the argument,
