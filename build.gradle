@@ -14,6 +14,7 @@ dependencies {
 
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'distribution'
 
 // The heap size for the JVM running the application is increased to allow
 // the included map of Denmark to be loaded.
@@ -86,6 +87,47 @@ test {
                 "${result.failedTestCount} failures, "+
                 "${result.skippedTestCount} skipped)"
             }
+        }
+    }
+}
+
+distributions {
+    windows {
+        contents {
+            into('') {
+                from startScripts
+                include '*.bat'
+            }
+            into('lib') {
+                from jar
+                from jar.destinationDir.getPath() + '/lib'
+            }
+        }
+    }
+    linux {
+        contents {
+            into('') {
+                from startScripts
+                // This assumes that no other startup scripts than for Unix and Windows exists
+                exclude '*.bat'
+            }
+            into('lib') {
+                from jar
+                from jar.destinationDir.getPath() + '/lib'
+            }
+        }
+    }
+}
+
+// This is done because the default startscripts assume that they exist in a subfolder to the base folder of the installation
+// eg. aMap2016/bin/<script>. This structure changed is changed for the platform specific distributions defined above so that the
+// the scartscript is directly in the installation folder eg. aMap2016/<script>
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.hasTask(linuxDistZip) || taskGraph.hasTask(linuxDistTar) || taskGraph.hasTask(installLinuxDist) ||
+        taskGraph.hasTask(windowsDistZip) || taskGraph.hasTask(windowsDistTar) || taskGraph.hasTask(installWindowsDist))
+    {
+        startScripts.doLast {
+            unixScript.text = unixScript.text.replace("cd \"`dirname \\\"\$PRG\\\"`/..\"", "cd \"`dirname \\\"\$PRG\\\"`\"")
         }
     }
 }
