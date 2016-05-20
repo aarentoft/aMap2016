@@ -131,3 +131,15 @@ gradle.taskGraph.whenReady { taskGraph ->
         }
     }
 }
+
+task distAllZip << {}
+distAllZip.dependsOn windowsDistZip
+distAllZip.dependsOn linuxDistZip
+
+task distAllTar << {}
+distAllTar.dependsOn windowsDistTar
+distAllTar.dependsOn linuxDistTar
+
+task installAllDist << {}
+installAllDist.dependsOn installWindowsDist
+installAllDist.dependsOn installLinuxDist
