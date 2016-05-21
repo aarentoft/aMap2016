@@ -94,8 +94,7 @@ test {
 distributions {
     windows {
         contents {
-            into('') {
-                from startScripts
+            from (startScripts) {
                 include '*.bat'
             }
             into('lib') {
@@ -106,11 +105,9 @@ distributions {
     }
     linux {
         contents {
-            into('') {
-                from startScripts
-                // This assumes that no other startup scripts than for Unix and Windows exists
-                exclude '*.bat'
-            }
+            from startScripts
+            // This assumes that no other startup scripts than for Unix and Windows exists
+            exclude '*.bat'
             into('lib') {
                 from jar
                 from jar.destinationDir.getPath() + '/lib'
@@ -132,14 +129,17 @@ gradle.taskGraph.whenReady { taskGraph ->
     }
 }
 
-task distAllZip << {}
-distAllZip.dependsOn windowsDistZip
-distAllZip.dependsOn linuxDistZip
+task distAllZip {
+    dependsOn windowsDistZip
+    dependsOn linuxDistZip
+}
 
-task distAllTar << {}
-distAllTar.dependsOn windowsDistTar
-distAllTar.dependsOn linuxDistTar
+task distAllTar {
+    dependsOn windowsDistTar
+    dependsOn linuxDistTar
+}
 
-task installAllDist << {}
-installAllDist.dependsOn installWindowsDist
-installAllDist.dependsOn installLinuxDist
+task installAllDist {
+    dependsOn installWindowsDist
+    dependsOn installLinuxDist
+}
