@@ -116,6 +116,14 @@ distributions {
     }
 }
 
+task installOsxDist(type: Copy, dependsOn: createApp) {
+    // Cannot use task createApp directly as 'from' as it is a placeholder task which simply
+    // invokes many other tasks. createApp has no defined output so Gradle ALWAYS thinks the
+    // createApp is UP-TO-DATE. At least, that is what I think
+    from "${->project.buildDir}/${->project.macAppBundle.appOutputDir}"
+    into "${->project.buildDir}/install"
+}
+
 // This is done because the default startscripts assume that they exist in a subfolder to the base folder of the installation
 // eg. aMap2016/bin/<script>. This structure changed is changed for the platform specific distributions defined above so that the
 // the scartscript is directly in the installation folder eg. aMap2016/<script>
@@ -142,4 +150,5 @@ task distAllTar {
 task installAllDist {
     dependsOn installWindowsDist
     dependsOn installLinuxDist
+    dependsOn installOsxDist
 }
