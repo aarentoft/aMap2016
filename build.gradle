@@ -122,6 +122,11 @@ task installOsxDist(type: Copy, dependsOn: createApp) {
     // createApp is UP-TO-DATE. At least, that is what I think
     from "${->project.buildDir}/${->project.macAppBundle.appOutputDir}"
     into "${->project.buildDir}/install"
+    doLast {
+        def origFileName = file("${->project.buildDir}/install/${project.name}.app")
+        def newFileName = file("${->project.buildDir}/install/${project.name}-osx.app")
+        origFileName.renameTo(newFileName)
+    }
 }
 
 // This is done because the default startscripts assume that they exist in a subfolder to the base folder of the installation
