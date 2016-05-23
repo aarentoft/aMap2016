@@ -116,6 +116,10 @@ distributions {
     }
 }
 
+// The following three tasks mirror the task names provided by the distribution plugin
+// in order to provide a uniform command interface for creating distributions across platforms.
+// Creating an OSX distribution is a little different than what the distribution
+// plugin normally does as OSX releases should be .app packages.
 task installOsxDist(type: Copy, dependsOn: createApp) {
     // Cannot use task createApp directly as 'from' as it is a placeholder task which simply
     // invokes many other tasks. createApp has no defined output so Gradle ALWAYS thinks the
@@ -127,6 +131,18 @@ task installOsxDist(type: Copy, dependsOn: createApp) {
         def newFileName = file("${->project.buildDir}/install/${project.name}-osx.app")
         origFileName.renameTo(newFileName)
     }
+}
+
+task osxDistZip(type: Zip, dependsOn: createApp) {
+    from("${->project.buildDir}/${->project.macAppBundle.appOutputDir}")
+    destinationDir = new File("${project.buildDir}/distributions")
+    archiveName "${->project.name}-osx.zip"
+}
+
+task osxDistTar(type: Tar, dependsOn: createApp) {
+    from("${->project.buildDir}/${->project.macAppBundle.appOutputDir}")
+    destinationDir = new File("${project.buildDir}/distributions")
+    archiveName "${->project.name}-osx.tar"
 }
 
 // This is done because the default startscripts assume that they exist in a subfolder to the base folder of the installation
