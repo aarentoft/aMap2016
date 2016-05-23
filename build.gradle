@@ -158,14 +158,17 @@ gradle.taskGraph.whenReady { taskGraph ->
     }
 }
 
-task distAllZip {
+// The following three tasks allows cross platform distribution with one command.
+task allDistZip {
     dependsOn windowsDistZip
     dependsOn linuxDistZip
+    dependsOn osxDistZip
 }
 
-task distAllTar {
+task allDistTar {
     dependsOn windowsDistTar
     dependsOn linuxDistTar
+    dependsOn osxDistTar
 }
 
 task installAllDist {
