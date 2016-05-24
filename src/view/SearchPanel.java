@@ -27,13 +27,13 @@ public class SearchPanel extends JPanel implements Observer {
 	/**
 	 * Constructor for the class.
 	 * 
-	 * @param routeModel
+	 * @param theRouteModel
 	 * @param nameSearchModel
 	 */
-	public SearchPanel(RouteModel routeModel, NameSearchModel nameSearchModel) {
+	public SearchPanel(RouteModel theRouteModel, NameSearchModel nameSearchModel) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-		this.routeModel = routeModel;
+		this.routeModel = theRouteModel;
 		routeModel.addObserver(this);
 		
 		setOpaque(false);
